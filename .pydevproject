@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse-pydev version="1.0"?>
+
+<pydev_project>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_INTERPRETER">C:\Users\eclipse\nokiantorpedo-django\site-dir\Scripts\python.exe</pydev_property>
+<pydev_property name="org.python.pydev.PYTHON_PROJECT_VERSION">python 2.6</pydev_property>
+<pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
+<path>/nokiantorpedo-django/djangobb/projects/basic_project</path>
+</pydev_pathproperty>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>C:\Users\eclipse\nokiantorpedo-django\site-dir\Lib\site-packages</path>
+<path>C:\Users\eclipse\nokiantorpedo-django\site-dir\Lib\site-packages\django_haystack-1.2.7-py2.6.egg-info</path>
+<path>C:\Users\eclipse\nokiantorpedo-django\site-dir\Lib\site-packages\distribute-0.6.10-py2.6.egg</path>
+<path>C:\Users\eclipse\nokiantorpedo-django\site-dir\Lib\site-packages\distribute-0.6.14-py2.6.egg</path>
+<path>C:\Users\eclipse\nokiantorpedo-django\site-dir\Lib\site-packages\pip-0.7.2-py2.6.egg</path>
+</pydev_pathproperty>
+</pydev_project>
