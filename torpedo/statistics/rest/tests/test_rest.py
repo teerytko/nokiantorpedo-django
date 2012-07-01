@@ -21,18 +21,12 @@ from django_webtest import WebTest
 class TestGameRest(WebTest):
     fixtures = ['users']
 
-    def test_game_actions(self):
-        res = self.app.get('/torpedo/rest/game/')
-        links = [a.text for a in res.html.ul.fetch('a')]
-        self.assertEquals(links,
-                          ['create', 'delete', 'update', 'list', 'meta', 'dlist'])
-
     def test_game_list_on_empty_data(self):
-        res = self.app.get('/torpedo/rest/game/list')
+        res = self.app.get('/statistics/rest/game')
         self.assertEquals(json.loads(res.body), [])
 
     def test_game_dlist_on_empty_data(self):
-        res = self.app.get('/torpedo/rest/game/dlist/')
+        res = self.app.get('/statistics/rest/game')
         self.assertEquals(json.loads(res.body),
                           {"aaData": [], "iTotalRecords": 0,
                            "sEcho": None, "iTotalDisplayRecords": 0})
