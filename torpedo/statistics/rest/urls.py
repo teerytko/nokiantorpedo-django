@@ -6,8 +6,9 @@ Created on 28.6.2012
 
 from django.conf.urls.defaults import patterns, url
 from djangorestframework.resources import ModelResource
-from djangorestframework.views import ListOrCreateModelView, InstanceModelView
+from djangorestframework.views import ListOrCreateModelView
 from statistics.models import Team, League, Game, Player, Goal, Penalty
+from statistics.rest.views import ListSearchModelView, MyInstanceModelView
 
 
 class TeamResource(ModelResource):
@@ -33,17 +34,18 @@ class GoalResource(ModelResource):
 class PenaltyResource(ModelResource):
     model = Penalty
 
+
 urlpatterns = patterns('',
-    url(r'rest/league$', ListOrCreateModelView.as_view(resource=LeagueResource)),
-    url(r'rest/league/(?P<pk>[^/]+)/$', InstanceModelView.as_view(resource=LeagueResource)),
-    url(r'rest/team$', ListOrCreateModelView.as_view(resource=TeamResource)),
-    url(r'rest/team/(?P<pk>[^/]+)/$', InstanceModelView.as_view(resource=TeamResource)),
-    url(r'rest/game$', ListOrCreateModelView.as_view(resource=GameResource)),
-    url(r'rest/game/(?P<pk>[^/]+)/$', InstanceModelView.as_view(resource=GameResource)),
-    url(r'rest/player$', ListOrCreateModelView.as_view(resource=PlayerResource)),
-    url(r'rest/player/(?P<pk>[^/]+)/$', InstanceModelView.as_view(resource=PlayerResource)),
-    url(r'rest/goal$', ListOrCreateModelView.as_view(resource=GoalResource)),
-    url(r'rest/goal/(?P<pk>[^/]+)/$', InstanceModelView.as_view(resource=GoalResource)),
-    url(r'rest/penalty$', ListOrCreateModelView.as_view(resource=PenaltyResource)),
-    url(r'rest/penalty/(?P<pk>[^/]+)/$', InstanceModelView.as_view(resource=PenaltyResource)),
+    url(r'league$', ListSearchModelView.as_view(resource=LeagueResource)),
+    url(r'league/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=LeagueResource)),
+    url(r'team$', ListSearchModelView.as_view(resource=TeamResource)),
+    url(r'team/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=TeamResource)),
+    url(r'game', ListSearchModelView.as_view(resource=GameResource)),
+    url(r'game/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=GameResource)),
+    url(r'player$', ListSearchModelView.as_view(resource=PlayerResource)),
+    url(r'player/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=PlayerResource)),
+    url(r'goal$', ListSearchModelView.as_view(resource=GoalResource)),
+    url(r'goal/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=GoalResource)),
+    url(r'penalty$', ListSearchModelView.as_view(resource=PenaltyResource)),
+    url(r'penalty/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=PenaltyResource)),
 )
