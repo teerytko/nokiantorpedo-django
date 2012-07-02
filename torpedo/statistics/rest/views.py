@@ -1,6 +1,7 @@
 
 from djangorestframework.mixins import ListModelMixin
-from djangorestframework.views import ModelView, InstanceModelView, ListOrCreateModelView
+from djangorestframework.views import InstanceModelView, ListOrCreateModelView
+from djangorestframework.renderers import BaseRenderer
 from statistics.rest.renderers import DListRenderer
 
 class MyInstanceModelView(InstanceModelView):
@@ -17,7 +18,14 @@ class SearchModelMixin(ListModelMixin):
     def get_query_kwargs(self, request, *args, **kwargs):
         """
         """
-        return request.GET.dict()
+        kwargs = request.GET.dict()
+        # If the URLconf includes a .(?P<format>\w+) pattern to match against
+        # a .json, .xml suffix, then drop the 'format' kwarg before
+        # constructing the query.
+        if BaseRenderer._FORMAT_QUERY_PARAM in kwargs:
+            del kwargs[BaseRenderer._FORMAT_QUERY_PARAM]
+
+        return kwargs
 
 
 class ListSearchModelView(SearchModelMixin, ListOrCreateModelView):
@@ -25,5 +33,7 @@ class ListSearchModelView(SearchModelMixin, ListOrCreateModelView):
     A view which provides default operations for searchable list, against a 
     model in the database.
     """
+    renderers = (list(InstanceModelView.renderers) + [DListRenderer])
+
     _suffix = 'List'
 
