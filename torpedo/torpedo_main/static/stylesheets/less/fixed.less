@@ -1,5 +1,4 @@
 @import 'static/stylesheets/reset.css';
-@import 'static/stylesheets/main.css';
 @import 'grid.less';
 @import "config.less";
 
@@ -44,8 +43,11 @@ header#top {
 #maincolumn {
     .rounded-corners;
 	.column(9);
+    background-color: lighten(@theme, 70%);
 }
 #sidebar {
+    .rounded-corners;
 	.column(3);
+    background-color: lighten(@theme, 70%);
 }
 
