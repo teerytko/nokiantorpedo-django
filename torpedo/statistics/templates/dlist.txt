@@ -1,0 +1,6 @@
+{% autoescape off %}
+{'sEcho' : {{ echo }},
+'iTotalNumber' :  {{ object|length }},
+'aaData' : {{ data }}
+}
+{% endautoescape %}

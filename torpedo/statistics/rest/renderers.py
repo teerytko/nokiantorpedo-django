@@ -15,7 +15,7 @@ class DListRenderer(TemplateRenderer):
     jquery Table.
     """
 
-    media_type = 'application/dlist'
+    media_type = 'text/plain'
     format = 'dlist'
     template = 'dlist.txt'
 
@@ -30,12 +30,12 @@ class DListRenderer(TemplateRenderer):
             listobj = [obj] 
             
         data = JSONRenderer(self.view).render(obj)
-
         template = loader.get_template(self.template)
         context = RequestContext(self.view.request, {
+                         'echo': self.view.request.GET.get('sEcho'),  
                          'request': self.view.request,  
                          'response': self.view.response,
-                         'object': obj,
+                         'object': listobj,
                          'data' : data})
         return template.render(context)
     

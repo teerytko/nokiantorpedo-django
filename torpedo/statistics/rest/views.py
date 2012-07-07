@@ -19,6 +19,8 @@ class SearchModelMixin(ListModelMixin):
         """
         """
         kwargs = request.GET.dict()
+        # pop possible echo parameter
+        kwargs.pop('sEcho', None)
         # If the URLconf includes a .(?P<format>\w+) pattern to match against
         # a .json, .xml suffix, then drop the 'format' kwarg before
         # constructing the query.
