@@ -1,0 +1,116 @@
+{{extend 'layout.html'}}
+{{block head_addition}}    
+<script type="text/javascript" charset="utf-8">
+var oTable
+var sid = getQueryVariable("sId");
+var editMode = false;
+$(document).ready(function() {
+    oTable = $('#players').dataTable( {
+        "bProcessing": true,
+        "bServerSide": true,
+        "bPaginate": false,
+        "bInfo": false,
+        "bFilter": false,
+        "sAjaxSource": "../rest/player/dlist?sQuery=team_id=="+sid,
+        "aaSorting": [[2,'asc']],
+        "aoColumnDefs": [ { "bVisible": false, "aTargets": [0] }, // the first column is invisible
+                          { "bVisible": false , "sName": "team_id", "aTargets": [1]},
+                          { "sClass": "text", "sName": "number", "aTargets": [2]},
+                          { "sClass": "text", "sName": "name", "aTargets": [3]},
+                          { "sClass": "text", "sName": "role", "aTargets": [4]},
+                       ],
+        "fnDrawCallback": function () {
+            if (editMode == true) {
+                $('td.text').create_edit({'oTable' : oTable, 
+                                          'sPostUrl': '../rest/player/update'});
+            }
+        }
+    });
+    /* Add a click handler to the rows - this could be used as a callback */
+    $("#players tbody").click(function(event) {
+        $(oTable.fnSettings().aoData).each(function (){
+            $(this.nTr).removeClass('row_selected');
+        });
+        $(event.target.parentNode).addClass('row_selected');
+    });
+
+    /* Add a click handler for the delete row */
+    $('#delete').click( function() {
+        var anSelected = fnGetSelected( oTable );
+        var sId = oTable.fnGetData(oTable.fnGetPosition(anSelected[0]))[0]
+        delete_datarow(oTable, 'player', sId);
+    });
+    /* Add a click handler for the delete row */
+    $('#add').click( function() {
+        add_datarow(oTable, 'player', {'team_id' : sid});
+    });
+    /* Add a click handler for the delete row */
+    $('#edit').click( function() {
+        if (editMode == false) {
+            $('#edit').html('Lopeta muokkaus')
+            editMode = true
+            oTable.fnDraw();    
+        }
+        else {
+            $('#edit').html('Muokkaa');
+            editMode = false;
+            oTable.fnDraw();    
+        }
+    });
+
+    $.getJSON('../rest/team/dlist?sQuery=id=='+sid, function(data) {
+        data = data['aaData'][0];
+        $('#home-team-name').html(data[1]);
+    }); 
+
+});
+
+
+</script>
+{{end}} 
+{{include}}
+<DIV class="main">
+<div id="datatables">
+        <div id="container">
+            <div class="full_width big">
+                <i><div id="home-team-name"></div></i>
+            </div>
+            <div id="dynamic">
+            <!-- joukkeen pelaajat -->
+            <h2>Pelaajat</h2>
+            <p>
+                <a href="./teams">Takaisin joukkueisiin</a>
+                {{if auth.has_permission('statistics_admin'):}}
+                /
+                <a href="javascript:void(0);" id="add">Lisää</a>
+                /
+                <a href="javascript:void(0)" id="delete">Poista</a>
+                /
+                <a href="javascript:void(0)" id="edit">Muokkaa</a>
+                {{pass}}
+            </p>
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="players">
+                <thead>
+                    <tr>
+                        <th width="10%">Id</th>
+                        <th width="15%">Team_id</th>
+                        <th width="20%">Number</th>
+                        <th width="50%">Name</th>
+                        <th width="50%">Rooli</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>null</td>
+                        <td>null</td>
+                        <td>null</td>
+                        <td>null</td>
+                        <td>null</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+</div>
+</div>
+

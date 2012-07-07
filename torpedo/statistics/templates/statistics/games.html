@@ -1,0 +1,69 @@
+{{extend 'layout.html'}}
+{{block head_addition}}    
+<script type="text/javascript" charset="utf-8">
+var oTable;
+$(document).ready(function() {
+    $('#example tbody tr').each( function() {
+        var sTitle;
+        var nTds = $('td', this);
+        var gid = $(nTds[0]).text();
+        var ddate = $(nTds[1]).text();
+        var sTitle = gid + " " + ddate 
+        this.setAttribute( 'title', sTitle );
+    } );
+    oTable = $('#pelit').dataTable(
+    {
+        "bPaginate": false,
+        "bProcessing": true,
+        "bServerSide": true,
+        "sAjaxSource": "../rest/game/dlist",
+        "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
+            var alink = '<a href="game?sId=' + aData[0] + '"';
+            alink += '>'+aData[1]+'</a>';
+            $('td:eq(0)', nRow).html( alink );
+            return nRow;
+        },
+        "aaSorting": [[1,'asc']],
+        "aoColumnDefs" : [{ 'bVisible' : false, "aTargets" : [0] },
+                          { 'sName' : 'date', "aTargets" : [1] },
+                          { 'sName' : 'location', "aTargets" : [2] },
+                          { 'sName' : 'home_id', "aTargets" : [3] },
+                          { 'sName' : 'guest_id', "aTargets" : [4] },
+                         ]
+    });
+});
+</script>
+{{end}} 
+{{include}}
+<DIV class="main">
+<h1>Pelit</h1>
+<div id="datatables">
+<div id="container">
+    {{if auth.has_permission('statistics_admin'):}}
+        <p><a href="javascript:void(0);" onclick="add_datarow(oTable, 'game',
+                                          {'date' : '2012-01-01 00:00:00'});" style="color:black">Lisää peli</a></p>
+    {{pass}}
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="pelit">
+<thead>
+    <tr>
+        <th width="10%">Id</th>
+        <th width="20%">Aika</th>
+        <th width="15%">Paikka</th>
+        <th width="25%">Koti</th>
+        <th width="25%">Vieras</th>
+<!--        
+        <th width="25%">Koti maalit</th>
+        <th width="25%">Vieras maalit</th>
+-->
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td colspan="7"></td>
+    </tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+

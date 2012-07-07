@@ -1,0 +1,486 @@
+{{extend 'layout.html'}}
+{{block head_addition}}    
+<script type="text/javascript" charset="utf-8">
+    var sid = getQueryVariable("sId");
+    var hometeam;
+    var hometeam_id=0;
+    var guestteam;
+    var guestteam_id=0;
+    var gameTable;
+
+    var guestPlayer;
+    var homeGoal;
+    var editHomeGoal = false;
+    var guestGoal;
+    var editGuestGoal = false;
+    var homePenalty;
+    var editHomePenalty = false;
+    var guestPenalty;
+    var editGuestPenalty = false;
+	var playerquery = '../rest/player/dict?fields=number,name&query=team_id=='
+    var goalquery = "../rest/goalview/dlist?sQuery=game_id=="+sid+" and  team_id==";
+    var penaltyquery = "../rest/penaltyview/dlist?sQuery=game_id=="+sid+" and team_id==";
+    var STATIC_TABLE_LEN = 15;
+    function update_data(data)
+    {
+        var gamedate = data[0][1];
+        var gamelocation = data[0][2];
+        hometeam = data[0][3];
+        if (data[0][4] != '-') { hometeam_id = data[0][4]; }
+        guestteam = data[0][5];
+        if (data[0][6] != '-') { guestteam_id = data[0][6]; }
+        $('#game-info').html(gamedate+' '+gamelocation);
+        $('#home-team-info').html('Koti: <a href="team?sId='+hometeam_id+'">'+hometeam+'</a>');
+        $('#guest-team-info').html('Vieras: <a href="team?sId='+guestteam_id+'">'+guestteam+'</a>');
+    }
+
+    $(document).ready(function() {
+        var gameid = getQueryVariable('sId');
+        var defaults = {
+            "bServerSide": true,
+            "bPaginate": false,
+            "bInfo": false,
+            "bFilter": false,
+        }
+
+        gameTable = $('#salibandy_game').dataTable( 
+            $.extend(defaults, {
+            sAjaxSource: "../rest/gameview/dlist?sQuery=id=="+gameid,
+            aoColumns: [ { "bVisible": false }, // the first column is invisible
+                         { "sClass": "text", "sName": "date"},
+                         { "sClass": "text", "sName": "location"},
+                         { "sClass": "select", "sName": "home" },
+                         { "bVisible": false , "sName": "home_id" },
+                         { "sClass": "select", "sName": "guest"},
+                         { "bVisible": false , "sName": "guest_id" },
+                         { "sName": "home_goals"},
+                         { "sName": "guest_goals"},
+                         ],
+        {{if auth.has_permission('statistics_admin'):}}
+            fnDrawCallback: function () {
+                $('#salibandy_game td.text').create_edit(
+                      { 'oTable' : gameTable, 
+                        'sPostUrl': '../rest/game/update'})
+                $('#salibandy_game td.select').create_select_edit(
+                    { 'oTable' : gameTable, 
+                      'sPostUrl': '../rest/gameview/update', 
+                      'sLoadUrl': '../rest/team/dict?fields=name',
+                })
+                data = gameTable.fnGetData()
+                update_data(data);
+                homeGoal.fnSettings().sAjaxSource = goalquery+hometeam_id;
+                guestGoal.fnSettings().sAjaxSource = goalquery+guestteam_id;
+                homePenalty.fnSettings().sAjaxSource = penaltyquery+hometeam_id;
+                guestPenalty.fnSettings().sAjaxSource = penaltyquery+guestteam_id;
+                homeGoal.fnDraw();
+                guestGoal.fnDraw();
+                homePenalty.fnDraw();
+                guestPenalty.fnDraw();
+                
+            }
+        {{pass}}
+        }) );
+        homeGoal = $('#homegoal').dataTable( {
+            bServerSide: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            sAjaxSource: goalquery+hometeam_id,
+            aaSorting: [[1,'asc']],
+            aoColumns: [ { bVisible: false }, // the first column is invisible
+                         { sClass: "text", "sName": "time"},
+                         { sClass: "select", "sName": "player"},
+                         { sClass: "select", "sName": "assisting"},
+                         { sClass: "text", "sName": "note"},
+                         ],
+            fnDrawCallback: function() {
+                add_static_data(homeGoal, []);
+                if (editHomeGoal == true) {
+                    $('#homegoal td.text').create_edit(
+                          { 'oTable' : homeGoal, 
+                            'sPostUrl': '../rest/goalview/update'})
+                    $('#homegoal td.select').create_select_edit(
+                        { 'oTable' : homeGoal, 
+                          'sPostUrl': '../rest/goalview/update', 
+                          'sLoadUrl': playerquery+hometeam_id})
+                }
+            }
+        });
+        /* Add a click handler to the rows - this could be used as a callback */
+        $("#homegoal tbody").click(function(event) {
+            $(homeGoal.fnSettings().aoData).each(function (){
+                $(this.nTr).removeClass('row_selected');
+            });
+            $(event.target.parentNode).addClass('row_selected');
+        });
+        /* Add a click handler for the delete row */
+        $('#delete-homeGoal').click( function() {
+            var anSelected = fnGetSelected( homeGoal );
+            var sId = homeGoal.fnGetData(homeGoal.fnGetPosition(anSelected[0]))[0]
+            delete_datarow(homeGoal, 'goal', sId);
+        } );
+        /* Add a click handler for the delete row */
+        $('#add-homeGoal').click( function() {
+            add_datarow(homeGoal, 'goal', {'team_id' : hometeam_id, 
+                                           'game_id' : sid,
+                                           'time' : '00:00:00'});
+        } );
+        /* Add a click handler for the delete row */
+        $('#edit-homeGoal').click( function() {
+            if (editHomeGoal == false) {
+                editHomeGoal = true
+                $('#edit-homeGoal').html('Lopeta muokkaus')
+                homeGoal.fnDraw();    
+            }
+            else {
+                editHomeGoal = false;
+                $('#edit-homeGoal').html('Muokkaa');
+                homeGoal.fnDraw();
+            }    
+        });
+        guestGoal = $('#guestgoal').dataTable( {
+            bServerSide: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            sAjaxSource: goalquery+guestteam_id,
+            aaSorting: [[1,'asc']],
+            aoColumns: [ { bVisible: false }, // the first column is invisible
+                         { sClass: "text", "sName": "time"},
+                         { sClass: "select", "sName": "player"},
+                         { sClass: "select", "sName": "assisting"},
+                         { sClass: "text", "sName": "note"},
+                         ],
+            fnDrawCallback: function() {
+                add_static_data(guestGoal, []);
+                if (editGuestGoal == true) {
+                    $('#guestgoal td.text').create_edit(
+                          { 'oTable' : guestGoal, 
+                            'sPostUrl': '../rest/goalview/update'})
+                    $('#guestgoal td.select').create_select_edit(
+                        { 'oTable' : guestGoal, 
+                          'sPostUrl': '../rest/goalview/update', 
+                          'sLoadUrl': playerquery+guestteam_id})
+                }
+            }
+        });
+        /* Add a click handler to the rows - this could be used as a callback */
+        $("#guestgoal tbody").click(function(event) {
+            $(guestGoal.fnSettings().aoData).each(function (){
+                $(this.nTr).removeClass('row_selected');
+            });
+            $(event.target.parentNode).addClass('row_selected');
+        });
+        /* Add a click handler for the delete row */
+        $('#delete-guestGoal').click( function() {
+            var anSelected = fnGetSelected( guestGoal );
+            var sId = guestGoal.fnGetData(guestGoal.fnGetPosition(anSelected[0]))[0]
+            delete_datarow(guestGoal, 'goal', sId);
+        } );
+        /* Add a click handler for the delete row */
+        $('#add-guestGoal').click( function() {
+            add_datarow(guestGoal, 'goal', 
+                                  {'team_id' : guestteam_id, 
+                                  'game_id' : sid,
+                                  'time' : '00:00:00'});
+        } );
+        /* Add a click handler for the delete row */
+        $('#edit-guestGoal').click( function() {
+            if (editGuestGoal == false) {
+                editGuestGoal = true
+                $('#edit-guestGoal').html('Lopeta muokkaus')
+                guestGoal.fnDraw();    
+            }
+            else {
+                editGuestGoal = false;
+                $('#edit-guestGoal').html('Muokkaa');
+                guestGoal.fnDraw();
+            }    
+        });
+        homePenalty = $('#homepenalty').dataTable( {
+            bServerSide: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            sAjaxSource: penaltyquery+hometeam_id,
+            aaSorting: [[1,'asc']],
+            aoColumns: [ { bVisible: false }, // the first column is invisible
+                         { sClass: "text", "sName": "time"},
+                         { sClass: "text", "sName": "length"},
+                         { sClass: "select", "sName": "name"},
+                         { sClass: "text", "sName": "reason"},
+                         ],
+            fnDrawCallback: function() {
+                add_static_data(homePenalty, []);
+                if (editHomePenalty == true) {
+                    $('#homepenalty td.text').create_edit(
+                          { 'oTable' : homePenalty, 
+                            'sPostUrl': '../rest/penaltyview/update'})
+                    $('#homepenalty td.select').create_select_edit(
+                        { 'oTable' : homePenalty, 
+                          'sPostUrl': '../rest/penaltyview/update', 
+                          'sLoadUrl': playerquery+hometeam_id})
+                }
+            }
+        });
+        /* Add a click handler to the rows - this could be used as a callback */
+        $("#homepenalty tbody").click(function(event) {
+            $(homePenalty.fnSettings().aoData).each(function (){
+                $(this.nTr).removeClass('row_selected');
+            });
+            $(event.target.parentNode).addClass('row_selected');
+        });
+        /* Add a click handler for the delete row */
+        $('#delete-homePenalty').click( function() {
+            var anSelected = fnGetSelected( homePenalty );
+            var sId = homePenalty.fnGetData(homePenalty.fnGetPosition(anSelected[0]))[0]
+            delete_datarow(homePenalty, 'penalty', sId);
+        } );
+        /* Add a click handler for the delete row */
+        $('#add-homePenalty').click( function() {
+            add_datarow(homePenalty, 'penalty', {'team_id' : hometeam_id, 
+                                                 'game_id' : sid,
+                                                 'time' : '00:00:00',
+                                                 'length' : '00:02:00'});
+        } );
+        /* Add a click handler for the delete row */
+        $('#edit-homePenalty').click( function() {
+            if (editHomePenalty == false) {
+                editHomePenalty = true
+                $('#edit-homePenalty').html('Lopeta muokkaus')
+                homePenalty.fnDraw();    
+            }
+            else {
+                editHomePenalty = false;
+                $('#edit-homePenalty').html('Muokkaa');
+                homePenalty.fnDraw();
+            }    
+        });
+
+        guestPenalty = $('#guestpenalty').dataTable( {
+            bServerSide: true,
+            bPaginate: false,
+            bInfo: false,
+            bFilter: false,
+            sAjaxSource: penaltyquery+guestteam_id,
+            aaSorting: [[1,'asc']],
+            aoColumns: [ { bVisible: false }, // the first column is invisible
+                         { sClass: "text", "sName": "time"},
+                         { sClass: "text", "sName": "length"},
+                         { sClass: "select", "sName": "name"},
+                         { sClass: "text", "sName": "reason"},
+                         ],
+            fnDrawCallback: function() {
+                add_static_data(guestPenalty, []);
+                if (editHomePenalty == true) {
+                    $('#guestpenalty td.text').create_edit(
+                          { 'oTable' : guestPenalty, 
+                            'sPostUrl': '../rest/penaltyview/update'})
+                    $('#guestpenalty td.select').create_select_edit(
+                        { 'oTable' : guestPenalty, 
+                          'sPostUrl': '../rest/penaltyview/update', 
+                          'sLoadUrl': playerquery+guestteam_id})
+                }
+            }
+        });
+        /* Add a click handler to the rows - this could be used as a callback */
+        $("#guestpenalty tbody").click(function(event) {
+            $(guestPenalty.fnSettings().aoData).each(function (){
+                $(this.nTr).removeClass('row_selected');
+            });
+            $(event.target.parentNode).addClass('row_selected');
+        });
+        /* Add a click handler for the delete row */
+        $('#delete-guestPenalty').click( function() {
+            var anSelected = fnGetSelected( guestPenalty );
+            var sId = guestPenalty.fnGetData(guestPenalty.fnGetPosition(anSelected[0]))[0]
+            delete_datarow(guestPenalty, 'penalty', sId);
+        } );
+        /* Add a click handler for the delete row */
+        $('#add-guestPenalty').click( function() {
+            add_datarow(guestPenalty, 'penalty', {'team_id' : guestteam_id, 
+                                                  'game_id' : sid,
+                                                  'time' : '00:00:00',
+                                                  'length' : '00:02:00'});
+        } );
+        /* Add a click handler for the delete row */
+        $('#edit-guestPenalty').click( function() {
+            if (editHomePenalty == false) {
+                editHomePenalty = true
+                $('#edit-guestPenalty').html('Lopeta muokkaus')
+                guestPenalty.fnDraw();    
+            }
+            else {
+                editHomePenalty = false;
+                $('#edit-guestPenalty').html('Muokkaa');
+                guestPenalty.fnDraw();
+            }    
+        });
+
+    });
+
+</script>
+{{end}} 
+{{include}}
+
+<DIV class="main">
+<div id="datatables">
+<div id="container">
+    <div class="full_width big">
+        <i><div id="game-info"></div></i>
+    </div>
+    
+    <p>Peli tietojen täyttö</p>
+    <a href="games">Takaisin peleihin</a>
+    <div id="dynamic">  
+    <table class="display">
+    <tr><td colspan="2">
+        <!-- pelin perustiedot -->
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" id="salibandy_game">
+        <thead>
+            <tr>
+                <th width="10%">Id</th>
+                <th width="20%">Aika</th>
+                <th width="15%">Paikka</th>
+                <th width="25%">Koti</th>
+                <th width="25%">Koti</th>
+                <th width="25%">Vieras</th>
+                <th width="25%">Vieras</th>
+                <th width="25%">Koti maalit</th>
+                <th width="25%">Vieras maalit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="9"></td>
+            </tr>
+        </tbody>
+        </table>
+    </td></tr>
+    <tr><td>
+ 
+        <!--<table cellpadding="0" cellspacing="0" border="0" id="content">-->
+        <tr>
+            <th width="50%">Maalit</th>
+            <th width="50%">Rangaistukset</th>
+        </tr>
+        <tr>
+            <td colspan="2"><div id="home-team-info"></div></td>
+        </tr>
+        {{if auth.has_permission('statistics_admin'):}}
+        <tr>
+            <td colspan="1">
+                <a href="javascript:void(0);" id="add-homeGoal" style="color:black">Lisää</a> / 
+                <a href="javascript:void(0);" id="delete-homeGoal" style="color:black">Poista</a> /
+                <a href="javascript:void(0);" id="edit-homeGoal" style="color:black">Muokkaa</a>
+            </td>
+            <td colspan="1">
+                <a href="javascript:void(0);" id="add-homePenalty" style="color:black">Lisää</a> / 
+                <a href="javascript:void(0);" id="delete-homePenalty" style="color:black">Poista</a> /
+                <a href="javascript:void(0);" id="edit-homePenalty" style="color:black">Muokkaa</a>
+            </td>
+        </tr>
+        {{pass}}
+        <tr>
+            <td>
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="homegoal">
+                <thead>
+                    <tr>
+                        <th width="0%">Id</th>
+                        <th width="10%">Aika</th>
+                        <th width="40%">Tekijä</th>
+                        <th width="40%">Syöttäjä</th>
+                        <th width="10%">Koodi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">null</td>
+                    </tr>
+                </tbody>
+            </table>
+            </td>    
+            <td>
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="homepenalty">
+                <thead>
+                    <tr>
+                        <th width="0%">Id</th>
+                        <th width="10%">Aika</th>
+                        <th width="10%">Kesto</th>
+                        <th width="50%">Pelaaja</th>
+                        <th width="5%">Syy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">null</td>
+                    </tr>
+                </tbody>
+            </table>
+            </td>    
+        </tr>
+        <tr>
+            <td colspan="2"><div id="guest-team-info"></div></td>
+        </tr>
+        {{if auth.has_permission('statistics_admin'):}}
+        <tr>
+            <td colspan="1">
+                <a href="javascript:void(0);" id="add-guestGoal" style="color:black">Lisää</a> / 
+                <a href="javascript:void(0);" id="delete-guestGoal" style="color:black">Poista</a> /
+                <a href="javascript:void(0);" id="edit-guestGoal" style="color:black">Muokkaa</a>
+            </td>
+            <td colspan="1">
+                <a href="javascript:void(0);" id="add-guestPenalty" style="color:black">Lisää</a> / 
+                <a href="javascript:void(0);" id="delete-guestPenalty" style="color:black">Poista</a> /
+                <a href="javascript:void(0);" id="edit-guestPenalty" style="color:black">Muokkaa</a>
+            </td>
+        </tr>
+        {{pass}}
+        <tr>
+            <td>    
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="guestgoal">
+                <thead>
+                    <tr>
+                        <th width="0%">Id</th>
+                        <th width="10%">Aika</th>
+                        <th width="30%">Tekijä</th>
+                        <th width="30%">Syöttäjä</th>
+                        <th width="10%">Koodi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">null</td>
+                    </tr>
+                </tbody>
+            </table>
+            </td>    
+            <td>
+            <table cellpadding="0" cellspacing="0" border="0" class="display" id="guestpenalty">
+                <thead>
+                    <tr>
+                        <th width="0%">Id</th>
+                        <th width="10%">Aika</th>
+                        <th width="10%">Kesto</th>
+                        <th width="50%">Pelaaja</th>
+                        <th width="5%">Syy</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="5">null</td>
+                    </tr>
+                </tbody>
+            </table>
+            </td>    
+        </tr>
+        <!--</table> -->
+        
+        </td>    
+    </tr>
+    </table>
+</div>
+</div>
+</div>
+</div>
+
