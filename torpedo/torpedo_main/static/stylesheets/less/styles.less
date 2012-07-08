@@ -2,11 +2,7 @@
 /* Font */
 @font-face {
     font-family: 'AsapRegular';
-    src: url('fonts/Asap-Regular-webfont.eot');
-    src: url('fonts/Asap-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Asap-Regular-webfont.woff') format('woff'),
-         url('fonts/Asap-Regular-webfont.ttf') format('truetype'),
-         url('fonts/Asap-Regular-webfont.svg#AsapRegular') format('svg');
+    src: url('/static/fonts/Asap-Regular.otf');
     font-weight: normal;
     font-style: normal;
 }
@@ -23,8 +19,7 @@ header#top {
 }
 
 nav {
-	margin: 50px auto 0;
-	width: 788px;
+	background-color: @theme + #252525;
 	height: 45px;
 	.border;
 	.shadow;

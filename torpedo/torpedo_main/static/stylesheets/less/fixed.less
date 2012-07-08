@@ -22,7 +22,7 @@
 
 // center the contents
 div.center {
-	width: 960px;
+	width: @width;
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -30,7 +30,12 @@ div.center {
 // header
 header#top {
 	.column(12);
-	margin-bottom: 1em;
+}
+
+// navigation
+nav#topnav {
+    .column(12);
+    margin-bottom: 1em;
 }
 
 .rounded-corners (@radius: 5px) {
