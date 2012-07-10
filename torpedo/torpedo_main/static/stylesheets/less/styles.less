@@ -1,4 +1,6 @@
-@import "config.less";
+@import '/static/stylesheets/reset.css';
+@import '/static/stylesheets/less/config.less';
+
 /* Font */
 @font-face {
     font-family: 'AsapRegular';
@@ -6,62 +8,17 @@
     font-weight: normal;
     font-style: normal;
 }
-/* Body */
-body {
-	background: lighten(@theme, 90%);
-	font-family: AsapRegular, sans-serif;
-	font-size: 11pt;
-}
 
+
+/* Styles*/
+body {
+    background: lighten(@theme, 90%);
+    font-family: AsapRegular, sans-serif;
+    font-size: 11pt;
+}
 
 header#top {
     background-color: lighten(@theme, 30%);
-}
-
-nav {
-	height: 45px;
-	.border;
-	.shadow;
-    .gradient;
-	ul {
-		padding: 0;
-		margin: 0;
-		li {
-			display: inline;
-			a {
-				text-decoration: none;
-				display: inline-block;
-				float: left;
-				width: 156px;
-				height: 45px;
-				text-align: center;
-				line-height: 300%;
-				.textcolor(#f2f2f2); // You can change this line
-				.divider;
-				.gradient;
-				&:hover {
-					.hovereffect;
-				}
-			}
-		}
-		li:first-child a {
-			border-left: none;
-		}
-		li:last-child a {
-			border-right: none;
-		}
-		a#active {
-            .hovereffect;
-		}
-	}
-}
-
-ul#boxes li {
-    font-family: Georgia;
-    font-size: 1.33em;
-    padding: 2.5em 0;
-    color: #999;
-    text-align: center;
 }
 
 h1 {
@@ -70,10 +27,6 @@ h1 {
     padding: 1em;
     color: white;
 }
-    h1 a {
-        color: white;
-        text-decoration: none;
-    }
 h2 {
     font-family: Georgia;
     font-size: 1.5em;

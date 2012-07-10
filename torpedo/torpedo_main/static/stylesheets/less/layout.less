@@ -1,7 +1,6 @@
 @import '/static/stylesheets/reset.css';
 @import '/static/stylesheets/less/grid.less';
-@import "/static/stylesheets/less/config.less";
-
+@import '/static/stylesheets/less/config.less';
 
 //////////
 // GRID //
@@ -14,6 +13,7 @@
 
 // Uncomment the definition below for a percentage-based layout
 // @total-width: 100%;
+
 
 
 ////////////
@@ -32,21 +32,9 @@ header#top {
 	.column(12);
 }
 
-// navigation
 nav#topnav {
     .column(12);
     margin-bottom: 1em;
-}
-
-nav#subnav {
-    .column(12);
-    height: 35px;
-    margin-bottom: 1em;
-}
-
-nav#subnav a {
-    height: 35px;
-    line-height: 200%;
 }
 
 .rounded-corners (@radius: 5px) {
@@ -66,4 +54,3 @@ nav#subnav a {
 	.column(3);
     background-color: lighten(@theme, 40%);
 }
-

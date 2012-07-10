@@ -1,0 +1,49 @@
+@import "config.less";
+
+nav {
+//	height: 45px;
+	.border;
+	.shadow;
+    .gradient;
+	ul {
+		padding: 0;
+		margin: 0;
+		li {
+			display: inline;
+			a {
+				text-decoration: none;
+				display: inline-block;
+				float: left;
+				width: 156px;
+				height: 45px;
+				text-align: center;
+				line-height: 300%;
+				.textcolor(#f2f2f2); // You can change this line
+				.divider;
+				.gradient;
+				&:hover {
+					.hovereffect;
+				}
+			}
+			ul {
+		        display: none;
+			}
+		}
+		li:first-child a {
+			border-left: none;
+		}
+		li:last-child a {
+			border-right: none;
+		}
+		a#active {
+            .hovereffect;
+		}
+        li:hover ul, li:focus ul {
+            display: block;
+            float: none;
+        }
+        li ul li {
+            float: none;
+        }
+	}
+}
