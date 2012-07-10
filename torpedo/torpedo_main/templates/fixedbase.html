@@ -26,11 +26,12 @@
 	    {% block nav %}
 	    <nav id="topnav">
 	        <ul>
-	            <li><a rel="external" href="#">Home</a></li>
-	            <li><a rel="external" href="#">Inspiration</a></li>
-	            <li><a rel="external" href="#">Tutorials</a></li>
-	            <li><a rel="external" href="#">Freebies</a></li>
-	            <li><a rel="external" href="#">Resources</a></li>
+                <li><a id="active" rel="external" href="#">Koti</a></li>
+                <li><a rel="external" href="#">Joukkue</a></li>
+                <li><a rel="external" href="#">Statistiikat</a></li>
+                <li><a rel="external" href="#">Forum</a></li>
+	        {% for navitem in navs %}
+	        {% endfor %}
 	        </ul>
 	    </nav>
 	    {% endblock %}

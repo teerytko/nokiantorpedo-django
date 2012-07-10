@@ -38,6 +38,17 @@ nav#topnav {
     margin-bottom: 1em;
 }
 
+nav#subnav {
+    .column(12);
+    height: 35px;
+    margin-bottom: 1em;
+}
+
+nav#subnav a {
+    height: 35px;
+    line-height: 200%;
+}
+
 .rounded-corners (@radius: 5px) {
   border-radius: @radius;
   -webkit-border-radius: @radius;
@@ -48,11 +59,11 @@ nav#topnav {
 #maincolumn {
     .rounded-corners;
 	.column(9);
-    background-color: lighten(@theme, 70%);
+    background-color: lighten(@theme, 40%);
 }
 #sidebar {
     .rounded-corners;
 	.column(3);
-    background-color: lighten(@theme, 70%);
+    background-color: lighten(@theme, 40%);
 }
 
