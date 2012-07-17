@@ -1,0 +1,50 @@
+@import "config.less";
+
+a {
+    text-decoration: none;
+    color: #838383;
+}
+
+a:hover {
+    color: black;
+}
+
+nav {
+    position: relative;
+    margin-left: 30px;
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        padding-top: 5px;
+        li {
+            float: left;
+            position: relative;
+            padding: 3px 0;
+            text-align: center;
+            a {
+                display: block;
+                width: 140px;
+            }
+        }
+        .sub-menu {
+            display: none;
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            padding: 10px;
+            z-index: 90;
+            li {
+                text-align: left;
+            }
+        }
+        li:hover ul.sub-menu {
+            display: block;
+            border: 1px solid #ececec;
+        }
+    }
+}
+
+
+
+
