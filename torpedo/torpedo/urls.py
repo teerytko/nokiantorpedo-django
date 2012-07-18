@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'torpedo_main.views.home', name='home'),
+    url(r'^', include('torpedo_main.urls')),
     url(r'^statistics', include('statistics.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

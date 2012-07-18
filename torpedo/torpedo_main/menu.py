@@ -16,6 +16,7 @@ mainmenu['statistics'] =     {'name': 'Statistiikat',
         ]
     }
 mainmenu['forum'] = {'name': 'Forum', 'href': '/forum'}
+mainmenu['association'] = {'name': 'Yhdistys', 'href': '/association'}
 
 
 class Menu(object):

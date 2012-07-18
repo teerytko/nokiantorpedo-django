@@ -16,3 +16,12 @@ def home(request):
         'menu': menu
     })
     return HttpResponse(t.render(c))
+
+def association(request):
+    t = loader.get_template('association.html')
+    menu = get_menu()
+    menu.active = 'association'
+    c = Context({
+        'menu': menu
+    })
+    return HttpResponse(t.render(c))
