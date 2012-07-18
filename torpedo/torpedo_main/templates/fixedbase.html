@@ -14,7 +14,6 @@
     <!-- Scripts -->
     <script src="/static/js/less.js" type="text/javascript"></script>
     <!--[if lt IE 9]><script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    
 </head>
 <body>
 
@@ -28,20 +27,19 @@
         {% block nav %}
         <nav>
             <ul>
-                <li><a rel="external" href="#">Koti</a></li>
-                <li id="active" ><a rel="external" href="#">Joukkue</a>
-                    <ul id="active" class="sub-menu">
-                       <li><a rel="ext" href="#">2011</a></li>
-                       <li><a rel="ext" href="#">2012 -- </a></li>
-                   </ul>
-                </li>
-                <li><a rel="external" href="#">Statistiikat</a>
-                   <ul class="sub-menu">
-                       <li><a rel="ext" href="#">Pelaajat</a></li>
-                       <li><a rel="ext" href="#">Ottelut</a></li>
-                   </ul>
-                </li>
-                <li><a rel="external" href="#">Forum</a></li>
+            {% for key, mainitem in menu.items %}
+            <li><a id="{{key}}"
+                {% if menu.active == key %}class="active"{% endif %}
+                   href="{{mainitem.href}}">{{ mainitem.name }}</a>
+                {% if mainitem.children %}
+                <ul class='sub-menu'>
+                {% for subitem in mainitem.children %}
+                    <li><a href="{{subitem.href}}">{{ subitem.name }}</a></li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </li>
+            {% endfor %}
             </ul>
         </nav>
         {% endblock %}
