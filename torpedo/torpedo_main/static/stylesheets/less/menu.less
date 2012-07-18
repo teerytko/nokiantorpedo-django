@@ -9,11 +9,11 @@ nav {
 		padding: 0;
 		margin: 0;
 		li {
-			display: inline;
+            float: left;
+            position: relative;
 			a {
 				text-decoration: none;
 				display: inline-block;
-				float: left;
 				width: 156px;
 				height: 45px;
 				text-align: center;
@@ -25,9 +25,6 @@ nav {
 					.hovereffect;
 				}
 			}
-			ul {
-		        display: none;
-			}
 		}
 		li:first-child a {
 			border-left: none;
@@ -38,9 +35,19 @@ nav {
 		a#active {
             .hovereffect;
 		}
-        li:hover ul, li:focus ul {
+        .sub-menu {
+            background-color: white;
+            display: none;
+            position: absolute;
+            top: 45px;
+            z-index: 90;
+            li {
+                text-align: left;
+            }
+        }
+        li:hover ul.sub-menu {
             display: block;
-            float: none;
+            border: 1px solid #ececec;
         }
         li ul li {
             float: none;
