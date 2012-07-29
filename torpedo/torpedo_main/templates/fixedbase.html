@@ -30,33 +30,13 @@
     <div class="center">
         <!-- Header -->
         <header id="top">
-            <ul id="login">
-                <li><a href="#" onclick="showlayer('login_menu')">Login | Register</a></li>
+            <ul id="user">
+                {% if user.is_authenticated %}
+                  <li>Logged in {{ user }} | <a href="/accounts/logout/">logout</a></li>
+                {% else %}
+                  <li><a href="/accounts/login/">login</a></li>
+                {% endif %}
             <li>
-            <div id="login_menu" style="display:none;">
-              <div id="new-user-col">New User:<br /><br />
-                <a href="/register" class="green-button">Register</a>
-              </div>
-              <div id="signup-user-col">
-              Existing User log in below:<br /><br />
-              <form action="login.html" method="post">
-              <ul>
-                <li>
-                <label for="email">Email:</label>
-                <input type="text" id="email" size="18"/>
-                </li>
-                <li>
-                <label for="psw">Password:</label>
-                <input type="password" id="psw" size="18"/>
-                </li>
-                <li>
-                <button type="submit" class="green-button">Log-in</button>
-                </li>
-                </ul>
-                </form>
-                </div>
-                <div class="spacer"></div>
-            </div>
             </ul>
             <h1>Nokian torpedo - Salibandya vuodesta 2008</h1>
         </header>
@@ -78,6 +58,9 @@
                 {% endif %}
             </li>
             {% endfor %}
+            {% if user.is_staff %}
+            <li><a id="admin" href="/admin/">Admin</a></li>
+            {% endif %}
         </nav>
         {% endblock %}
         <!-- Main Body -->	

@@ -125,6 +125,10 @@ INSTALLED_APPS = (
     'djangorestframework',
     'torpedo_main',
     'statistics',
+    'pagination',
+    'django_authopenid',
+    'djangobb_forum',
+    'django_messages',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -155,3 +159,13 @@ LOGGING = {
         },
     }
 }
+
+import os
+PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
+
+# Haystack settings
+HAYSTACK_SITECONF = 'search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'djangobb_index')
+
+LOGIN_REDIRECT_URL = '/'
