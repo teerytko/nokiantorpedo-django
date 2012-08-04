@@ -1,0 +1,30 @@
+
+
+            <ul id="login">
+                <li><a href="#" onclick="showlayer('login_menu')">Login | Register</a></li>
+            <li>
+            <div id="login_menu" style="display:none;">
+              <div id="new-user-col">New User:<br /><br />
+                <a href="/register" class="green-button">Register</a>
+              </div>
+              <div id="signup-user-col">
+              Existing User log in below:<br /><br />
+              <form action="/login" method="post">
+              <ul>
+                <li>
+                <label for="username">Username:</label>
+                <input type="text" id="username" size="18"/>
+                </li>
+                <li>
+                <label for="psw">Password:</label>
+                <input type="password" id="password" size="18"/>
+                </li>
+                <li>
+                <button type="submit" class="submit-button">Log-in</button>
+                </li>
+                </ul>
+                </form>
+                </div>
+                <div class="spacer"></div>
+            </div>
+            </ul>
