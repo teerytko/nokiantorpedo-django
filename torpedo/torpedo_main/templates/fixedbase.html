@@ -28,41 +28,7 @@
 <body>
 
     <div class="center">
-        <!-- Header -->
-        <header id="top">
-            <ul id="user">
-                {% if user.is_authenticated %}
-                  <li>Logged in {{ user }} | <a href="/accounts/logout/">logout</a></li>
-                {% else %}
-                  <li><a href="/accounts/login/">login</a></li>
-                {% endif %}
-            <li>
-            </ul>
-            <h1>Nokian torpedo - Salibandya vuodesta 2008</h1>
-        </header>
-
-        <!-- Navigation -->
-        {% block nav %}
-        <nav>
-            <ul>
-            {% for key, mainitem in menu.items %}
-            <li><a id="{{key}}"
-                {% if menu.active == key %}class="active"{% endif %}
-                   href="{{mainitem.href}}">{{ mainitem.name }}</a>
-                {% if mainitem.children %}
-                <ul class='sub-menu'>
-                {% for subitem in mainitem.children %}
-                    <li><a href="{{subitem.href}}">{{ subitem.name }}</a></li>
-                {% endfor %}
-                </ul>
-                {% endif %}
-            </li>
-            {% endfor %}
-            {% if user.is_staff %}
-            <li><a id="admin" href="/admin/">Admin</a></li>
-            {% endif %}
-        </nav>
-        {% endblock %}
+        {% include 'torpedo/header.html' %}
         <!-- Main Body -->	
         <article id="maincolumn">
         {% block main %}
