@@ -1,0 +1,93 @@
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * General page setup
+ */
+#datatables {
+	font: 80%/1.45em "Lucida Grande", Verdana, Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #333;
+	background-color: #fff;
+}
+
+
+#datatables #container {
+	width: 800px;
+	margin: 30px auto;
+	padding: 0;
+}
+
+
+#datatables #footer {
+	margin: 50px auto 0 auto;
+	padding: 0;
+}
+
+#datatables #demo {
+	margin: 30px auto 0 auto;
+}
+
+#datatables .demo_jui {
+	margin: 30px auto 0 auto;
+}
+
+#datatables .big {
+	font-size: 1.3em;
+	font-weight: bold;
+	line-height: 1.6em;
+	color: #4E6CA3;
+}
+
+#datatables .spacer {
+	height: 20px;
+	clear: both;
+}
+
+#datatables .clear {
+	clear: both;
+}
+
+#datatables pre {
+	padding: 15px;
+	background-color: #F5F5F5;
+	border: 1px solid #CCCCCC;
+}
+
+#datatables h1 {
+	margin-top: 2em;
+	font-size: 1.3em;
+	font-weight: normal;
+	line-height: 1.6em;
+	color: #4E6CA3;
+	border-bottom: 1px solid #B0BED9;
+	clear: both;
+}
+
+#datatables h2 {
+	font-size: 1.2em;
+	font-weight: normal;
+	line-height: 1.6em;
+	color: #4E6CA3;
+	clear: both;
+}
+
+#datatables a {
+	color: #000000;
+	text-decoration: none;
+}
+
+#datatables a:hover {
+	text-decoration: underline;
+}
+
+#datatables ul {
+	color: #4E6CA3;
+}
+
+.css_right {
+	float: right;
+}
+
+.css_left {
+	float: left;
+}

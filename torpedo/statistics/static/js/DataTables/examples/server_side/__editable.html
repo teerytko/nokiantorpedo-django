@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/media/images/favicon.ico" />
+		
+		<title>DataTables example</title>
+		<style type="text/css" title="currentStyle">
+			@import "../../media/css/demo_page.css";
+			@import "../../media/css/demo_table.css";
+		</style>
+		<script type="text/javascript" language="javascript" src="../../media/js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="../examples_support/jquery.jeditable.js"></script>
+		<script type="text/javascript" language="javascript" src="../../media/js/jquery.dataTables.js"></script>
+		<script type="text/javascript" charset="utf-8">
+            /* Global var for counter */
+            var giCount = 1;
+			var oTable;
+			$(document).ready(function() {
+				oTable = $('#example').dataTable( {
+					"bProcessing": true,
+					"bServerSide": true,
+					"sAjaxSource": "../examples_support/server_processing.php",
+					"fnDrawCallback": function () {
+						$('#example tbody td').editable( '../examples_support/editable_ajax.php', {
+							"callback": function( sValue, y ) {
+								/* Redraw the table from the new data on the server */
+								oTable.fnDraw();
+							},
+							"height": "14px"
+						} );
+					}
+				} );
+			} );
+			
+            function fnClickAddRow() {
+                $('#example').dataTable().fnAddData( [
+                    giCount+".1",
+                    giCount+".2",
+                    giCount+".3",
+                    giCount+".4" ] );
+                
+                giCount++;
+            }
+		</script>
+        <script type="text/javascript" charset="utf-8">
+            /* Global var for counter */
+            var giCount = 1;
+            
+            $(document).ready(function() {
+                $('#example').dataTable();
+            } );
+            
+            function fnClickAddRow() {
+                $('#example').dataTable().fnAddData( [
+                    giCount+".1",
+                    giCount+".2",
+                    giCount+".3",
+                    giCount+".4" ] );
+                
+                giCount++;
+            }
+        </script>
+
+	</head>
+	<body id="dt_example">
+		<div id="container">
+			<div class="full_width big">
+				<i>DataTables</i> server-side processing example
+			</div>
+			
+			<h1>Preamble</h1>
+			<p>There are many ways to get your data into DataTables, and if you are working with seriously large databases, you might want to consider using the server-side options that DataTables provides. Basically all of the paging, filtering, sorting etc that DataTables does can be handed off to a server (or any other data source - Google Gears or Adobe Air for example!) and DataTables is just an events and display module.</p>
+			<p>The example here shows a very simple display of the CSS data (used in all my other examples), but in this instance coming from the server on each draw. Filtering, multi-column sorting etc all work as you would expect.</p>
+			
+            <p><a href="javascript:void(0);" onclick="fnClickAddRow();">Click to add a new row</a></p>
+			<h1>Live example</h1>
+			<div id="dynamic">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+	<thead>
+		<tr>
+            <th width="15%">Location</th>
+			<th width="20%">Date</th>
+			<th width="25%">Home</th>
+			<th width="25%">Guest</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+            <td>Row 2 Data 1</td>
+            <td>Row 2 Data 2</td>
+            <td>etc</td>
+            <td>etc</td>
+		</tr>
+	</tbody>
+</table>
+			</div>
+			<div class="spacer"></div>
+			
+			<div id="footer" style="text-align:center;">
+				<span style="font-size:10px;">DataTables &copy; Allan Jardine 2008-2010</span>
+			</div>
+		</div>
+	</body>
+</html>
