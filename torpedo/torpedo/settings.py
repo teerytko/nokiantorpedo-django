@@ -177,6 +177,9 @@ PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 HAYSTACK_SITECONF = 'search_sites'
 HAYSTACK_SEARCH_ENGINE = 'whoosh'
 HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'djangobb_index')
+DJANGOBB_FORUM_BASE_TITLE = 'Nokian Torpedo Forum'
+DJANGOBB_HEADER = 'Nokian Torpedo Forum'
+DJANGOBB_TAGLINE = 'Nokialaisen urheiluseuran keskustelu foorumi'
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -192,3 +195,4 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
+
