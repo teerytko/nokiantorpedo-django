@@ -1,8 +1,11 @@
 
-from djangorestframework.mixins import ListModelMixin
+from djangorestframework.mixins import ListModelMixin, PaginatorMixin
 from djangorestframework.views import InstanceModelView, ListOrCreateModelView
 from djangorestframework.renderers import BaseRenderer
 from statistics.rest.renderers import DListRenderer
+from django.db.models.fields import TextField
+from django.db.models import Q
+
 
 class MyInstanceModelView(InstanceModelView):
     """
@@ -11,7 +14,7 @@ class MyInstanceModelView(InstanceModelView):
     renderers = (list(InstanceModelView.renderers) + [DListRenderer])
 
 
-class SearchModelMixin(ListModelMixin):
+class SearchModelMixin(ListModelMixin, PaginatorMixin):
     """
     Behavior to list a set of `model` instances on GET requests
     """
@@ -26,11 +29,47 @@ class SearchModelMixin(ListModelMixin):
         # constructing the query.
         if BaseRenderer._FORMAT_QUERY_PARAM in kwargs:
             del kwargs[BaseRenderer._FORMAT_QUERY_PARAM]
-
         return kwargs
 
 
-class ListSearchModelView(SearchModelMixin, ListOrCreateModelView):
+class DataTableMixin(ListModelMixin):
+    """
+    List a set of `model` instances on GET requests based on
+    input arguments of DataTables.
+    """
+    def get_ordering(self):
+        return None
+
+    def get_query(self, request, *args, **kwargs):
+        """
+        Create a query object for the request.
+
+        @param sSearch: search parameter which is searched from all
+        TextFields of the model.
+        """
+        kwargs = request.GET
+        query = Q()
+        sSearch = kwargs.get('sSearch')
+        if sSearch is not None:
+            for field in self._resource.model._meta.fields:
+                if isinstance(field, TextField):
+                    query |=  Q(**{'{0}__{1}'.format(field.attname, 'contains'): sSearch})
+        return query
+
+    def get(self, request, *args, **kwargs):
+        """
+        Get the data for the request.
+        """
+        queryset = self.get_queryset()
+        ordering = self.get_ordering()
+        query = self.get_query(request, *args, **kwargs)
+        queryset = queryset.filter(query)
+        if ordering:
+            queryset = queryset.order_by(*ordering)
+        return queryset
+
+
+class ListSearchModelView(DataTableMixin, ListOrCreateModelView):
     """
     A view which provides default operations for searchable list, against a 
     model in the database.
