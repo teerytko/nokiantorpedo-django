@@ -26,6 +26,8 @@ class GameResource(ModelResource):
 class PlayerResource(ModelResource):
     model = Player
 
+    include = list(ModelResource.include) + ['goals', 'assists',
+                                             'penalties', 'points']
 
 class GoalResource(ModelResource):
     model = Goal

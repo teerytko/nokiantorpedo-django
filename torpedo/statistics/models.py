@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib import admin
+from django.db.models import Sum
 
 
 class League(models.Model):
@@ -34,6 +35,22 @@ class Player(models.Model):
     name = models.TextField()
     role= models.TextField(blank=True)
     team = models.ForeignKey(Team, related_name='player')
+
+    @property
+    def goals(self):
+        return self.scoring.count()
+
+    @property
+    def assists(self):
+        return self.assisting.count()
+
+    @property
+    def points(self):
+        return self.goals + self.assists
+
+    @property
+    def penalties(self):
+        return str(self.penalty_set.aggregate(Sum('time')))
 
     def __unicode__(self):
         return "Player: #%r: %r" % (self.number, self.name)
