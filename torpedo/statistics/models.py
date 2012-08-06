@@ -50,7 +50,14 @@ class Player(models.Model):
 
     @property
     def penalties(self):
-        return str(self.penalty_set.aggregate(Sum('time')))
+        from datetime import timedelta
+        penalty_time = timedelta()
+        for penalty in self.penalty_set.all():
+            penalty_time += timedelta(hours=penalty.length.hour,
+                                      minutes=penalty.length.minute,
+                                      seconds=penalty.length.second,
+                                      )
+        return penalty_time
 
     def __unicode__(self):
         return "Player: #%r: %r" % (self.number, self.name)
