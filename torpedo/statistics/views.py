@@ -19,3 +19,11 @@ def players(request):
         'menu': menu
     })
     return HttpResponse(t.render(c))
+
+def games(request):
+    t = loader.get_template('statistics/games.html')
+    menu.active = 'statistics'
+    c = RequestContext(request, {
+        'menu': menu
+    })
+    return HttpResponse(t.render(c))
