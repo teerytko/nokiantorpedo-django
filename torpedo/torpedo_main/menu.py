@@ -7,14 +7,7 @@ from django.utils.datastructures import SortedDict
 
 mainmenu = SortedDict()
 mainmenu['home'] = {'name': 'Koti', 'href': '/'}
-mainmenu['team'] = {'name': 'Joukkue', 'href': '/team'}
-mainmenu['statistics'] =     {'name': 'Statistiikat',
-     'href': '/statistics',
-     'children': [
-        {'name': 'Pelaajat', 'href': '/statistics/players'},
-        {'name': 'Ottelut', 'href': '/statistics/games'},
-        ]
-    }
+# mainmenu['team'] = {'name': 'Joukkue', 'href': '/team'}
 mainmenu['forum'] = {'name': 'Forum', 'href': '/forum'}
 mainmenu['association'] = {'name': 'Yhdistys', 'href': '/association'}
 
