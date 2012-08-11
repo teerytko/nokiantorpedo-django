@@ -30,9 +30,13 @@ class DListRenderer(TemplateRenderer):
         if not isinstance(listobj, list):
             listobj = [obj]
         
+        # create the dlist format with the columns in
+        # given format
         columns = get_columns(self.view.request)
-        sorting = get_sorting(self.view.request)
         dl = to_dlist(obj, columns)
+        # order the elements with with request tuples
+        # (orderIndex, reverse)
+        sorting = get_sorting(self.view.request)
         for order in sorting:
             dl.sort(key=itemgetter(order[0]), reverse=order[1])
         data = JSONRenderer(self.view).render(dl)

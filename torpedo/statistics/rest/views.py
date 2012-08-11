@@ -5,6 +5,8 @@ from djangorestframework.views import InstanceModelView, ListOrCreateModelView
 from djangorestframework.renderers import BaseRenderer
 from statistics.rest.renderers import DListRenderer
 from django.db.models.fields import TextField
+from django.db.models.fields.related import ForeignKey
+
 from django.db.models import Q
 
 
@@ -55,6 +57,8 @@ class DataTableMixin(ListModelMixin):
             for field in self._resource.model._meta.fields:
                 if isinstance(field, TextField):
                     query |=  Q(**{'{0}__{1}'.format(field.attname, 'contains'): sSearch})
+                elif isinstance(field, ForeignKey):
+                    query |=  Q(**{'{0}__{1}'.format(field.name, 'name__contains'): sSearch})
         return query
 
     def get(self, request, *args, **kwargs):
