@@ -1,4 +1,5 @@
 
+from statistics.rest.utils import get_columns
 from djangorestframework.mixins import ListModelMixin, PaginatorMixin
 from djangorestframework.views import InstanceModelView, ListOrCreateModelView
 from djangorestframework.renderers import BaseRenderer
@@ -61,11 +62,8 @@ class DataTableMixin(ListModelMixin):
         Get the data for the request.
         """
         queryset = self.get_queryset()
-        ordering = self.get_ordering()
         query = self.get_query(request, *args, **kwargs)
         queryset = queryset.filter(query)
-        if ordering:
-            queryset = queryset.order_by(*ordering)
         return queryset
 
 

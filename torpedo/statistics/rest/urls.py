@@ -25,8 +25,8 @@ class GameResource(ModelResource):
 
 class PlayerResource(ModelResource):
     model = Player
-
-    include = list(ModelResource.include) + ['goals', 'assists',
+    exclude = ('pk')
+    include = list(ModelResource.include) + ['team_name', 'goals', 'assists',
                                              'penalties', 'points']
 
 class GoalResource(ModelResource):

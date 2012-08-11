@@ -7,13 +7,12 @@
 	margin: 0;
 	padding: 0;
 	color: #333;
-	background-color: #fff;
 }
 
 
 #datatables #container {
-	width: 800px;
-	margin: 30px auto;
+	width: 600px;
+	margin: 0px auto;
 	padding: 0;
 }
 

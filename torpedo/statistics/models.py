@@ -37,6 +37,10 @@ class Player(models.Model):
     team = models.ForeignKey(Team, related_name='player')
 
     @property
+    def team_name(self):
+        return self.team.name
+
+    @property
     def goals(self):
         return self.scoring.count()
 
