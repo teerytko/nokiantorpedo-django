@@ -23,16 +23,26 @@
     <div class="center">
         {% include 'torpedo/header.html' %}
         <!-- Main Body -->	
+        {% block center %}
         <article id="maincolumn">
         {% block main %}
-            <h2>Main</h2>
         {% endblock %}
         </article>
         <section id="sidebar">
         {% block sidebar %}
-            <h2>Sidebar</h2>
+            <h3>Linkkejä</h3>
+            <a href="http://salibandy.net/">Salibandy.net</a>
+            <br>
+            <a href="http://www.osallistujat.com" target="blank"><img src="http://www.osallistujat.com/LinkkiLogoPieni.png" border="0" width="100" height="30" alt="Osallistujat.com" title="Osallistujat.com"></a>
+            <br>
+            <a href="http://www.facebook.com/group.php?gid=118127174888202&v=wall#!/group.php?gid=118127174888202&v=wall"><img src="/static/facebook_logo.png" border="0" height="30" alt="Nokian Torpedo Facebookissa!" title="Nokian Torpedo Facebookissa!"></a>
+
+<iframe src="http://www.osallistujat.com/EMBED.php?id=2185&amp;height=300&amp;width=220&amp;style=list&amp;viikkoja=1" 
+style="border-width: 1pt; border-color: rgb(107,121,10); border-style: solid;" 
+scrolling="no" frameborder="0" height="300" width="220"></iframe>
         {% endblock %}
         </section>
+        {% endblock %}
         <div id="copyrights">
            <p>&copy;&nbsp;Nokian Torpedo ry, 2012</p>
         </div>

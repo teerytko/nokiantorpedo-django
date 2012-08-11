@@ -9,6 +9,7 @@ mainmenu = SortedDict()
 mainmenu['home'] = {'name': 'Koti', 'href': '/'}
 # mainmenu['team'] = {'name': 'Joukkue', 'href': '/team'}
 mainmenu['forum'] = {'name': 'Forum', 'href': '/forum'}
+mainmenu['calendar'] = {'name': 'Kalenteri', 'href': '/calendar'}
 mainmenu['association'] = {'name': 'Yhdistys', 'href': '/association'}
 
 
