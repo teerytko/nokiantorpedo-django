@@ -8,17 +8,23 @@
 <script type="text/javascript">
 $(document).ready(function () {
     jQuery.getFeed({
-       url: 'http://localhost:8000/forum/feeds/forum/2/',
+       url: 'http://localhost:8000/forum/feeds/posts/',
        success: function(feed) {
           var title = '<h3>' + feed.title + '</h3>';
           $('#forumfeeds').append(title);
           for (i=0; i<feed.items.length; i++)
           {
+             var post_id = 'post_'+i
+             jQuery('<div/>', {
+                    id: post_id,
+             }).appendTo('#forumfeeds');
              var item = feed.items[i];
              var link = '<a href="'+item.link+'">'+item.title+'</a>';
-             var updated = ' Updated: '+item.updated+'</br>';
-             $('#forumfeeds').append(link);
-             $('#forumfeeds').append(updated);
+             var updated = ' '+item.updated+'</br>';
+             var description = ''+item.description+'</br>';
+             $('#'+post_id).append(link);
+             $('#'+post_id).append(updated);
+             $('#'+post_id).append(description);
           }
        }
     });
