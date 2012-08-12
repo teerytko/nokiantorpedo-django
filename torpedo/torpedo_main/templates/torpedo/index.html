@@ -11,14 +11,14 @@ $(document).ready(function () {
        url: 'http://localhost:8000/forum/feeds/forum/2/',
        success: function(feed) {
           var title = '<h3>' + feed.title + '</h3>';
-          $('#test').append(title);
+          $('#forumfeeds').append(title);
           for (i=0; i<feed.items.length; i++)
           {
              var item = feed.items[i];
              var link = '<a href="'+item.link+'">'+item.title+'</a>';
              var updated = ' Updated: '+item.updated+'</br>';
-             $('#test').append(link);
-             $('#test').append(updated);
+             $('#forumfeeds').append(link);
+             $('#forumfeeds').append(updated);
           }
        }
     });
@@ -32,8 +32,7 @@ $(document).ready(function () {
 <p>Nokian torpedo on vuodesta 2008 vaikuttanut Nokialainen urheiluseura,
 jonka pääasiallista toimintaa on <a href="http://salibandy.net/">salibandy</a> ja muu yleinen kuntoilu.
 </p>
-<div id="test">
-    <h2>Tapahtuu</h2>
+<div id="forumfeeds">
 </div>
 
 
