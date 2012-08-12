@@ -6,7 +6,7 @@ urlpatterns = patterns('',
     url(r'^calendar$', 'torpedo_main.views.calendar', name='calendar'),
     url(r'^association$', 'torpedo_main.views.association', name='association'),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login',
-        {'template_name': 'login.html'}),
+        {'template_name': 'torpedo/login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
     
 )

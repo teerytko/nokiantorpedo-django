@@ -1,10 +1,40 @@
 {% extends "torpedo/fixedbase.html" %}
+{% block head_addition %}
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<script src="/static/js/jquery.js" type="text/javascript"></script>
+<script src="/static/js/jfeed.js" type="text/javascript"></script>
+<script src="/static/js/jatom.js" type="text/javascript"></script>
+<script src="/static/js/jfeeditem.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+    jQuery.getFeed({
+       url: 'http://localhost:8000/forum/feeds/forum/2/',
+       success: function(feed) {
+          var title = '<h3>' + feed.title + '</h3>';
+          $('#test').append(title);
+          for (i=0; i<feed.items.length; i++)
+          {
+             var item = feed.items[i];
+             var link = '<a href="'+item.link+'">'+item.title+'</a>';
+             var updated = ' Updated: '+item.updated+'</br>';
+             $('#test').append(link);
+             $('#test').append(updated);
+          }
+       }
+    });
+});
+</script>
+{% endblock %}
+
 
 {% block main %}
 <h2>Nokian Torpedo</h2>
 <p>Nokian torpedo on vuodesta 2008 vaikuttanut Nokialainen urheiluseura,
 jonka pääasiallista toimintaa on <a href="http://salibandy.net/">salibandy</a> ja muu yleinen kuntoilu.
 </p>
-<h2>Tapahtuu</h2>
+<div id="test">
+    <h2>Tapahtuu</h2>
+</div>
+
+
 {% endblock %}
