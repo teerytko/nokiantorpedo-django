@@ -181,6 +181,20 @@ DJANGOBB_FORUM_BASE_TITLE = 'Nokian Torpedo Forum'
 DJANGOBB_HEADER = 'Nokian Torpedo Forum'
 DJANGOBB_TAGLINE = 'Nokialaisen urheiluseuran keskustelu foorumi'
 
+try:
+    import mailer
+    INSTALLED_APPS += ('mailer',)
+    EMAIL_BACKEND = "mailer.backend.DbBackend"
+except ImportError:
+    pass
+
+try:
+    import south
+    INSTALLED_APPS += ('south',)
+    SOUTH_TESTS_MIGRATE = False
+except ImportError:
+    pass
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -194,5 +208,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'djangobb_forum.context_processors.forum_settings',
 )
 
+
+# Account settings
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_ACTIVATION_DAYS = 10
+LOGIN_URL = '/forum/account/signin/'
 
