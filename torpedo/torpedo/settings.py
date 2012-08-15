@@ -182,6 +182,11 @@ DJANGOBB_FORUM_BASE_TITLE = 'Nokian Torpedo Forum'
 DJANGOBB_HEADER = 'Nokian Torpedo Forum'
 DJANGOBB_TAGLINE = 'Nokialaisen urheiluseuran keskustelu foorumi'
 
+# EMAIL settings
+DEFAULT_FROM_EMAIL = 'webmaster@nokiantorpedo.fi'
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_SUBJECT_PREFIX = '[NokianTorpedo] '
+
 try:
     import mailer
     INSTALLED_APPS += ('mailer',)

@@ -28,7 +28,6 @@ urlpatterns = patterns('',
     (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 
     # Apps
-    (r'^forum/account/', include('django_authopenid.urls')),
     (r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
     (r'^messages/', include('django_messages.urls')),
     

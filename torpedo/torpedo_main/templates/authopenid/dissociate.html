@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "torpedo/fixedbase.html" %}
 {% load i18n %}
 
 {% block head %}
@@ -7,7 +7,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block main %}
 {% if msg %}
 	<p class="warning">{{ msg }}</p>
 {% endif %}
