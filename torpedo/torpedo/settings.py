@@ -191,6 +191,7 @@ try:
     import mailer
     INSTALLED_APPS += ('mailer',)
     EMAIL_BACKEND = "mailer.backend.DbBackend"
+    MAILER_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 except ImportError:
     pass
 
@@ -220,3 +221,7 @@ LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 10
 LOGIN_URL = '/forum/account/signin/'
 
+try:
+    from local_settings import *
+except ImportError:
+    pass
