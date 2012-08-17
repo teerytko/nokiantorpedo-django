@@ -2,7 +2,7 @@
 <header id="top">
     <ul id="user">
         {% if user.is_authenticated %}
-          <li>Logged in {{ user }} | <a href="/account/signout/">logout</a></li>
+          <li>Logged in {{ user }} | <a href="/account/logout/">logout</a></li>
         {% else %}
           <li><a href="/account/signup/">register</a>|<a href="/account/signin/">login</a></li>
         {% endif %}
