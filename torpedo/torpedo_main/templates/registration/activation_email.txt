@@ -1,9 +1,9 @@
-{% load i18n %}
+ï»¿{% load i18n %}
 
 {% blocktrans %}
-Hi,
+Moi,
 
-Kiitokset rekisteröitymisestä. Activoidaksesi tilisi klikkaa alla olevaa linkkiä :
+Kiitokset rekisterÃ¶itymisestÃ¤. Activoidaksesi tilisi klikkaa alla olevaa linkkiÃ¤ :
 {% endblocktrans %}
 
 http://{{ site.domain }}{% url registration_activate activation_key %}
