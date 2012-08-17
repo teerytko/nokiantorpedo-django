@@ -195,11 +195,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 # Pipeline configuration
-PIPELINE_COMPILERS = (
-  'pipeline.compilers.less.LessCompiler',
-)
 STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-PIPELINE_LESS_BINARY=os.path.join(PROJECT_ROOT,'winless/lessc.cmd')
+#PIPELINE_COMPILERS = (
+#  'pipeline.compilers.less.LessCompiler',
+#)
+#PIPELINE_LESS_BINARY=os.path.join(PROJECT_ROOT,'winless/lessc.cmd')
 
 PIPELINE_CSS = {
     'torpedo': {
