@@ -1,5 +1,9 @@
 # Django settings for torpedo project.
 
+import os
+SETTINGS_ROOT = os.path.dirname(os.path.realpath(__file__))
+PROJECT_ROOT = os.path.join(SETTINGS_ROOT, '../..')
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -9,16 +13,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'teerytko_nt',                      # Or path to database file if using sqlite3.
-        'USER': 'teerytko_nt',                      # Not used with sqlite3.
-        'PASSWORD': 'torpedo',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -127,7 +121,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.humanize',
-
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -140,7 +133,9 @@ INSTALLED_APPS = (
     'django_authopenid',
     'djangobb_forum',
     'django_messages',
+    'pipeline',
 )
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -171,22 +166,6 @@ LOGGING = {
     }
 }
 
-import os
-PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
-
-# Haystack settings
-HAYSTACK_SITECONF = 'search_sites'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = os.path.join(PROJECT_ROOT, 'djangobb_index')
-DJANGOBB_FORUM_BASE_TITLE = 'Nokian Torpedo Forum'
-DJANGOBB_HEADER = 'Nokian Torpedo Forum'
-DJANGOBB_TAGLINE = 'Nokialaisen urheiluseuran keskustelu foorumi'
-
-# EMAIL settings
-DEFAULT_FROM_EMAIL = 'webmaster@nokiantorpedo.fi'
-EMAIL_HOST = 'smtp.webfaction.com'
-EMAIL_SUBJECT_PREFIX = '[NokianTorpedo] '
-
 try:
     import mailer
     INSTALLED_APPS += ('mailer',)
@@ -214,6 +193,38 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django_messages.context_processors.inbox',
     'djangobb_forum.context_processors.forum_settings',
 )
+
+# Pipeline configuration
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.less.LessCompiler',
+)
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+PIPELINE_LESS_BINARY=os.path.join(PROJECT_ROOT,'winless/lessc.cmd')
+
+PIPELINE_CSS = {
+    'torpedo': {
+        'source_filenames': (
+          'stylesheets/less/*.less',
+        ),
+        'output_filename': 'stylesheets/css/torpedo.css',
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
+
+# Haystack settings
+HAYSTACK_SITECONF = 'search_sites'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+HAYSTACK_WHOOSH_PATH = os.path.join(SETTINGS_ROOT, 'djangobb_index')
+DJANGOBB_FORUM_BASE_TITLE = 'Nokian Torpedo Forum'
+DJANGOBB_HEADER = 'Nokian Torpedo Forum'
+DJANGOBB_TAGLINE = 'Nokialaisen urheiluseuran keskustelu foorumi'
+
+# EMAIL settings
+DEFAULT_FROM_EMAIL = 'webmaster@nokiantorpedo.fi'
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_SUBJECT_PREFIX = '[NokianTorpedo] '
 
 
 # Account settings

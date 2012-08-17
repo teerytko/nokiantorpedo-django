@@ -1,7 +1,6 @@
 @import 'config.less';
 
 nav {
-//	height: 45px;
     .border;
     .shadow;
     .gradient;
@@ -13,30 +12,30 @@ nav {
             padding: 0;
             float: left;
             position: relative;
-			a {
-				text-decoration: none;
-				display: inline-block;
-				width: 150px;
-				height: 45px;
-				text-align: center;
-				line-height: 300%;
-				.textcolor(#f2f2f2); // You can change this line
-				.divider;
-				.gradient;
-				&:hover {
-					.hovereffect;
-				}
-			}
-		}
-		li:first-child a {
-			border-left: none;
-		}
-		li:last-child a {
-			border-right: none;
-		}
-		a.active {
+            a {
+                text-decoration: none;
+                display: inline-block;
+                width: 150px;
+                height: 45px;
+                text-align: center;
+                line-height: 300%;
+                .textcolor(#f2f2f2); // You can change this line
+                .divider;
+                .gradient;
+                &:hover {
+                    .hovereffect;
+                }
+            }
+        }
+        li:first-child a {
+        	border-left: none;
+        }
+        li:last-child a {
+        	border-right: none;
+        }
+        a.active {
             .hovereffect;
-		}
+        }
         .sub-menu {
             background-color: white;
             display: none;
@@ -54,5 +53,5 @@ nav {
         li ul li {
             float: none;
         }
-	}
+    }
 }
