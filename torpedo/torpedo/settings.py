@@ -195,23 +195,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 # Pipeline configuration
-STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
-#PIPELINE_COMPILERS = (
-#  'pipeline.compilers.less.LessCompiler',
-#)
-#PIPELINE_LESS_BINARY=os.path.join(PROJECT_ROOT,'winless/lessc.cmd')
-
-PIPELINE_CSS = {
-    'torpedo': {
-        'source_filenames': (
-          'stylesheets/less/*.less',
-        ),
-        'output_filename': 'stylesheets/css/torpedo.css',
-        'extra_context': {
-            'media': 'screen,projection',
-        },
-    },
-}
+STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 # Haystack settings
 HAYSTACK_SITECONF = 'search_sites'

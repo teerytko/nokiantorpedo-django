@@ -21,3 +21,21 @@ MEDIA_ROOT = '/home/teerytko/webapps/torpedo_static/media'
 MEDIA_URL = '/torpedo/media/'
 STATIC_ROOT = '/home/teerytko/webapps/torpedo_static/static'
 STATIC_URL = '/torpedo/static/'
+
+# pipeline configuration
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.less.LessCompiler',
+)
+PIPELINE_LESS_BINARY='lessc'
+
+PIPELINE_CSS = {
+    'torpedo': {
+        'source_filenames': (
+          os.path.join('stylesheets','less','*.less'),
+        ),
+        'output_filename': os.path.join('stylesheets','css','torpedo.css'),
+        'extra_context': {
+            'media': 'screen,projection',
+        },
+    },
+}
