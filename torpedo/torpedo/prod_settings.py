@@ -21,6 +21,7 @@ MEDIA_ROOT = '/home/teerytko/webapps/torpedo_static/media'
 MEDIA_URL = '/torpedo/media/'
 STATIC_ROOT = '/home/teerytko/webapps/torpedo_static/static'
 STATIC_URL = '/torpedo/static/'
+DEBUG = False
 
 # pipeline configuration
 PIPELINE_COMPILERS = (
