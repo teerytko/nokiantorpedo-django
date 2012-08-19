@@ -1,4 +1,6 @@
-@import 'config.less';
+@import "config.less";
+@import "elements.less";
+
 
 /* Font */
 @font-face {
@@ -11,10 +13,12 @@
 
 /* Styles*/
 body {
-    background: lighten(@theme, 90%);
+    background-image: url("/static/logo.gif");
+    background-repeat: repeat-x;
     font-family: AsapRegular, sans-serif;
     font-size: 11pt;
 }
+
 
 header#top {
     background-color: lighten(@theme, 30%);
@@ -28,72 +32,6 @@ header#top {
         font-family: Georgia;
         color: #666;
     }
-    #login {
-        float: right;
-        padding: 1em;
-        font-family: Georgia;
-        color: #666;
-    }
-    /*------ Layer with Register and Login Section ------ */
-    #login_menu{
-        background: lighten(@theme, 15%);
-        border:solid 1px #666666;
-        width:340px;
-        padding:10px;
-        color:#FFFFFF;
-        position: absolute;
-        font-weight:bold;
-        font-size:12px;
-        line-height:18px;
-        x-index: 100;
-        li{
-            padding-bottom:6px;
-            text-align:right;
-        }
-    }
-    #new-user-col{
-        padding-right:10px;
-        border-right:1px #DEDEDE solid;
-        height:120px;
-        width:100px;
-        float:left;
-        line-height:12px;
-    }
-    #signup-user-col{
-        padding-left:20px;
-        height:120px;
-        width:200px;
-        float:left;
-        line-height:12px;
-        text-align:right;
-    }
-    #login_menu label{font-size:11px; font-weight:normal;}
-    #login_menu input{font-size:11px; color:#333333; margin-left:10px;}
-    
-    /*------ Button ------ */
-    #login_menu button{
-        line-height:24px;
-        float:right;
-        color:#FFFFFF;
-        font-size:11px;
-        font-weight:bold;
-        text-align:center;
-        cursor:pointer;
-    }
-
-    .green-button{
-        background:url(pic/button.png);
-        display:block;
-        color:#FFFFFF;
-        font-size:11px;
-        text-decoration:none;
-        width:81px;
-        height:26px;
-        line-height:24px;
-        text-align:center;
-    }
-    /*------ Spacer ------ */
-    .spacer{clear:both; height:1px;}
 }
 
 
