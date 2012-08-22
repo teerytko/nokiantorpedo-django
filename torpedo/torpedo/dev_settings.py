@@ -22,3 +22,10 @@ STATIC_ROOT = 'static/'
 STATIC_URL = '/static/'
 MAILER_EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     
+PIPELINE_CSS = {
+    'torpedo': {
+        'source_filenames': (
+          os.path.join('stylesheets','less','*.less'),
+        ),
+    },
+}

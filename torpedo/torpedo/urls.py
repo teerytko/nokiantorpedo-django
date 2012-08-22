@@ -30,5 +30,5 @@ urlpatterns = patterns('',
     # Apps
     (r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
     (r'^messages/', include('django_messages.urls')),
-    
+    (r'', include('feedjack.urls')),
 )
