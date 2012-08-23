@@ -1,26 +1,21 @@
 {% extends "torpedo/fixedbase.html" %}
 {% block head_addition %}
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<script src="{{ STATIC_URL }}js/jquery.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/jfeed.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/jatom.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/jfeeditem.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/date.js" type="text/javascript"></script>
 <script type="text/javascript">
 var maxitems=6;
 $(document).ready(
 function () {
     jQuery.getFeed({
-       url: '/feed/atom/',
+       url:  '/forum/feeds/posts/',
        success: function(feed) {
           var title = '<h3>' + feed.title + '</h3>';
-          $('#forumfeeds').append(title);
+          $('#forumfeed').append(title);
           for (i=0; i<feed.items.length && i<maxitems; i++)
           {
-             var post_id = 'post_'+i
+             var post_id = 'forumfeed_post_'+i
              jQuery('<div/>', {
                     id: post_id,
-             }).appendTo('#forumfeeds');
+             }).appendTo('#forumfeed');
              var item = feed.items[i];
              var dstr = item.updated.split('+')[0]
              var dtime = Date.parse(dstr, 'yyyy-MM-ddTHH:mm:ss')
@@ -35,7 +30,7 @@ function () {
     });
 });
 </script>
-{% endblock %}
+    {% endblock %}
 
 
 {% block main %}
@@ -43,7 +38,7 @@ function () {
 <p>Nokian torpedo on vuodesta 2008 vaikuttanut Nokialainen urheiluseura,
 jonka pääasiallista toimintaa on <a href="http://salibandy.net/">salibandy</a> ja muu yleinen kuntoilu.
 </p>
-<div id="forumfeeds">
+<div id="forumfeed">
 </div>
 
 
