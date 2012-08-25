@@ -1,6 +1,5 @@
 djangorestframework
 django-pipeline
-feedjack
 
 # development
 webtest

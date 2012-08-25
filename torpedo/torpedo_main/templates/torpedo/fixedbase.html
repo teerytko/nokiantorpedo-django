@@ -25,7 +25,7 @@ var maxevents=3;
 $(document).ready(
 function () {
     jQuery.getFeed({
-       url: '/feeds/feed/atom/',
+       url: '/events/feed/',
        success: function(feed) {
           var title = '<h3>' + feed.title + '</h3>';
           $('#eventsfeed').append(title);
@@ -39,9 +39,8 @@ function () {
              var dstr = item.updated.split('+')[0]
              var dtime = Date.parse(dstr, 'yyyy-MM-ddTHH:mm:ss')
              var updated = ' '+dtime.toString('yyyy-M-d HH:mm:ss');
-             var titles = item.title.split(': ');
-             var description = ''+item.description.substring(0, 80)+'</br>';
-             var link = '<a href="'+item.link+'" title="'+item.title+' '+description+'">'+titles[1]+'</a></br>';
+             var description = ''+item.description;
+             var link = '<a href="'+item.link+'" title="'+item.title+' '+description+'">'+item.title+'</a></br>';
              $('#'+post_id).append(link);
              // $('#'+post_id).append('<p/>');
              //$('#'+post_id+' p').append(description);

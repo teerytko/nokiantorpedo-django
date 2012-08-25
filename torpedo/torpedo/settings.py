@@ -135,6 +135,7 @@ INSTALLED_APPS = (
     'django_messages',
     'pipeline',
     'feedjack',
+    'events'
 )
 
 
