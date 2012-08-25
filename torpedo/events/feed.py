@@ -8,7 +8,7 @@ from events.models import Event
 from django.utils import feedgenerator
 
 class EventsFeed(Feed):
-    title = "Events"
+    title = "Tapahtumat"
     link = "/feed/"
     subtitle = "Calendar Events."
 
