@@ -1,9 +1,10 @@
 @import 'config.less';
+@import "elements.less";
 
 nav {
     .border;
     .shadow;
-    .gradient;
+    .gradient(@theme+ #252525, @theme + #171717, @theme - #010101);
     margin-bottom: 1em;
     ul {
         padding: 0;
@@ -21,9 +22,9 @@ nav {
                 line-height: 300%;
                 .textcolor(#f2f2f2); // You can change this line
                 .divider;
-                .gradient;
+                .gradient(@theme+ #252525, @theme + #171717, @theme - #010101);
                 &:hover {
-                    .hovereffect;
+                    .gradient(@theme - #010101, @theme - #121212, @theme - #222222);
                 }
             }
         }
@@ -34,7 +35,7 @@ nav {
         	border-right: none;
         }
         a.active {
-            .hovereffect;
+           .gradient(@theme - #010101, @theme - #121212, @theme - #222222);
         }
         .sub-menu {
             background-color: white;
