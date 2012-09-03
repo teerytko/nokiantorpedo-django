@@ -134,6 +134,7 @@ INSTALLED_APPS = (
     'djangobb_forum',
     'django_messages',
     'pipeline',
+    'feedjack',
     'events'
 )
 

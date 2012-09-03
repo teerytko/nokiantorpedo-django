@@ -3,8 +3,8 @@
 
 """
 feedjack
-Teemu Rytkönen
-feedjack update osallistujat
+Gustavo Picón
+update_feeds.py
 """
 
 import os
@@ -18,7 +18,7 @@ import sys
 os.environ['HTTP_PROXY'] = ''
 
 import feedparser
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 
 try:
     import threadpool
@@ -31,6 +31,7 @@ USER_AGENT = 'Feedjack %s - %s' % (VERSION, URL)
 SLOWFEED_WARNING = 10
 ENTRY_NEW, ENTRY_UPDATED, ENTRY_SAME, ENTRY_ERR = range(4)
 FEED_OK, FEED_SAME, FEED_ERRPARSE, FEED_ERRHTTP, FEED_ERREXC = range(5)
+
 
 def encode(tstr):
     """ Encodes a unicode string in utf-8
@@ -54,7 +55,10 @@ def prints(tstr):
 def mtime(ttime):
     """ datetime auxiliar function.
     """
-    return datetime.datetime.fromtimestamp(time.mktime(ttime))
+    if isinstance(ttime, str):
+        return datetime.datetime.strptime(ttime, "%a, %d %b %Y %H:%M:%S GMT")
+    else:
+        return datetime.datetime.fromtimestamp(time.mktime(ttime))
 
 class ProcessEntry:
     def __init__(self, feed, options, entry, postdict, fpf):
@@ -128,13 +132,7 @@ class ProcessEntry:
         if self.entry.has_key('modified_parsed'):
             date_modified = mtime(self.entry.modified_parsed)
         else:
-            try:
-                # parse the specific osallistujat time
-                dstr = title.split('-')[0].split(' ',1)[1]
-                df = datetime.datetime.strptime(dstr, '%d.%m.%y %H:%M')
-                date_modified = df
-            except:
-                date_modified = None
+            date_modified = None
 
         fcat = self.get_tags()
         comments = self.entry.get('comments', '')
