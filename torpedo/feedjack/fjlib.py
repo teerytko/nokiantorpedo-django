@@ -11,6 +11,7 @@ from django.db import connection
 from django.core.paginator import Paginator, InvalidPage
 from django.http import Http404
 from django.utils.encoding import smart_unicode
+from django.template import RequestContext, loader
 
 from feedjack import models
 from feedjack import fjcache
@@ -257,7 +258,7 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
           user_id, tag)
     else:
         user_obj, tag_obj = None, None
-    ctx = {
+    ctx = RequestContext(request, {
         'object_list': object_list,
         'is_paginated': paginator.pages > 1,
         'results_per_page': site.posts_per_page,
@@ -268,7 +269,7 @@ def page_context(request, site, tag=None, user_id=None, sfeeds=None):
         'previous': page - 1,
         'pages': paginator.pages,
         'hits' : paginator.hits,
-    }
+    })
     get_extra_content(site, sfeeds_ids, ctx)
     from feedjack import fjcloud
     ctx['tagcloud'] = fjcloud.getcloud(site, user_id)

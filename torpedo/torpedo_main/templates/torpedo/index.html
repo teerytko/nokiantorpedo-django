@@ -29,6 +29,32 @@ function () {
        }
     });
 });
+
+function () {
+    jQuery.getFeed({
+       url:  '/forum/feeds/posts/',
+       success: function(feed) {
+          var title = '<h3>' + feed.title + '</h3>';
+          $('#forumfeed').append(title);
+          for (i=0; i<feed.items.length && i<maxitems; i++)
+          {
+             var post_id = 'forumfeed_post_'+i
+             jQuery('<div/>', {
+                    id: post_id,
+             }).appendTo('#forumfeed');
+             var item = feed.items[i];
+             var dstr = item.updated.split('+')[0]
+             var dtime = Date.parse(dstr, 'yyyy-MM-ddTHH:mm:ss')
+             var updated = ' '+dtime.toString('yyyy-M-d HH:mm:ss');
+             var link = '<a href="'+item.link+'" title="'+updated+' '+item.title+'">'+item.title+'</a></br>';
+             var description = ''+item.description.substring(0, 80)+'</br>';
+             $('#'+post_id).append(link);
+             $('#'+post_id).append('<p/>');
+             $('#'+post_id+' p').append(description);
+          }
+       }
+    });
+});
 </script>
     {% endblock %}
 
@@ -41,5 +67,7 @@ jonka pääasiallista toimintaa on <a href="http://salibandy.net/">salibandy</a>
 <div id="forumfeed">
 </div>
 
+<div id="newsfeed">
+</div>
 
 {% endblock %}
