@@ -28,20 +28,17 @@ function () {
           }
        }
     });
-});
-
-function () {
     jQuery.getFeed({
-       url:  '/forum/feeds/posts/',
+       url:  '/feeds/feed/atom/',
        success: function(feed) {
-          var title = '<h3>' + feed.title + '</h3>';
-          $('#forumfeed').append(title);
+          var title = '<h3><a href="/feeds/">' + feed.title + '</a></h3>';
+          $('#newsfeed').append(title);
           for (i=0; i<feed.items.length && i<maxitems; i++)
           {
-             var post_id = 'forumfeed_post_'+i
+             var post_id = 'newsfeed_post_'+i
              jQuery('<div/>', {
                     id: post_id,
-             }).appendTo('#forumfeed');
+             }).appendTo('#newsfeed');
              var item = feed.items[i];
              var dstr = item.updated.split('+')[0]
              var dtime = Date.parse(dstr, 'yyyy-MM-ddTHH:mm:ss')
