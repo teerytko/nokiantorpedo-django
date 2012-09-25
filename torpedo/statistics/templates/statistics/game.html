@@ -1,5 +1,6 @@
-{{extend 'layout.html'}}
-{{block head_addition}}    
+{% extends 'statistics/base.html' %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% block head_datatables %}
 <script type="text/javascript" charset="utf-8">
     var sid = getQueryVariable("sId");
     var hometeam;
@@ -17,9 +18,9 @@
     var editHomePenalty = false;
     var guestPenalty;
     var editGuestPenalty = false;
-	var playerquery = '../rest/player/dict?fields=number,name&query=team_id=='
-    var goalquery = "../rest/goalview/dlist?sQuery=game_id=="+sid+" and  team_id==";
-    var penaltyquery = "../rest/penaltyview/dlist?sQuery=game_id=="+sid+" and team_id==";
+	var playerquery = '../statistics/rest/player?format=dict?fields=number,name&query=team_id=='
+    var goalquery = "../statistics/rest/goal?format=dlist&sQuery=game_id=="+sid+" and  team_id==";
+    var penaltyquery = "../statistics/rest/penalty?format=dlist&sQuery=game_id=="+sid+" and team_id==";
     var STATIC_TABLE_LEN = 15;
     function update_data(data)
     {
@@ -45,8 +46,8 @@
 
         gameTable = $('#salibandy_game').dataTable( 
             $.extend(defaults, {
-            sAjaxSource: "../rest/gameview/dlist?sQuery=id=="+gameid,
-            aoColumns: [ { "bVisible": false }, // the first column is invisible
+            sAjaxSource: "../statistics/rest/game?format=dlist&sQuery=id=="+gameid,
+            aoColumns: [ { "sName": "id", "bVisible": false }, // the first column is invisible
                          { "sClass": "text", "sName": "date"},
                          { "sClass": "text", "sName": "location"},
                          { "sClass": "select", "sName": "home" },
@@ -56,15 +57,15 @@
                          { "sName": "home_goals"},
                          { "sName": "guest_goals"},
                          ],
-        {{if auth.has_permission('statistics_admin'):}}
+        {%if perms.statistics.change_game %}
             fnDrawCallback: function () {
                 $('#salibandy_game td.text').create_edit(
                       { 'oTable' : gameTable, 
-                        'sPostUrl': '../rest/game/update'})
+                        'sPostUrl': '../statistics/rest/game'})
                 $('#salibandy_game td.select').create_select_edit(
                     { 'oTable' : gameTable, 
-                      'sPostUrl': '../rest/gameview/update', 
-                      'sLoadUrl': '../rest/team/dict?fields=name',
+                      'sPostUrl': '../statistics/rest/game',
+                      'sLoadUrl': '../statistics/rest/team?format=dict&fields=name',
                 })
                 data = gameTable.fnGetData()
                 update_data(data);
@@ -78,7 +79,7 @@
                 guestPenalty.fnDraw();
                 
             }
-        {{pass}}
+        {% endif %}
         }) );
         homeGoal = $('#homegoal').dataTable( {
             bServerSide: true,
@@ -98,10 +99,10 @@
                 if (editHomeGoal == true) {
                     $('#homegoal td.text').create_edit(
                           { 'oTable' : homeGoal, 
-                            'sPostUrl': '../rest/goalview/update'})
+                            'sPostUrl': '../statistics/rest/goal'})
                     $('#homegoal td.select').create_select_edit(
                         { 'oTable' : homeGoal, 
-                          'sPostUrl': '../rest/goalview/update', 
+                          'sPostUrl': '../statistics/rest/goal',
                           'sLoadUrl': playerquery+hometeam_id})
                 }
             }
@@ -121,7 +122,7 @@
         } );
         /* Add a click handler for the delete row */
         $('#add-homeGoal').click( function() {
-            add_datarow(homeGoal, 'goal', {'team_id' : hometeam_id, 
+            add_datarow(homeGoal, 'goal', {'team_id' : hometeam_id,
                                            'game_id' : sid,
                                            'time' : '00:00:00'});
         } );
@@ -156,10 +157,10 @@
                 if (editGuestGoal == true) {
                     $('#guestgoal td.text').create_edit(
                           { 'oTable' : guestGoal, 
-                            'sPostUrl': '../rest/goalview/update'})
+                            'sPostUrl': '../statistics/rest/goal'})
                     $('#guestgoal td.select').create_select_edit(
                         { 'oTable' : guestGoal, 
-                          'sPostUrl': '../rest/goalview/update', 
+                          'sPostUrl': '../statistics/rest/goal',
                           'sLoadUrl': playerquery+guestteam_id})
                 }
             }
@@ -215,10 +216,10 @@
                 if (editHomePenalty == true) {
                     $('#homepenalty td.text').create_edit(
                           { 'oTable' : homePenalty, 
-                            'sPostUrl': '../rest/penaltyview/update'})
+                            'sPostUrl': '../statistics/rest/penalty'})
                     $('#homepenalty td.select').create_select_edit(
                         { 'oTable' : homePenalty, 
-                          'sPostUrl': '../rest/penaltyview/update', 
+                          'sPostUrl': '../statistics/rest/penalty',
                           'sLoadUrl': playerquery+hometeam_id})
                 }
             }
@@ -238,7 +239,7 @@
         } );
         /* Add a click handler for the delete row */
         $('#add-homePenalty').click( function() {
-            add_datarow(homePenalty, 'penalty', {'team_id' : hometeam_id, 
+            add_datarow(homePenalty, 'penalty', {'team_id' : hometeam_id,
                                                  'game_id' : sid,
                                                  'time' : '00:00:00',
                                                  'length' : '00:02:00'});
@@ -275,10 +276,10 @@
                 if (editHomePenalty == true) {
                     $('#guestpenalty td.text').create_edit(
                           { 'oTable' : guestPenalty, 
-                            'sPostUrl': '../rest/penaltyview/update'})
+                            'sPostUrl': '../statistics/rest/penalty'})
                     $('#guestpenalty td.select').create_select_edit(
                         { 'oTable' : guestPenalty, 
-                          'sPostUrl': '../rest/penaltyview/update', 
+                          'sPostUrl': '../statistics/rest/penalty',
                           'sLoadUrl': playerquery+guestteam_id})
                 }
             }
@@ -308,7 +309,7 @@
             if (editHomePenalty == false) {
                 editHomePenalty = true
                 $('#edit-guestPenalty').html('Lopeta muokkaus')
-                guestPenalty.fnDraw();    
+                guestPenalty.fnDraw();
             }
             else {
                 editHomePenalty = false;
@@ -320,17 +321,18 @@
     });
 
 </script>
-{{end}} 
-{{include}}
+{% endblock %}
 
-<DIV class="main">
+{% block center %}
+<article id="fullmaincolumn">
+
 <div id="datatables">
-<div id="container">
+<div id="container" style="width: 800px;">
     <div class="full_width big">
         <i><div id="game-info"></div></i>
     </div>
     
-    <p>Peli tietojen täyttö</p>
+    <p>Peli tietojen täyyttö</p>
     <a href="games">Takaisin peleihin</a>
     <div id="dynamic">  
     <table class="display">
@@ -367,7 +369,7 @@
         <tr>
             <td colspan="2"><div id="home-team-info"></div></td>
         </tr>
-        {{if auth.has_permission('statistics_admin'):}}
+        {% if perms.statistics.change_game %}
         <tr>
             <td colspan="1">
                 <a href="javascript:void(0);" id="add-homeGoal" style="color:black">Lisää</a> / 
@@ -380,7 +382,7 @@
                 <a href="javascript:void(0);" id="edit-homePenalty" style="color:black">Muokkaa</a>
             </td>
         </tr>
-        {{pass}}
+        {% endif %}
         <tr>
             <td>
             <table cellpadding="0" cellspacing="0" border="0" class="display" id="homegoal">
@@ -422,7 +424,7 @@
         <tr>
             <td colspan="2"><div id="guest-team-info"></div></td>
         </tr>
-        {{if auth.has_permission('statistics_admin'):}}
+        {% if perms.statistics.change_game %}
         <tr>
             <td colspan="1">
                 <a href="javascript:void(0);" id="add-guestGoal" style="color:black">Lisää</a> / 
@@ -435,16 +437,16 @@
                 <a href="javascript:void(0);" id="edit-guestPenalty" style="color:black">Muokkaa</a>
             </td>
         </tr>
-        {{pass}}
+        {% endif %}
         <tr>
-            <td>    
+            <td>
             <table cellpadding="0" cellspacing="0" border="0" class="display" id="guestgoal">
                 <thead>
                     <tr>
                         <th width="0%">Id</th>
                         <th width="10%">Aika</th>
-                        <th width="30%">Tekijä</th>
-                        <th width="30%">Syöttäjä</th>
+                        <th width="30%">TekijÃ¤</th>
+                        <th width="30%">SyÃ¶ttÃ¤jÃ¤</th>
                         <th width="10%">Koodi</th>
                     </tr>
                 </thead>
@@ -482,5 +484,6 @@
 </div>
 </div>
 </div>
-</div>
+</article>
+{% endblock %}
 

@@ -6,34 +6,36 @@ Created on 28.6.2012
 
 from django.conf.urls.defaults import patterns, url
 from djangorestframework.resources import ModelResource
-from djangorestframework.views import ListOrCreateModelView
 from statistics.models import Team, League, Game, Player, Goal, Penalty
 from statistics.rest.views import ListSearchModelView, MyInstanceModelView
 
+class StatisticsBaseResource(ModelResource):
+    """ Exclude only pk so that id is shown """
+    exclude = ('pk')
 
-class TeamResource(ModelResource):
+
+class TeamResource(StatisticsBaseResource):
     model = Team
 
 
-class LeagueResource(ModelResource):
+class LeagueResource(StatisticsBaseResource):
     model = League
 
 
-class GameResource(ModelResource):
+class GameResource(StatisticsBaseResource):
     model = Game
 
 
-class PlayerResource(ModelResource):
+class PlayerResource(StatisticsBaseResource):
     model = Player
-    exclude = ('pk')
-    include = list(ModelResource.include) + ['team_name', 'goals', 'assists',
+    include = list(StatisticsBaseResource.include) + ['team_name', 'goals', 'assists',
                                              'penalties', 'points']
 
-class GoalResource(ModelResource):
+class GoalResource(StatisticsBaseResource):
     model = Goal
 
 
-class PenaltyResource(ModelResource):
+class PenaltyResource(StatisticsBaseResource):
     model = Penalty
 
 

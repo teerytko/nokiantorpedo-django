@@ -22,7 +22,15 @@ def players(request):
 
 def games(request):
     t = loader.get_template('statistics/games.html')
-    menu.active = 'statistics'
+    menu.active = 'team'
+    c = RequestContext(request, {
+        'menu': menu
+    })
+    return HttpResponse(t.render(c))
+
+def game(request):
+    t = loader.get_template('statistics/game.html')
+    menu.active = 'team'
     c = RequestContext(request, {
         'menu': menu
     })

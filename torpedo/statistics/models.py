@@ -8,24 +8,24 @@ class League(models.Model):
     League is a set of games for a certain period of time.
     """
     name =  models.TextField()
-    from_date = models.DateField()
-    to_date = models.DateField()
+    from_date = models.DateField(null=True, blank=True)
+    to_date = models.DateField(null=True, blank=True)
 
 
 class Team(models.Model):
     """
     Team is a set of players.
     """
-    name =  models.TextField()
+    name =  models.TextField(null=True, blank=True)
 
     def __unicode__(self):
         return "Team: %r" % self.name
 
 class Game(models.Model):
     date = models.DateTimeField()
-    location = models.TextField()
-    home = models.ForeignKey(Team, related_name='home')
-    guest = models.ForeignKey(Team, related_name='guest')
+    location = models.TextField(null=True, blank=True)
+    home = models.ForeignKey(Team, related_name='home', null=True, blank=True)
+    guest = models.ForeignKey(Team, related_name='guest', null=True, blank=True)
 
     def __unicode__(self):
         return "Game: %s, %r - %r" % (self.date, self.home, self.guest)

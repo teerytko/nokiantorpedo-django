@@ -30,7 +30,7 @@ function add_datarow(oTable, resource, data) {
         datastr += '?fields='+columns.join()
         datastr += '&values='+values.join()
     }
-    $.post('/torpedo/rest/'+resource+'/create'+datastr, function() {
+    $.post('/statistics/rest/'+resource+'/create', data, function() {
         oTable.fnDraw();
     });
 }
