@@ -217,6 +217,7 @@ EMAIL_SUBJECT_PREFIX = '[NokianTorpedo] '
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_ACTIVATION_DAYS = 10
 LOGIN_URL = '/forum/account/signin/'
+AUTH_PROFILE_MODULE = "torpedo_main.UserProfile"
 
 try:
     from local_settings import *
