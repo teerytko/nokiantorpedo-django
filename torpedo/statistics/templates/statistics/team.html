@@ -22,7 +22,7 @@ $(document).ready(function() {
         "fnDrawCallback": function () {
             if (editMode == true) {
                 $('td.text').create_edit({'oTable' : oTable, 
-                                          'sPostUrl': '../rest/player/update'});
+                                          'sUpdateUrl': '../rest/player/update'});
             }
         }
     });

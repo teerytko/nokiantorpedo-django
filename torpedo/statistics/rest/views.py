@@ -1,5 +1,4 @@
 
-from statistics.rest.utils import get_columns
 from djangorestframework.mixins import ListModelMixin, PaginatorMixin
 from djangorestframework.views import InstanceModelView, ListOrCreateModelView
 from djangorestframework.renderers import BaseRenderer
@@ -59,6 +58,13 @@ class DataTableMixin(ListModelMixin):
                     query |=  Q(**{'{0}__{1}'.format(field.attname, 'contains'): sSearch})
                 elif isinstance(field, ForeignKey):
                     query |=  Q(**{'{0}__{1}'.format(field.name, 'name__contains'): sSearch})
+        sQuery = kwargs.get('sQuery')
+        if sQuery is not None:
+            queryparams = {}
+            for queryitem in sQuery.split(' and '):
+                key, value = queryitem.split('==')
+                queryparams[key] = value
+            query |= Q(**queryparams)
         return query
 
     def get(self, request, *args, **kwargs):

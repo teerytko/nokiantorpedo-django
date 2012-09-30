@@ -91,12 +91,16 @@ function add_static_data(oTable, aStaticData) {
     $.fn.create_edit = function(options) {
         var empty = {}
         var options = $.extend(true, empty, defaults, options);
+        if (!options.sUpdateMethod) {
+            options.sUpdateMethod = 'PUT';
+        }
         this.each( function() {
             obj = $(this);
             poss = options.oTable.fnGetPosition(this)
             objid = options.oTable.fnGetData(poss[0])[0]
-            obj.editable(options.sPostUrl+'/'+objid, {
-                tooltip   : 'Click to edit...',
+            obj.editable(options.sUpdateUrl+'/'+objid+'/', {
+                tooltip: 'Click to edit..',
+                method: options.sUpdateMethod,
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
                     options.oTable.fnUpdate( sValue, aPos[0], aPos[1] );
@@ -120,7 +124,7 @@ function add_static_data(oTable, aStaticData) {
                     // This will be reverted by reset. 
                     // $('<span class="field-validation-error">' + error.Message + '</span>').appendTo($(this));  
                     alert(error.Message);  
-                    original.reset();  
+                    original.reset();
                 },
             }
             );
@@ -129,10 +133,13 @@ function add_static_data(oTable, aStaticData) {
     $.fn.create_select_edit = function(options) {
         var empty = {}
         var options = $.extend(true, empty, defaults, options);
+        if (!options.sUpdateMethod) {
+            options.sUpdateMethod = 'PUT';
+        }
         this.each( function() {
             obj = $(this);
             objid = options.oTable.fnGetData(options.oTable.fnGetPosition(this)[0])[0]
-            obj.editable(options.sPostUrl+'/'+objid, {
+            obj.editable(options.sUpdateUrl+'/'+objid, {
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
                     options.oTable.fnUpdate( sValue, aPos[0], aPos[1] );
@@ -155,6 +162,7 @@ function add_static_data(oTable, aStaticData) {
                 type   : "select",
                 submit : "OK",
                 style   : 'display: inline',
+                method: options.sUpdateMethod,
                 onerror: function (settings, original, xhr) {  
                     var error = eval('(' + xhr.responseText + ')');
                     // This will be reverted by reset. 
