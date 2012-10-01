@@ -113,9 +113,9 @@ function add_static_data(oTable, aStaticData) {
                     var cols = options.oTable.fnSettings().aoColumns;
                     var aPos = options.oTable.fnGetPosition( this );
                     var colname = cols[aPos[2]].sName;
-                    return {
-                        "field": colname,
-                    };
+                    ret = {};
+                    ret[colname] = value;
+                    return ret;
                 },
                 height: options.height,
                 placeholder : "-",

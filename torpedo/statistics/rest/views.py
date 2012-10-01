@@ -1,6 +1,6 @@
 
-from djangorestframework.mixins import ListModelMixin, PaginatorMixin
-from djangorestframework.views import InstanceModelView, ListOrCreateModelView
+from djangorestframework.mixins import ListModelMixin, PaginatorMixin, ModelMixin,InstanceMixin, ReadModelMixin, DeleteModelMixin
+from djangorestframework.views import InstanceModelView, ListOrCreateModelView, ModelView
 from djangorestframework.renderers import BaseRenderer
 from statistics.rest.renderers import DListRenderer
 from django.db.models.fields import TextField
@@ -8,12 +8,46 @@ from django.db.models.fields.related import ForeignKey
 
 from django.db.models import Q
 
-
-class MyInstanceModelView(InstanceModelView):
+class MyUpdateModelMixin(ModelMixin):
     """
-    A view which extra renderers.
+    Behavior to update a `model` instance on PUT requests that accepts
+    individual field updates
+    """
+    def put(self, request, *args, **kwargs):
+        model = self.resource.model
+        query_kwargs = self.get_query_kwargs(request, *args, **kwargs)
+
+        # TODO: update on the url of a non-existing resource url doesn't work
+        # correctly at the moment - will end up with a new url
+        try:
+            self.model_instance = self.get_instance(**query_kwargs)
+            self.basedata = self.DATA.dict()
+            for field in self.model_instance._meta.fields:
+                self.basedata.setdefault(field.attname, getattr(self.model_instance, field.attname))
+            for (key, val) in self.CONTENT.items():
+                setattr(self.model_instance, key, val)
+        except model.DoesNotExist:
+            self.model_instance = model(**self.get_instance_data(model, self.CONTENT, *args, **kwargs))
+        self.model_instance.save()
+        return self.model_instance
+
+    @property
+    def CONTENT(self):
+        """
+        Returns the cleaned, validated request content.
+
+        May raise an :class:`response.ErrorResponse` with status code 400 (Bad Request).
+        """
+        if not hasattr(self, '_content'):
+            self._content = self.validate_request(self.basedata, self.FILES)
+        return self._content
+
+class MyInstanceModelView(InstanceMixin, ReadModelMixin, MyUpdateModelMixin, DeleteModelMixin, ModelView):
+    """
+    A view which provides default operations for read/update/delete against a model instance.
     """
     renderers = (list(InstanceModelView.renderers) + [DListRenderer])
+    _suffix = 'Instance'
 
 
 class SearchModelMixin(ListModelMixin, PaginatorMixin):

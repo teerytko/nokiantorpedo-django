@@ -12,6 +12,7 @@ from statistics.rest.views import ListSearchModelView, MyInstanceModelView
 class StatisticsBaseResource(ModelResource):
     """ Exclude only pk so that id is shown """
     exclude = ('pk')
+    allow_unknown_form_fields = True
 
 
 class TeamResource(StatisticsBaseResource):
