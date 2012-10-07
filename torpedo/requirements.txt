@@ -1,6 +1,8 @@
-djangorestframework
+djangorestframework==0.3.3
 django-pipeline
-
+django_authopenid
+django==1.4
+whoosh==2.4.1
 # development
 webtest
 django-webtest
