@@ -2,7 +2,7 @@
 Test Rest utils
 """
 
-from statistics.rest.utils import to_dlist
+from statistics.rest.utils import to_dlist, to_dict
 import unittest
 
 class TestUtils(unittest.TestCase):
@@ -40,3 +40,25 @@ class TestUtils(unittest.TestCase):
                                      'three': 4}],
                                    ['one']),
                           [[1]])
+
+    def test_to_one_item_dict(self):
+        # GIVEN list with one dictionary
+        # WHEN to_dict is called 
+        # THEN a dict with name, value pairs is returned
+        self.assertEquals(to_dict([{'test': 1,
+                                    'two': 'foo'}],
+                          'test', 'two'),
+                          {1: 'foo'})
+
+    def test_to_item_dict(self):
+        # GIVEN list of dictionaries
+        # WHEN to_dict is called
+        # THEN a dict with name, value pairs is returned
+        self.assertEquals(to_dict([{'test': 1,
+                                    'two': 'foo'},
+                                   {'test': 2,
+                                    'two': 'bar'}],
+                          'test', 'two'),
+                          {1: 'foo',
+                           2: 'bar',
+                           })

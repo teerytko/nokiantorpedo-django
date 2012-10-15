@@ -6,7 +6,7 @@ Created on 2.7.2012
 
 
 from operator import itemgetter
-from statistics.rest.utils import to_dlist, get_columns, get_sorting
+from statistics.rest.utils import to_dlist, get_columns, get_sorting, to_dict
 from djangorestframework.renderers import TemplateRenderer, JSONRenderer
 from django.template import RequestContext, loader
 
@@ -48,4 +48,29 @@ class DListRenderer(TemplateRenderer):
                          'object': listobj,
                          'data' : data})
         return template.render(context)
+
     
+class DictRenderer(TemplateRenderer):
+    """
+    Renderer which serializes to data to dict format
+    """
+
+    media_type = 'text/plain'
+    format = 'dict'
+
+    def render(self, obj=None, media_type=None):
+        """
+        Renders *obj* using the :attr:`template` specified on the class.
+        """
+        if obj is None:
+            return ''
+        listobj = obj
+        if not isinstance(listobj, list):
+            listobj = [obj]
+        # create the dict format with the key and value
+        key = self.view.request.GET.get('key')
+        value = self.view.request.GET.get('value')
+        dl = to_dict(obj, key, value)
+        data = JSONRenderer(self.view).render(dl)
+        return data
+

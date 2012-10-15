@@ -23,6 +23,22 @@ def to_dlist(list_of_dicts, columns=None):
         data.append(row)
     return data
 
+def to_dict(list_of_dicts, key, value):
+    """
+    Convert a list of dictionaries to a dictionary, where the key and 
+    value is fetched with key and value names.
+    Expects that each dictionary in the list has same keys.
+    @param list_of_dicts: the list of dictionaries
+    @param key: the name of the key for each element
+    @param value: the name of the value for each element
+    """
+    data = {}
+    for obj in list_of_dicts:
+        keyval = obj.get(key)
+        valueval = obj.get(value)
+        data[keyval] = valueval
+    return data
+
 def get_columns(request):
     try:
         cols = request.GET['sColumns']

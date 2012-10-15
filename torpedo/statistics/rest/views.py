@@ -2,7 +2,7 @@
 from djangorestframework.mixins import ListModelMixin, PaginatorMixin, ModelMixin,InstanceMixin, ReadModelMixin, DeleteModelMixin
 from djangorestframework.views import InstanceModelView, ListOrCreateModelView, ModelView
 from djangorestframework.renderers import BaseRenderer
-from statistics.rest.renderers import DListRenderer
+from statistics.rest.renderers import DListRenderer, DictRenderer
 from django.db.models.fields import TextField
 from django.db.models.fields.related import ForeignKey
 
@@ -21,10 +21,12 @@ class MyUpdateModelMixin(ModelMixin):
         # correctly at the moment - will end up with a new url
         try:
             self.model_instance = self.get_instance(**query_kwargs)
+            self.update = self.DATA.dict()
             self.basedata = self.DATA.dict()
             for field in self.model_instance._meta.fields:
                 self.basedata.setdefault(field.attname, getattr(self.model_instance, field.attname))
-            for (key, val) in self.CONTENT.items():
+            self._content = self.validate_request(self.basedata, self.FILES)
+            for (key, val) in self.update.items():
                 setattr(self.model_instance, key, val)
         except model.DoesNotExist:
             self.model_instance = model(**self.get_instance_data(model, self.CONTENT, *args, **kwargs))
@@ -116,7 +118,7 @@ class ListSearchModelView(DataTableMixin, ListOrCreateModelView):
     A view which provides default operations for searchable list, against a 
     model in the database.
     """
-    renderers = (list(InstanceModelView.renderers) + [DListRenderer])
+    renderers = (list(InstanceModelView.renderers) + [DListRenderer, DictRenderer])
 
     _suffix = 'List'
 

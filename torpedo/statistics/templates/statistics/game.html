@@ -18,7 +18,7 @@
     var editHomePenalty = false;
     var guestPenalty;
     var editGuestPenalty = false;
-	var playerquery = '../statistics/rest/player?format=dict?fields=number,name&query=team__id=='
+	var playerquery = '../statistics/rest/player?format=dict&key=id&value=name&query=team__id=='
     var goalquery = "../statistics/rest/goal?format=dlist&sQuery=game__id=="+sid+" and team__id==";
     var penaltyquery = "../statistics/rest/penalty?format=dlist&sQuery=game__id=="+sid+" and team__id==";
     var STATIC_TABLE_LEN = 15;
@@ -50,9 +50,9 @@
             aoColumns: [ { "sName": "id", "bVisible": false }, // the first column is invisible
                          { "sClass": "text", "sName": "date"},
                          { "sClass": "text", "sName": "location"},
-                         { "sClass": "select", "sName": "home" },
+                         { "sClass": "select", "sName": "home_name" },
                          { "bVisible": false , "sName": "home_id" },
-                         { "sClass": "select", "sName": "guest"},
+                         { "sClass": "select", "sName": "guest_name"},
                          { "bVisible": false , "sName": "guest_id" },
                          { "sName": "home_goals"},
                          { "sName": "guest_goals"},
@@ -65,7 +65,7 @@
                 $('#salibandy_game td.select').create_select_edit(
                     { 'oTable' : gameTable, 
                       'sUpdateUrl': '../statistics/rest/game',
-                      'sLoadUrl': '../statistics/rest/team?format=dict&fields=name',
+                      'sLoadUrl': '../statistics/rest/team?format=dict&key=name&value=name',
                 })
                 data = gameTable.fnGetData()
                 update_data(data);
@@ -342,7 +342,7 @@
         <table cellpadding="0" cellspacing="0" border="0" width="100%" id="salibandy_game">
         <thead>
             <tr>
-                <th width="10%">Id</th>
+                <th width="0%">Id</th>
                 <th width="20%">Aika</th>
                 <th width="15%">Paikka</th>
                 <th width="25%">Koti</th>

@@ -27,6 +27,22 @@ class Game(models.Model):
     home = models.ForeignKey(Team, related_name='home', null=True, blank=True)
     guest = models.ForeignKey(Team, related_name='guest', null=True, blank=True)
 
+    def get_home_name(self):
+        return self.home.name
+
+    def set_home_name(self, name):
+        home_team = Team.objects.get(name=name)
+        self.home = home_team
+    home_name = property(get_home_name, set_home_name)
+
+    def get_guest_name(self):
+        return self.guest.name
+
+    def set_guest_name(self, name):
+        guest_team = Team.objects.get(name=name)
+        self.guest = guest_team
+    guest_name = property(get_guest_name, set_guest_name)
+
     def __unicode__(self):
         return "Game: %s, %r - %r" % (self.date, self.home, self.guest)
 

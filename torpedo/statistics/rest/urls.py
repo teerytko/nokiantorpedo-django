@@ -25,6 +25,7 @@ class LeagueResource(StatisticsBaseResource):
 
 class GameResource(StatisticsBaseResource):
     model = Game
+    include = list(StatisticsBaseResource.include) + ['home_name', 'guest_name']
 
 
 class PlayerResource(StatisticsBaseResource):

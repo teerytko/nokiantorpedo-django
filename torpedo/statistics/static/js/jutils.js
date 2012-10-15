@@ -30,7 +30,7 @@ function add_datarow(oTable, resource, data) {
         datastr += '?fields='+columns.join()
         datastr += '&values='+values.join()
     }
-    $.post('/statistics/rest/'+resource+'/create', data, function() {
+    $.post('/statistics/rest/'+resource, data, function() {
         oTable.fnDraw();
     });
 }
@@ -51,7 +51,7 @@ function add_data(oTable, resource, data) {
 }
 
 function delete_datarow(oTable, resource, sId) {
-    $.post('/torpedo/rest/'+resource+'/delete/'+sId, function() {
+    $.delete('/torpedo/rest/'+resource+'/'+sId+'/', function() {
         oTable.fnDraw();
     });
 }
@@ -98,9 +98,14 @@ function add_static_data(oTable, aStaticData) {
             obj = $(this);
             poss = options.oTable.fnGetPosition(this)
             objid = options.oTable.fnGetData(poss[0])[0]
+            var cols = options.oTable.fnSettings().aoColumns;
+            var aPos = options.oTable.fnGetPosition( this );
+            var colname = cols[aPos[2]].sName;        
             obj.editable(options.sUpdateUrl+'/'+objid+'/', {
                 tooltip: 'Click to edit..',
                 method: options.sUpdateMethod,
+                name: colname,
+                id: null,
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
                     options.oTable.fnUpdate( sValue, aPos[0], aPos[1] );
@@ -108,14 +113,6 @@ function add_static_data(oTable, aStaticData) {
                     if(typeof callbackFnk == 'function') {
                         callbackFnk.call(this, options);
                     }
-                },
-                submitdata: function ( value, settings ) {
-                    var cols = options.oTable.fnSettings().aoColumns;
-                    var aPos = options.oTable.fnGetPosition( this );
-                    var colname = cols[aPos[2]].sName;
-                    ret = {};
-                    ret[colname] = value;
-                    return ret;
                 },
                 height: options.height,
                 placeholder : "-",
@@ -139,7 +136,10 @@ function add_static_data(oTable, aStaticData) {
         this.each( function() {
             obj = $(this);
             objid = options.oTable.fnGetData(options.oTable.fnGetPosition(this)[0])[0]
-            obj.editable(options.sUpdateUrl+'/'+objid, {
+            var cols = options.oTable.fnSettings().aoColumns;
+            var aPos = options.oTable.fnGetPosition( this );
+            var colname = cols[aPos[2]].sName;
+            obj.editable(options.sUpdateUrl+'/'+objid+'/', {
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
                     options.oTable.fnUpdate( sValue, aPos[0], aPos[1] );
@@ -148,14 +148,8 @@ function add_static_data(oTable, aStaticData) {
                         callbackFnk.call(this, options);
                     }
                 },
-                submitdata: function ( value, settings ) {
-                    var cols = options.oTable.fnSettings().aoColumns;
-                    var aPos = options.oTable.fnGetPosition( this );
-                    var colname = cols[aPos[2]].sName;
-                    return {
-                        "field": colname,
-                    };
-                },
+                name: colname,
+                id: null,
                 loadurl : options.sLoadUrl,
                 height: options.height,
                 placeholder : "-",
