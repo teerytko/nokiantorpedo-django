@@ -26,8 +26,10 @@ class MyUpdateModelMixin(ModelMixin):
             for field in self.model_instance._meta.fields:
                 self.basedata.setdefault(field.attname, getattr(self.model_instance, field.attname))
             self._content = self.validate_request(self.basedata, self.FILES)
+            self.model_instance = self.get_instance(**query_kwargs)
             for (key, val) in self.update.items():
-                setattr(self.model_instance, key, val)
+                if key:
+                    setattr(self.model_instance, key, val)
         except model.DoesNotExist:
             self.model_instance = model(**self.get_instance_data(model, self.CONTENT, *args, **kwargs))
         self.model_instance.save()

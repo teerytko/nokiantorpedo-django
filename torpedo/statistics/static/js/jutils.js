@@ -105,7 +105,7 @@ function add_static_data(oTable, aStaticData) {
                 tooltip: 'Click to edit..',
                 method: options.sUpdateMethod,
                 name: colname,
-                id: null,
+                id: '',
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
                     options.oTable.fnUpdate( sValue, aPos[0], aPos[1] );
@@ -149,7 +149,7 @@ function add_static_data(oTable, aStaticData) {
                     }
                 },
                 name: colname,
-                id: null,
+                id: '',
                 loadurl : options.sLoadUrl,
                 height: options.height,
                 placeholder : "-",
