@@ -11,6 +11,7 @@ mainmenu['team'] = {'name': 'Joukkue', 'href': '/team',
     'children': [
         {'name': 'Pelaajat', 'href': '/statistics/players'},
         {'name': 'Ottelut', 'href': '/statistics/games'},
+        {'name': 'Joukkueet', 'href': '/statistics/teams'},
     ]
 }
 mainmenu['forum'] = {'name': 'Forum', 'href': '/forum'}

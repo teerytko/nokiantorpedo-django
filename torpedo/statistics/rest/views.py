@@ -24,7 +24,7 @@ class MyUpdateModelMixin(ModelMixin):
             self.update = self.DATA.dict()
             self.basedata = self.DATA.dict()
             for field in self.model_instance._meta.fields:
-                self.basedata.setdefault(field.attname, getattr(self.model_instance, field.attname))
+                self.basedata.setdefault(field.name, getattr(self.model_instance, field.attname))
             self._content = self.validate_request(self.basedata, self.FILES)
             self.model_instance = self.get_instance(**query_kwargs)
             for (key, val) in self.update.items():

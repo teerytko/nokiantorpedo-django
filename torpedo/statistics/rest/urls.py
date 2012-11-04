@@ -25,7 +25,9 @@ class LeagueResource(StatisticsBaseResource):
 
 class GameResource(StatisticsBaseResource):
     model = Game
-    include = list(StatisticsBaseResource.include) + ['home_name', 'guest_name']
+    include = list(StatisticsBaseResource.include) + ['home_name', 'guest_name',
+                                                      'home_id', 'guest_id',
+                                                      ]
 
 
 class PlayerResource(StatisticsBaseResource):
@@ -45,7 +47,7 @@ urlpatterns = patterns('',
     url(r'league$', ListSearchModelView.as_view(resource=LeagueResource)),
     url(r'league/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=LeagueResource)),
     url(r'team$', ListSearchModelView.as_view(resource=TeamResource)),
-    url(r'team(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=TeamResource)),
+    url(r'team/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=TeamResource)),
     url(r'game$', ListSearchModelView.as_view(resource=GameResource)),
     url(r'game/(?P<pk>[^/]+)/$', MyInstanceModelView.as_view(resource=GameResource)),
     url(r'player$', ListSearchModelView.as_view(resource=PlayerResource)),

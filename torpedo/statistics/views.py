@@ -28,6 +28,22 @@ def games(request):
     })
     return HttpResponse(t.render(c))
 
+def teams(request):
+    t = loader.get_template('statistics/teams.html')
+    menu.active = 'team'
+    c = RequestContext(request, {
+        'menu': menu
+    })
+    return HttpResponse(t.render(c))
+
+def team(request):
+    t = loader.get_template('statistics/team.html')
+    menu.active = 'team'
+    c = RequestContext(request, {
+        'menu': menu
+    })
+    return HttpResponse(t.render(c))
+
 def game(request):
     t = loader.get_template('statistics/game.html')
     menu.active = 'team'

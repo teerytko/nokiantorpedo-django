@@ -46,9 +46,10 @@ class Game(models.Model):
     def __unicode__(self):
         return "Game: %s, %r - %r" % (self.date, self.home, self.guest)
 
+
 class Player(models.Model):
-    number = models.IntegerField()
-    name = models.TextField()
+    number = models.IntegerField(blank=True)
+    name = models.TextField(blank=True)
     role= models.TextField(blank=True)
     team = models.ForeignKey(Team, related_name='player')
 
@@ -86,9 +87,9 @@ class Goal(models.Model):
     time = models.TimeField(null=False)
     game = models.ForeignKey(Game)
     team = models.ForeignKey(Team)
-    player = models.ForeignKey(Player, related_name='scoring')
-    assisting = models.ForeignKey(Player, related_name='assisting')
-    note = models.TextField(blank=True)
+    player = models.ForeignKey(Player, related_name='scoring', blank=True, null=True)
+    assisting = models.ForeignKey(Player, related_name='assisting', blank=True, null=True)
+    note = models.TextField(blank=True, null=True)
 
     def __unicode__(self):
         return "Goal: %r, %r" % (self.player, self.time)
@@ -98,8 +99,8 @@ class Penalty(models.Model):
     length = models.TimeField(null=False) 
     game = models.ForeignKey(Game)
     team = models.ForeignKey(Team)
-    player = models.ForeignKey(Player)
-    reason = models.IntegerField()
+    player = models.ForeignKey(Player, blank=True, null=True)
+    reason = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True)
 
     def __unicode__(self):

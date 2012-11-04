@@ -1,5 +1,5 @@
 {% extends 'statistics/base.html' %}
-{{block head_addition}}    
+{% block head_datatables %}
 <script type="text/javascript" charset="utf-8">
         var oTable;
         $(document).ready(function() {
@@ -8,30 +8,33 @@
             {
                 "bProcessing": true,
                 "bServerSide": true,
-                "sAjaxSource": "../rest/team/dlist",
+                "sAjaxSource": "../statistics/rest/team?format=dlist",
                 "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
                     var alink = '<a href="team?sId=' + aData[0];
                     alink += '">'+ aData[0]+' '+aData[1]+'</a>';
                     $('td:eq(0)', nRow).html( alink );
                     return nRow;
                 },
-                "aoColumnDefs" : [{ "aTargets": [0]},
-                                  { "sName": "name", "sClass": "text", "aTargets": [1]}],
+                aoColumns: [{ "sName": "id"}, // the first column is invisible
+                            { "sClass": "text", "sName": "name"}
+                           ],
                 "fnDrawCallback": function () {
-                $('td.text').create_edit({ 'oTable' : oTable, 
-                                           'sUpdateUrl': '../rest/team/update'})
+                    $('td.text').create_edit({ 'oTable' : oTable, 
+                                               'sUpdateUrl': '../statistics/rest/team'})
                 }
             });
         });
 </script>
-{{end}} 
-{{include}}
-<div class="main">
-  <h1>Teams</h1>
-  <div id="datatables">
-    {{if auth.has_permission('statistics_admin'):}}
-        <p><a href="javascript:void(0);" onclick="add_data(oTable, 'team');" style="color:black">Add team</a></p>
-    {{pass}}
+{% endblock %}
+
+
+{% block center %}
+<article id="fullmaincolumn">
+<div id="datatables">
+<div id="container" style="width: 800px;">
+    {% if perms.statistics.change_game %}
+        <p><a href="javascript:void(0);" onclick="add_datarow(oTable, 'team', {name: 'Empty'});" style="color:black">Add team</a></p>
+    {% endif %}
   <div id="container">
 	<table cellpadding="0" cellspacing="0" border="0" class="display" id="teams">
 	  <thead>
@@ -47,6 +50,7 @@
 	  </tbody>
 	</table>
   </div>
-  </div>
-</div>  
+</div>
+</article>
 
+{% endblock %}

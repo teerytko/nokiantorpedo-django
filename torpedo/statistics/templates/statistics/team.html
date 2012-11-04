@@ -1,5 +1,5 @@
 {% extends 'statistics/base.html' %}
-{{block head_addition}}    
+{% block head_datatables %}
 <script type="text/javascript" charset="utf-8">
 var oTable
 var sid = getQueryVariable("sId");
@@ -11,18 +11,18 @@ $(document).ready(function() {
         "bPaginate": false,
         "bInfo": false,
         "bFilter": false,
-        "sAjaxSource": "../rest/player/dlist?sQuery=team_id=="+sid,
+        "sAjaxSource": "../statistics/rest/player?format=dlist&sQuery=team_id=="+sid,
         "aaSorting": [[2,'asc']],
-        "aoColumnDefs": [ { "bVisible": false, "aTargets": [0] }, // the first column is invisible
-                          { "bVisible": false , "sName": "team_id", "aTargets": [1]},
-                          { "sClass": "text", "sName": "number", "aTargets": [2]},
-                          { "sClass": "text", "sName": "name", "aTargets": [3]},
-                          { "sClass": "text", "sName": "role", "aTargets": [4]},
-                       ],
+        aoColumns: [{ "sName": "id", bVisible: false}, // the first column is invisible
+                    { "bVisible": false , "sName": "team_id"},
+                    { "sClass": "text", "sName": "number"},
+                    { "sClass": "text", "sName": "name"},
+                    { "sClass": "text", "sName": "role"},
+                   ],
         "fnDrawCallback": function () {
             if (editMode == true) {
                 $('td.text').create_edit({'oTable' : oTable, 
-                                          'sUpdateUrl': '../rest/player/update'});
+                                          'sUpdateUrl': '../statistics/rest/player'});
             }
         }
     });
@@ -42,7 +42,10 @@ $(document).ready(function() {
     });
     /* Add a click handler for the delete row */
     $('#add').click( function() {
-        add_datarow(oTable, 'player', {'team_id' : sid});
+        add_datarow(oTable, 'player', {team: sid,
+                                       number: 1,
+                                       name: '',
+                                       role: ''});
     });
     /* Add a click handler for the delete row */
     $('#edit').click( function() {
@@ -58,7 +61,7 @@ $(document).ready(function() {
         }
     });
 
-    $.getJSON('../rest/team/dlist?sQuery=id=='+sid, function(data) {
+    $.getJSON('../statistics/rest/team?format=dlist&sQuery=id=='+sid, function(data) {
         data = data['aaData'][0];
         $('#home-team-name').html(data[1]);
     }); 
@@ -67,50 +70,52 @@ $(document).ready(function() {
 
 
 </script>
-{{end}} 
-{{include}}
-<DIV class="main">
+{% endblock %} 
+
+{% block center %}
+<article id="fullmaincolumn">
 <div id="datatables">
-        <div id="container">
-            <div class="full_width big">
-                <i><div id="home-team-name"></div></i>
-            </div>
-            <div id="dynamic">
-            <!-- joukkeen pelaajat -->
-            <h2>Pelaajat</h2>
-            <p>
-                <a href="./teams">Takaisin joukkueisiin</a>
-                {{if auth.has_permission('statistics_admin'):}}
-                /
-                <a href="javascript:void(0);" id="add">Lisää</a>
-                /
-                <a href="javascript:void(0)" id="delete">Poista</a>
-                /
-                <a href="javascript:void(0)" id="edit">Muokkaa</a>
-                {{pass}}
-            </p>
-            <table cellpadding="0" cellspacing="0" border="0" class="display" id="players">
-                <thead>
-                    <tr>
-                        <th width="10%">Id</th>
-                        <th width="15%">Team_id</th>
-                        <th width="20%">Number</th>
-                        <th width="50%">Name</th>
-                        <th width="50%">Rooli</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                        <td>null</td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
+    <div id="container">
+    <div class="full_width big">
+        <i><div id="home-team-name"></div></i>
         </div>
+    <div id="dynamic">
+    <!-- joukkeen pelaajat -->
+    <h2>Pelaajat</h2>
+    <p>
+        <a href="./teams">Takaisin joukkueisiin</a>
+        {% if perms.statistics.change_game %}
+        /
+        <a href="javascript:void(0);" id="add">Lisää</a>
+        /
+        <a href="javascript:void(0)" id="delete">Poista</a>
+        /
+        <a href="javascript:void(0)" id="edit">Muokkaa</a>
+        {% endif %}
+    </p>
+    <table cellpadding="0" cellspacing="0" border="0" class="display" id="players">
+        <thead>
+            <tr>
+                <th width="10%">Id</th>
+                <th width="15%">Team_id</th>
+                <th width="20%">Number</th>
+                <th width="50%">Name</th>
+                <th width="50%">Rooli</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+                <td>null</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 </div>
 </div>
 
+</article>
+{% endblock %}

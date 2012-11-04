@@ -18,34 +18,7 @@ function getQueryVariable(variable) {
 }
 
 function add_datarow(oTable, resource, data) {
-    var datastr = ''
-    if (data != null) {
-        var columns = []
-        var values = []
-
-        for (var key in data) {
-            columns.push(key)
-            values.push(data[key])
-        }
-        datastr += '?fields='+columns.join()
-        datastr += '&values='+values.join()
-    }
     $.post('/statistics/rest/'+resource, data, function() {
-        oTable.fnDraw();
-    });
-}
-
-function add_data(oTable, resource, data) {
-    var datastr = ''
-    if (data != null) {
-        var datas = []
-
-        for (var key in data) {
-            datas.push(key + '=' + data[key])
-        }
-        datastr = '?' + datas.join('&')
-    }
-    $.get('/torpedo/rest/'+resource+'/create'+datastr, function() {
         oTable.fnDraw();
     });
 }
@@ -106,6 +79,7 @@ function add_static_data(oTable, aStaticData) {
                 method: options.sUpdateMethod,
                 name: colname,
                 id: '',
+                ajaxoptions: {dataType: 'text'},
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
                     options.oTable.fnUpdate( sValue, aPos[0], aPos[1] );
@@ -150,6 +124,7 @@ function add_static_data(oTable, aStaticData) {
                 },
                 name: colname,
                 id: '',
+                ajaxoptions: {dataType: 'text'},
                 loadurl : options.sLoadUrl,
                 height: options.height,
                 placeholder : "-",
