@@ -18,8 +18,13 @@ def to_dlist(list_of_dicts, columns=None):
         columns = list_of_dicts[0].keys()
     for obj in list_of_dicts:
         row = []
+        # this enables requesting data from object attributes (from object dicts)
         for col in columns:
-            row.append(obj.get(col))
+            item = obj
+            for colpart in col.split('__'):
+                if item is not None:
+                    item = item.get(colpart)
+            row.append(item)
         data.append(row)
     return data
 

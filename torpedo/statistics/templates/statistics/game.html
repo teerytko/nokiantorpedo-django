@@ -18,7 +18,7 @@
     var editHomePenalty = false;
     var guestPenalty;
     var editGuestPenalty = false;
-	var playerquery = '../statistics/rest/player?format=dict&key=id&value=name&query=team__id=='
+	var playerquery = '../statistics/rest/player?format=dict&key=id&value=name&sQuery=team__id=='
     var goalquery = "../statistics/rest/goal?format=dlist&sQuery=game__id=="+sid+" and team__id==";
     var penaltyquery = "../statistics/rest/penalty?format=dlist&sQuery=game__id=="+sid+" and team__id==";
     var STATIC_TABLE_LEN = 15;
@@ -50,10 +50,10 @@
             aoColumns: [ { "sName": "id", "bVisible": false }, // the first column is invisible
                          { "sClass": "text", "sName": "date"},
                          { "sClass": "text", "sName": "location"},
-                         { "sClass": "select", "sName": "home_name" },
-                         { "bVisible": false , "sName": "home_id" },
-                         { "sClass": "select", "sName": "guest_name"},
-                         { "bVisible": false , "sName": "guest_id" },
+                         { "sClass": "select", "sName": "home__name" },
+                         { "bVisible": false , "sName": "home__id" },
+                         { "sClass": "select", "sName": "guest__name"},
+                         { "bVisible": false , "sName": "guest__id" },
                          { "sName": "home_goals"},
                          { "sName": "guest_goals"},
                          ],
@@ -90,8 +90,8 @@
             aaSorting: [[1,'asc']],
             aoColumns: [ { "sName": "id", bVisible: false }, // the first column is invisible
                          { sClass: "text", "sName": "time"},
-                         { sClass: "select", "sName": "player"},
-                         { sClass: "select", "sName": "assisting"},
+                         { sClass: "select", "sName": "player__name"},
+                         { sClass: "select", "sName": "assisting__name"},
                          { sClass: "text", "sName": "note"},
                          ],
             fnDrawCallback: function() {
@@ -101,9 +101,10 @@
                           { 'oTable' : homeGoal, 
                             'sUpdateUrl': '../statistics/rest/goal'})
                     $('#homegoal td.select').create_select_edit(
-                        { 'oTable' : homeGoal, 
-                          'sUpdateUrl': '../statistics/rest/goal',
-                          'sLoadUrl': playerquery+hometeam_id})
+                        { oTable : homeGoal, 
+                          sUpdateUrl: '../statistics/rest/goal',
+                          sUpdateFieldReplace: {from: '__name', to: '_id'}, 
+                          sLoadUrl: playerquery+hometeam_id})
                 }
             }
         });
@@ -146,10 +147,10 @@
             bFilter: false,
             sAjaxSource: goalquery+guestteam_id,
             aaSorting: [[1,'asc']],
-            aoColumns: [ { bVisible: false }, // the first column is invisible
+            aoColumns: [ { "sName": "id", bVisible: false }, // the first column is invisible
                          { sClass: "text", "sName": "time"},
-                         { sClass: "select", "sName": "player"},
-                         { sClass: "select", "sName": "assisting"},
+                         { sClass: "select", "sName": "player__name"},
+                         { sClass: "select", "sName": "assisting__name"},
                          { sClass: "text", "sName": "note"},
                          ],
             fnDrawCallback: function() {
@@ -159,9 +160,10 @@
                           { 'oTable' : guestGoal, 
                             'sUpdateUrl': '../statistics/rest/goal'})
                     $('#guestgoal td.select').create_select_edit(
-                        { 'oTable' : guestGoal, 
-                          'sUpdateUrl': '../statistics/rest/goal',
-                          'sLoadUrl': playerquery+guestteam_id})
+                        { oTable : guestGoal, 
+                          sUpdateUrl: '../statistics/rest/goal',
+                          sUpdateFieldReplace: {from: '__name', to: '_id'}, 
+                          sLoadUrl: playerquery+guestteam_id})
                 }
             }
         });
@@ -181,9 +183,9 @@
         /* Add a click handler for the delete row */
         $('#add-guestGoal').click( function() {
             add_datarow(guestGoal, 'goal', 
-                                  {'team_id' : guestteam_id, 
-                                  'game_id' : sid,
-                                  'time' : '00:00:00'});
+                                  {'team' : guestteam_id, 
+                                   'game' : sid,
+                                   'time' : '00:00:00'});
         } );
         /* Add a click handler for the delete row */
         $('#edit-guestGoal').click( function() {
@@ -205,10 +207,10 @@
             bFilter: false,
             sAjaxSource: penaltyquery+hometeam_id,
             aaSorting: [[1,'asc']],
-            aoColumns: [ { bVisible: false }, // the first column is invisible
+            aoColumns: [ { sName: 'id', bVisible: false }, // the first column is invisible
                          { sClass: "text", "sName": "time"},
                          { sClass: "text", "sName": "length"},
-                         { sClass: "select", "sName": "name"},
+                         { sClass: "select", "sName": "player__name"},
                          { sClass: "text", "sName": "reason"},
                          ],
             fnDrawCallback: function() {
@@ -218,9 +220,10 @@
                           { 'oTable' : homePenalty, 
                             'sUpdateUrl': '../statistics/rest/penalty'})
                     $('#homepenalty td.select').create_select_edit(
-                        { 'oTable' : homePenalty, 
-                          'sUpdateUrl': '../statistics/rest/penalty',
-                          'sLoadUrl': playerquery+hometeam_id})
+                        { oTable : homePenalty, 
+                          sUpdateUrl: '../statistics/rest/penalty',
+                          sUpdateFieldReplace: {from: '__name', to: '_id'}, 
+                          sLoadUrl: playerquery+hometeam_id})
                 }
             }
         });
@@ -239,8 +242,8 @@
         } );
         /* Add a click handler for the delete row */
         $('#add-homePenalty').click( function() {
-            add_datarow(homePenalty, 'penalty', {'team_id' : hometeam_id,
-                                                 'game_id' : sid,
+            add_datarow(homePenalty, 'penalty', {'team' : hometeam_id,
+                                                 'game' : sid,
                                                  'time' : '00:00:00',
                                                  'length' : '00:02:00'});
         } );
@@ -265,10 +268,10 @@
             bFilter: false,
             sAjaxSource: penaltyquery+guestteam_id,
             aaSorting: [[1,'asc']],
-            aoColumns: [ { bVisible: false }, // the first column is invisible
+            aoColumns: [ { sName: 'id', bVisible: false }, // the first column is invisible
                          { sClass: "text", "sName": "time"},
                          { sClass: "text", "sName": "length"},
-                         { sClass: "select", "sName": "name"},
+                         { sClass: "select", "sName": "player__name"},
                          { sClass: "text", "sName": "reason"},
                          ],
             fnDrawCallback: function() {
@@ -281,6 +284,7 @@
                     $('#guestpenalty td.select').create_select_edit(
                         { 'oTable' : guestPenalty, 
                           'sUpdateUrl': '../statistics/rest/penalty',
+                          sUpdateFieldReplace: {from: '__name', to: '_id'}, 
                           'sLoadUrl': playerquery+guestteam_id})
                 }
             }
@@ -300,8 +304,8 @@
         } );
         /* Add a click handler for the delete row */
         $('#add-guestPenalty').click( function() {
-            add_datarow(guestPenalty, 'penalty', {'team_id' : guestteam_id, 
-                                                  'game_id' : sid,
+            add_datarow(guestPenalty, 'penalty', {'team' : guestteam_id, 
+                                                  'game' : sid,
                                                   'time' : '00:00:00',
                                                   'length' : '00:02:00'});
         } );

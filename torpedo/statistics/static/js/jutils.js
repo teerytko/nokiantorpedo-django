@@ -48,7 +48,7 @@ function add_static_data(oTable, aStaticData) {
     if (datalength < STATIC_TABLE_LEN) {
         var dummyrow = [];
         for (j=0; j<collength; j++) {
-            dummyrow.push('-');
+            dummyrow.push('**');
         }
         for (i=datalength+aStaticData.length; i<STATIC_TABLE_LEN; i++) {
             aStaticData.push(dummyrow);
@@ -91,10 +91,7 @@ function add_static_data(oTable, aStaticData) {
                 height: options.height,
                 placeholder : "-",
                 onerror: function (settings, original, xhr) {  
-                    var error = eval('(' + xhr.responseText + ')');
-                    // This will be reverted by reset. 
-                    // $('<span class="field-validation-error">' + error.Message + '</span>').appendTo($(this));  
-                    alert(error.Message);  
+                    alert(xhr);
                     original.reset();
                 },
             }
@@ -110,9 +107,15 @@ function add_static_data(oTable, aStaticData) {
         this.each( function() {
             obj = $(this);
             objid = options.oTable.fnGetData(options.oTable.fnGetPosition(this)[0])[0]
+            var colname = '';
             var cols = options.oTable.fnSettings().aoColumns;
             var aPos = options.oTable.fnGetPosition( this );
-            var colname = cols[aPos[2]].sName;
+            colname = cols[aPos[2]].sName;
+            if (options.sUpdateFieldReplace != null) 
+            {
+                colname = colname.replace(options.sUpdateFieldReplace.from,
+                                          options.sUpdateFieldReplace.to);
+            }
             obj.editable(options.sUpdateUrl+'/'+objid+'/', {
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
@@ -133,12 +136,9 @@ function add_static_data(oTable, aStaticData) {
                 style   : 'display: inline',
                 method: options.sUpdateMethod,
                 onerror: function (settings, original, xhr) {  
-                    var error = eval('(' + xhr.responseText + ')');
-                    // This will be reverted by reset. 
-                    // $('<span class="field-validation-error">' + error.Message + '</span>').appendTo($(this));  
-                    alert(error.Message);  
+                    alert(xhr   );  
                     original.reset();  
-                },
+                }
             });
         });
     }

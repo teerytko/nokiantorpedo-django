@@ -43,8 +43,18 @@ class Game(models.Model):
         self.guest = guest_team
     guest_name = property(get_guest_name, set_guest_name)
 
+    @property
+    def home_goals(self):
+        home_goals = Goal.objects.filter(game=self, team=self.home)
+        return home_goals.count()
+
+    @property
+    def guest_goals(self):
+        return Goal.objects.filter(game=self, team=self.guest).count()
+
     def __unicode__(self):
         return "Game: %s, %r - %r" % (self.date, self.home, self.guest)
+
 
 
 class Player(models.Model):
