@@ -42,7 +42,7 @@ class DListRenderer(TemplateRenderer):
         data = JSONRenderer(self.view).render(dl)
         template = loader.get_template(self.template)
         context = RequestContext(self.view.request, {
-                         'echo': self.view.request.GET.get('sEcho'),  
+                         'echo': self.view.request.GET.get('sEcho') or 0,  
                          'request': self.view.request,  
                          'response': self.view.response,
                          'object': listobj,

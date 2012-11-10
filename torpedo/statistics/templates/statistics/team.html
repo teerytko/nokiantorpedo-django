@@ -61,9 +61,9 @@ $(document).ready(function() {
         }
     });
 
-    $.getJSON('../statistics/rest/team?format=dlist&sQuery=id=='+sid, function(data) {
-        data = data['aaData'][0];
-        $('#team-name').html(data[1]);
+    $.getJSON('../statistics/rest/team?format=dlist&sColumns=name&sQuery=id=='+sid, function(data) {
+        data = data['aaData'][0][0];
+        $('#team-name').html(data);
     }); 
 
 });
