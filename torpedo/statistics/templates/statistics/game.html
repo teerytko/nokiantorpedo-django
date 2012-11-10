@@ -63,9 +63,10 @@
                       { 'oTable' : gameTable, 
                         'sUpdateUrl': '../statistics/rest/game'})
                 $('#salibandy_game td.select').create_select_edit(
-                    { 'oTable' : gameTable, 
-                      'sUpdateUrl': '../statistics/rest/game',
-                      'sLoadUrl': '../statistics/rest/team?format=dict&key=name&value=name',
+                    { oTable : gameTable, 
+                      sUpdateUrl: '../statistics/rest/game',
+                      sUpdateFieldReplace: {from: '__name', to: '_id'}, 
+                      sLoadUrl: '../statistics/rest/team?format=dict&key=id&value=name',
                 })
                 data = gameTable.fnGetData()
                 update_data(data);
