@@ -82,7 +82,7 @@ function add_static_data(oTable, aStaticData) {
                 ajaxoptions: {dataType: 'text'},
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
-                    options.oTable.fnUpdate( '-', aPos[0], aPos[1]+1 );
+                    options.oTable.fnUpdate( '-', aPos[0], aPos[1] );
                     callbackFnk = options.callback;
                     if(typeof callbackFnk == 'function') {
                         callbackFnk.call(this, options);
@@ -119,7 +119,7 @@ function add_static_data(oTable, aStaticData) {
             obj.editable(options.sUpdateUrl+'/'+objid+'/', {
                 callback: function( sValue, y ) {
                     var aPos = options.oTable.fnGetPosition( this );
-                    options.oTable.fnUpdate( '-', aPos[0], aPos[1]+1 );
+                    options.oTable.fnUpdate( '-', aPos[0], aPos[1] );
                     callbackFnk = options.callback;
                     if(typeof callbackFnk == 'function') {
                         callbackFnk.call(this, options);
