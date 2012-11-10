@@ -27,8 +27,10 @@ $(document).ready(function() {
         "aoColumnDefs" : [{ 'bVisible' : false, 'sName' : 'id', "aTargets" : [0] },
                           { 'sName' : 'date', "aTargets" : [1] },
                           { 'sName' : 'location', "aTargets" : [2] },
-                          { 'sName' : 'home_id', "aTargets" : [3] },
-                          { 'sName' : 'guest_id', "aTargets" : [4] },
+                          { 'sName' : 'home__name', "aTargets" : [3] },
+                          { 'sName' : 'guest__name', "aTargets" : [4] },
+                          { 'sName' : 'home_goals', "aTargets" : [5] },
+                          { 'sName' : 'guest_goals', "aTargets" : [6] },
                          ]
     });
 });
@@ -51,15 +53,13 @@ $(document).ready(function() {
         <th width="15%">Paikka</th>
         <th width="25%">Koti</th>
         <th width="25%">Vieras</th>
-<!--        
         <th width="25%">Koti maalit</th>
         <th width="25%">Vieras maalit</th>
--->
     </tr>
 </thead>
 <tbody>
     <tr>
-        <td colspan="5"></td>
+        <td colspan="7"></td>
     </tr>
 </tbody>
 </table>
