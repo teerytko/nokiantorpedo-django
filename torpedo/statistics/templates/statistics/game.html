@@ -57,8 +57,8 @@
                          { "sName": "home_goals"},
                          { "sName": "guest_goals"},
                          ],
-        {%if perms.statistics.change_game %}
             fnDrawCallback: function () {
+        {%if perms.statistics.change_game %}
                 $('#salibandy_game td.text').create_edit(
                       { 'oTable' : gameTable, 
                         'sUpdateUrl': '../statistics/rest/game'})
@@ -68,6 +68,7 @@
                       sUpdateFieldReplace: {from: '__name', to: '_id'}, 
                       sLoadUrl: '../statistics/rest/team?format=dict&key=id&value=name',
                 })
+        {% endif %}
                 data = gameTable.fnGetData()
                 update_data(data);
                 homeGoal.fnSettings().sAjaxSource = goalquery+hometeam_id;
@@ -80,7 +81,6 @@
                 guestPenalty.fnDraw();
                 
             }
-        {% endif %}
         }) );
         homeGoal = $('#homegoal').dataTable( {
             bServerSide: true,
