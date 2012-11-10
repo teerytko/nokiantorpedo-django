@@ -17,9 +17,9 @@ function () {
                     id: post_id,
              }).appendTo('#forumfeed');
              var item = feed.items[i];
-             # replace possible ending Z
-             dstr = dstr.replace(/Z$/, '');
              var dstr = item.updated.split('+')[0]
+             // replace possible ending Z
+             dstr = dstr.replace(/Z$/, '');
              var dtime = Date.parse(dstr, 'yyyy-MM-ddTHH:mm:ss')
              var updated = ' '+dtime.toString('yyyy-M-d HH:mm:ss');
              var link = '<a href="'+item.link+'" title="'+updated+' '+item.title+'">'+item.title+'</a></br>';
@@ -43,7 +43,7 @@ function () {
              }).appendTo('#newsfeed');
              var item = feed.items[i];
              var dstr = item.updated.split('+')[0]
-             # replace possible ending Z
+             // replace possible ending Z
              dstr = dstr.replace(/Z$/, '');
              var dtime = Date.parse(dstr, 'yyyy-MM-ddTHH:mm:ss')
              var updated = ' '+dtime.toString('yyyy-M-d HH:mm:ss');
