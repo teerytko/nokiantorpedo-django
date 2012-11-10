@@ -28,17 +28,22 @@ $(document).ready(function() {
 			{{ form1.non_field_errors.as_ul }}
 			{{ form2.non_field_errors.as_ul }}
 			<fieldset>
-				<legend>{% trans "Sign in using your username and password" %}</legend>
 					<div class="infldset">
+                    <ul>
+                        <li>
 						{{ form2.username.errors }}
 						<label><strong>{{ form2.username.label }}</strong><br />{{ form2.username }}</label>
+						</li>
+					    <li>
 						{{ form2.password.errors }}
 						<label><strong>{{ form2.password.label }}</strong><br />{{ form2.password }}</label>
-						<p class="clearb">{% trans "If you have not registered or have forgotten your password click on the appropriate link below." %}</p>
+						</li>
+                        <li>
 						<p>
-							<a href="{% url registration_register %}">{% trans "Not registered yet?" %}</a>&nbsp;&nbsp;
 							<a href="{% url auth_password_reset %}">{% trans "Forgotten your password?" %}</a>
 						</p>
+                        </li>
+                     </ul>
 					</div>
 			</fieldset>
 		</div>
@@ -46,24 +51,6 @@ $(document).ready(function() {
             <input type="hidden" name="next" value="{{ next }}" />
             <input type="submit" value="{% trans "Login" %}" />
         </p>
-		</form>
-
-		<form id="openid_form" name="openid_form" action="." method="post">
-		{% csrf_token %}
-		<fieldset>
-        <input type="hidden" name="action" value="verify" />
-        <input type="hidden" name="next" value="{{ next }}" />
-		<legend>{% trans "Sign In Using Your OpenID URL" %}</legend>
-			<div id="openid_choice">
-				<p>{% trans "Please click your account provider:" %}</p>
-				<div id="openid_btns"></div>
-			</div>
-		<div id="openid_input_area">
-		    {{ form1.openid_url.errors }}
-		    <label for="id_openid_url">OpenId URL :</label>{{ form1.openid_url }}
-		    <input name="openid_submit" type="submit" value="{% trans "Sign in with OpenID" %}" />
-		</div>
-		</fieldset>
 		</form>
     </div>
 </div>
