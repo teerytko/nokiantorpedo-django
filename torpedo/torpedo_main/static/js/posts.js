@@ -17,13 +17,15 @@ require(['jquery', 'jfeed'], function($, jfeed) {
 				for (i=0; i<feed.items.length && i<maxitems; i++)
 				{
 					var post_id = 'forumfeed_post_'+i
-					jQuery('<div/>', {
+					jQuery('<blockquote/>', {
 						id: post_id,
 					}).appendTo('#forumfeed');
 					var dstr = feed.updated.split('+')[0]
 					var updated = ' '+get_datetime(dstr);
 					var item = feed.items[i];
-					var link = '<a href="'+item.link+'" title="'+updated+' '+item.title+'">'+item.title+'</a></br>';
+					var title = item.title.split('::');
+					title = title[title.length-1].trim()
+					var link = '<a href="'+item.link+'" title="'+updated+' '+item.title+'">'+title+'</a></br>';
 					var description = item.description.substring(0, 180)+'</br>';
 					$('#'+post_id).append(link);
 					$('#'+post_id).append('<p/>');
@@ -41,12 +43,13 @@ require(['jquery', 'jfeed'], function($, jfeed) {
 				for (i=0; i<feed.items.length && i<maxitems; i++)
 				{
 					var post_id = 'newsfeed_post_'+i
-					jQuery('<div/>', {
+					jQuery('<blockquote/>', {
 						id: post_id,
 					}).appendTo('#newsfeed');
 					var item = feed.items[i];
 					var dstr = item.updated.split('+')[0]
 					var updated = ' '+get_datetime(dstr);
+					var title = item.title;
 					var link = '<a href="'+item.link+'" title="'+updated+' '+item.title+'">'+item.title+'</a></br>';
 					var description = ''+item.description.substring(0, 80)+'</br>';
 					$('#'+post_id).append(link);

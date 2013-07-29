@@ -10,7 +10,7 @@ require(['jquery', 'jfeed'], function($, jfeed) {
 				for (i=0; i<feed.items.length && i<maxevents; i++)
 				{
 					var post_id = 'eventsfeed_post_'+i
-					$('<div/>', {
+					$('<blockquote/>', {
 						id: post_id,
 					}).appendTo('#eventsfeed');
 					var item = feed.items[i];

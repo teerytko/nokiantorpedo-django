@@ -14,17 +14,26 @@
 {% endblock %}
 </head>
 <body>
-    <div class="container">
-        {% include 'torpedo/header.html' %}
-        <!-- Main Body -->	
         <div class="row">
+        <div class="col-offset-3 col-8 col-lg-8">
+        {% include 'torpedo/header.html' %}
+        </div>
+        </div>
+        <!-- Main Body -->	
+            <div class="row">
             {% block center %}
-            <div class="col-12 col-lg-8">
+            <div id="leftside" class="col-3 col-lg-3">
+            {% block leftside %}
+            <div id="forumfeed">
+            </div>
+            {% endblock %}
+            </div>
+            <div class="col-6 col-lg-6">
             {% block main %}
             {% endblock %}
             </div>
-            <div class="col-6 col-lg-4">
-            {% block sidebar %}
+            <div class="col-2 col-lg-2">
+            {% block rightside %}
             <h3>Linkkejä</h3>
             <a href="http://salibandy.net/">Salibandy.net</a>
             <br>
