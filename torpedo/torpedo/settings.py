@@ -3,6 +3,9 @@
 import os
 SETTINGS_ROOT = os.path.dirname(os.path.realpath(__file__))
 PROJECT_ROOT = os.path.join(SETTINGS_ROOT, '../..')
+# The base dir
+BASEDIR = os.path.join(PROJECT_ROOT, '..')
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -132,7 +135,7 @@ INSTALLED_APPS = (
     'pagination',
     'django_authopenid',
     'djangobb_forum',
-    'django_messages',
+    #'messages',
     'pipeline',
     'feedjack',
     'events',
@@ -192,7 +195,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'django_authopenid.context_processors.authopenid',
-    'django_messages.context_processors.inbox',
+    #'django_messages.context_processors.inbox',
     'djangobb_forum.context_processors.forum_settings',
 )
 
