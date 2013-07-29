@@ -1,4 +1,5 @@
 <!-- Header -->
+{% load menu_access %}
 <header id="top">
     <ul id="user">
         {% if user.is_authenticated %}
@@ -16,17 +17,21 @@
 <nav>
     <ul>
     {% for key, mainitem in menu.items %}
+    {% if mainitem|can_see:user %}
     <li><a id="{{key}}"
         {% if menu.active == key %}class="active"{% endif %}
-           href="{{mainitem.href}}">{{ mainitem.name }}</a>
+        href="{{mainitem.href}}">{{ mainitem.name }}</a>
         {% if mainitem.children %}
-        <ul class='sub-menu'>
-        {% for subitem in mainitem.children %}
+          <ul class='sub-menu'>
+          {% for subitem in mainitem.children.values %}
+            {% if subitem|can_see:user %}
             <li><a href="{{subitem.href}}">{{ subitem.name }}</a></li>
-        {% endfor %}
-        </ul>
+            {% endif %}
+          {% endfor %}
+          </ul>
         {% endif %}
     </li>
+    {% endif %}
     {% endfor %}
     {% if user.is_staff %}
     <li><a id="admin" href="/admin/">Admin</a></li>

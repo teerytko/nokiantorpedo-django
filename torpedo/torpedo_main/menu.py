@@ -5,33 +5,38 @@ Created on 18.7.2012
 '''
 from django.utils.datastructures import SortedDict
 
-mainmenu = SortedDict()
-mainmenu['home'] = {'name': 'Koti', 'href': '/'}
-mainmenu['team'] = {'name': 'Joukkue', 'href': '/statistics/team?sId=1',
-    'children': [
-        {'name': 'Pelaajat', 'href': '/statistics/players'},
-        {'name': 'Ottelut', 'href': '/statistics/games'},
-        {'name': 'Joukkueet', 'href': '/statistics/teams'},
-    ]
-}
-mainmenu['calendar'] = {'name': 'Kalenteri', 'href': '/calendar'}
-mainmenu['association'] = {'name': 'Yhdistys', 'href': '/association'}
-mainmenu['forum'] = {'name': 'Forum', 'href': '/forum'}
+class MenuItem(object):
+    def __init__(self, name, href, access='public'):
+        self.name = name
+        self.href = href
+        self.access = access
+        self.children = SortedDict()
 
-
-class Menu(object):
-    def __init__(self, menu):
-        self.mainmenu = menu.copy()
+class RootMenu(MenuItem):
+    def __init__(self):
+        super(RootMenu, self).__init__('root', '/')
         self.active = ''
 
     def sorteddict(self):
-        return self.mainmenu
+        return self.children
 
     def __getattr__(self, name):
-        return getattr(self.mainmenu, name)
+        return getattr(self.children, name)
 
 
-mymenu = Menu(mainmenu)
+mymenu = RootMenu()
+mymenu.children['home'] = MenuItem(name='Koti', href='/')
+mymenu.children['team'] = MenuItem(**{'name': 'Joukkue', 'href': '/statistics/team?sId=1'})
+mymenu.children['team'].children['players'] = \
+    MenuItem(**{'name': 'Pelaajat', 'href': '/statistics/players'})
+mymenu.children['team'].children['games'] = \
+    MenuItem(**{'name': 'Ottelut', 'href': '/statistics/games'})
+mymenu.children['team'].children['teams'] = \
+    MenuItem(name='Joukkueet', href='/statistics/teams', access='admin')
+mymenu.children['calendar'] = MenuItem(name='Kalenteri', href='/calendar', access='private')
+mymenu.children['association'] = MenuItem(**{'name': 'Yhdistys', 'href': '/association'})
+mymenu.children['forum'] = MenuItem(**{'name': 'Forum', 'href': '/forum'})
+
 
 def get_menu():
     return mymenu
