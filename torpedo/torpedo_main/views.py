@@ -10,6 +10,7 @@ from torpedo_main.menu import get_menu
 from forms import UserProfileForm
 from django.http import HttpResponseRedirect
 from django_authopenid.views import signin as authsignin
+from statistics.models import Team
 
 def signin(request, *args, **kwargs):
     menu = get_menu()
@@ -27,6 +28,33 @@ def home(request):
         'menu': menu
     })
     return HttpResponse(t.render(c))
+
+def floorball_view(request, view):
+    if view == '':
+        view = 'main'
+    t = loader.get_template('torpedo/floorball_%s.html' % view)
+    menu = get_menu()
+    menu.active = 'floorball'
+    team= Team.objects.get(name='Nokian Torpedo')
+    c = RequestContext(request, {
+        'menu': menu,
+        'team': team,
+        'players': team.player.all().order_by('number'),
+        
+    })
+    return HttpResponse(t.render(c))
+
+def endurance_view(request, view):
+    if view == '':
+        view = 'main'
+    t = loader.get_template('torpedo/endurance_%s.html' % view)
+    menu = get_menu()
+    menu.active = 'endurance'
+    c = RequestContext(request, {
+        'menu': menu,
+    })
+    return HttpResponse(t.render(c))
+
 
 def calendar(request):
     t = loader.get_template('torpedo/calendar.html')

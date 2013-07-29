@@ -1,6 +1,7 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
 '''
 Created on 18.7.2012
-
 @author: teerytko
 '''
 from django.utils.datastructures import SortedDict
@@ -26,14 +27,23 @@ class RootMenu(MenuItem):
 
 mymenu = RootMenu()
 mymenu.children['home'] = MenuItem(name='Koti', href='/')
-mymenu.children['team'] = MenuItem(**{'name': 'Joukkue', 'href': '/statistics/team?sId=1'})
-mymenu.children['team'].children['players'] = \
-    MenuItem(**{'name': 'Pelaajat', 'href': '/statistics/players'})
-mymenu.children['team'].children['games'] = \
-    MenuItem(**{'name': 'Ottelut', 'href': '/statistics/games'})
-mymenu.children['team'].children['teams'] = \
-    MenuItem(name='Joukkueet', href='/statistics/teams', access='admin')
-mymenu.children['calendar'] = MenuItem(name='Kalenteri', href='/calendar', access='private')
+mymenu.children['floorball'] = MenuItem(name='Salibandy', href='/floorball')
+mymenu.children['floorball'].children['main'] = \
+    MenuItem(name='Salibandy', href='/floorball/')
+mymenu.children['floorball'].children['recent'] = \
+    MenuItem(name='Ajankohtaista', href='/floorball/recent')
+mymenu.children['floorball'].children['players'] = \
+    MenuItem(name='Joukkue', href='/floorball/team')
+
+mymenu.children['endurance'] = MenuItem(name='Kestävyys', href='/endurance')
+mymenu.children['endurance'].children['main'] = \
+    MenuItem(name='Kestävyys Urheilu', href='/endurance/')
+mymenu.children['endurance'].children['recent'] = \
+    MenuItem(name='Ajankohtaista', href='/endurance/recent')
+mymenu.children['endurance'].children['events'] = \
+    MenuItem(name='Tapahtumat', href='/endurance/events')
+
+#mymenu.children['calendar'] = MenuItem(name='Kalenteri', href='/calendar', access='private')
 mymenu.children['association'] = MenuItem(**{'name': 'Yhdistys', 'href': '/association'})
 mymenu.children['forum'] = MenuItem(**{'name': 'Forum', 'href': '/forum'})
 

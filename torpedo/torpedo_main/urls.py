@@ -4,6 +4,8 @@ from torpedo_main.feeds import LatestTopicPosts
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'torpedo_main.views.home', name='home'),
+    url(r'^floorball/(?P<view>.*)$', 'torpedo_main.views.floorball_view', name='floorball_view'),
+    url(r'^endurance/(?P<view>.*)$', 'torpedo_main.views.endurance_view', name='floorball_view'),
     url(r'^calendar$', 'torpedo_main.views.calendar', name='calendar'),
     url(r'^association$', 'torpedo_main.views.association', name='association'),
     url(r'^profile$', 'torpedo_main.views.profile', name='profile'),

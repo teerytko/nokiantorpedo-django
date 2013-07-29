@@ -1,0 +1,25 @@
+{% extends "torpedo/fixedbase.html" %}
+{% block head_addition %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% endblock %}
+
+
+{% block main %}
+<br/>
+<h4>{{ team.name }} Salibandyjoukkue</h4>
+<table class="table table-striped">
+<thead>
+<td>#</td>
+<td>Nimi</td>
+</thead>
+{% for player in players %}
+<tr>
+<td>{{ player.number }}</td>
+<td>{{ player.name }}</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}
+
+
