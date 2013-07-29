@@ -1,28 +1,35 @@
 <!-- Header -->
 {% load menu_access %}
-<header id="top">
-    <ul id="user">
+<div>
+    <ul id="user" class="pull-right">
         {% if user.is_authenticated %}
           <li>Logged in <a href="/profile">{{ user }}</a> | <a href="/account/logout/">logout</a></li>
         {% else %}
           <li><a href="/account/signup/">register</a>|<a href="/account/signin/">login</a></li>
         {% endif %}
-    <li>
     </ul>
-    <h1>Nokian torpedo - Salibandya vuodesta 2008</h1>
-</header>
+    <h2>Nokian torpedo <small>Salibandya vuodesta 2008</small></h2>
+</div>
 
 <!-- Navigation -->
 {% block nav %}
-<nav>
-    <ul>
+<div>
+    <ul class="nav nav-tabs">
     {% for key, mainitem in menu.items %}
     {% if mainitem|can_see:user %}
-    <li><a id="{{key}}"
-        {% if menu.active == key %}class="active"{% endif %}
-        href="{{mainitem.href}}">{{ mainitem.name }}</a>
+    <li 
+    {% if menu.active == key %}class="active"{% endif %}
+    {% if mainitem.children %}class="dropdown"{% endif %}>
+        <a id="{{key}}"
         {% if mainitem.children %}
-          <ul class='sub-menu'>
+        class="dropdown-toggle" data-toggle="dropdown" 
+        href="#">{{ mainitem.name }}<span class="caret"></span>
+        {% else %}
+        href="{{mainitem.href}}">{{ mainitem.name }}
+        {% endif %}
+        </a>
+        {% if mainitem.children %}
+          <ul class='dropdown-menu'>
           {% for subitem in mainitem.children.values %}
             {% if subitem|can_see:user %}
             <li><a href="{{subitem.href}}">{{ subitem.name }}</a></li>
@@ -36,5 +43,5 @@
     {% if user.is_staff %}
     <li><a id="admin" href="/admin/">Admin</a></li>
     {% endif %}
-</nav>
+</div>
 {% endblock %}

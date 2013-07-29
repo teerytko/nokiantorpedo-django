@@ -1,53 +1,55 @@
 {% load compressed %}
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Nokian Torpedo | Nokialainen Salibandy seura</title>
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/css/reset.css" type="text/css" media="screen" />
-    {% compressed_css 'torpedo' %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nokian Torpedo | Nokialainen Salibandy seura</title>
+<!-- Stylesheets -->
+<link rel="stylesheet" href="{{ STATIC_URL }}js/bootstrap3/css/bootstrap.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/css/sticky-footer.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/css/torpedo.css" type="text/css" media="screen" />
 
 {% block head_addition %}
 {% endblock %}
 </head>
 <body>
-    <div class="center">
+    <div class="container">
         {% include 'torpedo/header.html' %}
         <!-- Main Body -->	
-        {% block center %}
-        <article id="maincolumn">
-        {% block main %}
-        {% endblock %}
-        </article>
-        <section id="sidebar">
-        {% block sidebar %}
+        <div class="row">
+            {% block center %}
+            <div class="col-12 col-lg-8">
+            {% block main %}
+            {% endblock %}
+            </div>
+            <div class="col-6 col-lg-4">
+            {% block sidebar %}
             <h3>Linkkejä</h3>
             <a href="http://salibandy.net/">Salibandy.net</a>
             <br>
             <a href="http://salibandy.net/kilpailutoiminta/tulospalvelu/sisa-suomi-miehet-6div-lohko-34-tilastot-2012-13-pirkanmaa-4-1">Sarjatilanne salibandy.net</a>
-            <br>			
+            <br>            
             <a href="http://www.osallistujat.com" target="blank"><img src="http://www.osallistujat.com/LinkkiLogoPieni.png" border="0" width="100" height="30" alt="Osallistujat.com" title="Osallistujat.com"></a>
             <br>
             <a href="http://www.facebook.com/group.php?gid=118127174888202&v=wall#!/group.php?gid=118127174888202&v=wall"><img src="{{ STATIC_URL }}facebook_logo.png" border="0" height="30" alt="Nokian Torpedo Facebookissa!" title="Nokian Torpedo Facebookissa!"></a>
             
             <div id="eventsfeed">
             </div>
-        {% endblock %}
-        </section>
-        {% endblock %}
-        <div id="copyrights">
-           <p>&copy;&nbsp;Nokian Torpedo ry, 2012</p>
+            {% endblock %}
+            </div>
+            {% endblock %}
         </div>
+    </div>
+    <div id="footer">
+      <p class="text-muted credit">&copy;&nbsp;Nokian Torpedo ry, 2012</p>
     </div>
     <!-- Scripts -->
     <script type="text/javascript">var STATIC_URL = "{{STATIC_URL}}";</script>
     <script type="text/javascript" src="{{STATIC_URL}}js/require.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/require.config.js"></script>
     <!--[if lt IE 9]><script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-    <script type="text/javascript" src="{{ STATIC_URL }}js/vendor/less.js" ></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/events.js" ></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/main.js" ></script>
 {% block scripts %}
 {% endblock %}
 

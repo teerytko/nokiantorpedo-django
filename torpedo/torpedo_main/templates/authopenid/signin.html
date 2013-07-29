@@ -1,19 +1,8 @@
 {% extends "torpedo/fixedbase.html" %}
 {% load i18n %}
 {% block head_addition %}
-<script type="text/javascript" src="{{ STATIC_URL }}openid/js/openid-jquery.js"></script>
-{% if LANGUAGE_CODE in 'de,en,jp,ru,uk' %}
-	<script type="text/javascript" src="{{ STATIC_URL }}openid/js/openid-{{ LANGUAGE_CODE }}.js"></script>
-{% else %}
-	<script type="text/javascript" src="{{ STATIC_URL }}openid/js/openid-en.js"></script>
-{% endif %}
-<script type="text/javascript">
-$(document).ready(function() {
-    openid.init('openid_url');
-});
-</script>
 {% endblock %}
-{% block main %}
+{% block center %}
 <div class="blockform">
     <h2><span>{% trans "Login" %}</span></h2>
     <div class="box">
@@ -54,4 +43,5 @@ $(document).ready(function() {
 		</form>
     </div>
 </div>
+
 {% endblock %}

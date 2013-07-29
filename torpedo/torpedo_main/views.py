@@ -9,6 +9,15 @@ from django.http import HttpResponse
 from torpedo_main.menu import get_menu 
 from forms import UserProfileForm
 from django.http import HttpResponseRedirect
+from django_authopenid.views import signin as authsignin
+
+def signin(request, *args, **kwargs):
+    menu = get_menu()
+    menu.active = None
+    kwargs['extra_context'] = {
+        'menu': menu
+    }
+    return authsignin(request, *args, **kwargs)
 
 def home(request):
     t = loader.get_template('torpedo/index.html')
