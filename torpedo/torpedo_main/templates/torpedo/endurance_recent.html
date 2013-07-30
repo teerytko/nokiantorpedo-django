@@ -8,13 +8,6 @@
 <br/>
 <h2>Ajankohtaista</h2>
 
-<script type="text/javascript">
-<!--
-var leftfeed = {'titleurl': '/forum/2/',
-        'feedurl': '/forum/feeds/forum/2/'}
-
-//-->
-</script>
 <div id="leftfeeds" class="feeds col-6">
 </div>
 
@@ -24,3 +17,12 @@ var leftfeed = {'titleurl': '/forum/2/',
 {% endblock %}
 
 
+{% block scripts %}
+<script type="text/javascript">
+<!--
+var leftfeed = {'titleurl': '/forum/2/',
+        'feedurl': '/forum/feeds/forum/2/'}
+
+//-->
+</script>
+{% endblock %}

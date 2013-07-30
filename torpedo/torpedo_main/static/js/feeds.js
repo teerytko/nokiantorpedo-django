@@ -1,8 +1,6 @@
 (function() {
 require(['jquery', 'jfeed'], function($, jfeed) {
 	var maxitems=6;
-	var leftfeed = null;
-	var rightfeed = null;
 	var get_datetime = function(dstr) {
 		// replace possible ending Z
 		dstr = dstr.replace(/Z$/, '');
@@ -41,9 +39,9 @@ require(['jquery', 'jfeed'], function($, jfeed) {
 	}
 
 	$(document).ready(function() {
-		if (leftfeed != null)
+		if (typeof(leftfeed) !== 'undefined')
 			feeds($("#leftfeeds"), leftfeed.titleurl, leftfeed.feedurl);
-		if (rightfeed != null)
+		if (typeof(rightfeed) !== 'undefined')
 			feeds($("#rightfeeds"), rightfeed.titleurl, rightfeed.feedurl);
 	});
 });
