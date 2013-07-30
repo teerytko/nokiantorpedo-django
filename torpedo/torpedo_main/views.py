@@ -90,6 +90,8 @@ def profile(request):
             user.save()
             user_profile.save()
             return HttpResponseRedirect('/') # Redirect after POST
+        else:
+            print form
     else:
         form = UserProfileForm(
             initial={'firstname': user.first_name,

@@ -8,10 +8,19 @@
 <br/>
 <h2>Ajankohtaista</h2>
 
-<div id="forumfeed" class="col-4">
+<script type="text/javascript">
+<!--
+var leftfeed = {'titleurl': '/forum/1/',
+        'feedurl': '/forum/feeds/forum/1/'}
+var rightfeed = {'titleurl': 'http://salibandy.net/alueuutiset/sisa-suomi/',
+        'feedurl': '/feeds/feed/atom/'}
+
+//-->
+</script>
+<div id="leftfeeds" class="feeds col-6">
 </div>
 
-<div id="newsfeed" class="col-5">
+<div id="rightfeeds" class="feeds col-5">
 </div>
 
 {% endblock %}

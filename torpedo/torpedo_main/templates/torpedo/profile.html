@@ -7,26 +7,16 @@
     <fieldset id="profile">
         <legend><span>Henkilökohtaiset tiedot</span></legend>
         {{ form.non_field_errors }}
-        <ol>
-            {{ form.firstname.errors }}
-            <li><label for="id_firstname" title="Enter your forename" class="required">Etunimi<span>*</span></label>
-                {{ form.firstname }}
-            </li>
-            {{ form.lastname.errors }}
-            <li><label for="id_firstname" title="Enter your forename" class="required">Sukunimi<span>*</span></label>
-                {{ form.lastname }}
-            </li>
-            {{ form.email.errors }}
-            <li><label for="id_email" title="Enter your forename" class="required">Email<span>*</span></label>
-                {{ form.email }}
-            </li>
-            {{ form.phonenumber.errors }}
-            <li><label for="id_phonenumber" title="Anna puhelin numero" class="required">Puhelin<span>*</span></label>
-                {{ form.phonenumber}}
-            </li>
-         </ol>
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+        </div>
+        {% endfor %}
     </fieldset>
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit" 
+           class="btn btn-default"/>
 </form>
 </div>
 {% endblock %}

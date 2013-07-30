@@ -13,23 +13,11 @@
 	margin-left: 10px;
 }
 
-#forumfeed blockquote p {
+.feeds blockquote p {
 	font-size: 11.5px;	
 }
-#forumfeed blockquote a {
+.feeds blockquote a {
     font-size: 11px;  
 	line-height: 1;
 }
 
-#newsfeed blockquote a {
-    font-size: 11px;  
-    line-height: 1;
-}
-#newsfeed blockquote p {
-    font-size: 11.5px;  
-}
-
-#eventsfeed blockquote a {
-    font-size: 11px;  
-    line-height: 1;
-}

@@ -1,6 +1,6 @@
 (function() {
-require(['jquery', 'bootstrap', 'events', 'posts'], 
-function($, bootstrap, events, posts) {
+require(['jquery', 'bootstrap', 'events', 'feeds'], 
+function($, bootstrap, events, feeds) {
 
 });
 }).call(this);
