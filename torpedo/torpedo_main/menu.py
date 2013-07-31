@@ -35,9 +35,9 @@ mymenu.children['floorball'].children['recent'] = \
 mymenu.children['floorball'].children['players'] = \
     MenuItem(name='Joukkue', href='/floorball/team')
 
-mymenu.children['endurance'] = MenuItem(name='Kestävyys urheilu', href='/endurance')
+mymenu.children['endurance'] = MenuItem(name='Kestävyysurheilu', href='/endurance')
 mymenu.children['endurance'].children['main'] = \
-    MenuItem(name='Kestävyys urheilu', href='/endurance/')
+    MenuItem(name='Kestävyysurheilu', href='/endurance/')
 mymenu.children['endurance'].children['recent'] = \
     MenuItem(name='Ajankohtaista', href='/endurance/recent')
 mymenu.children['endurance'].children['events'] = \

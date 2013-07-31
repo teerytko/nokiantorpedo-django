@@ -116,7 +116,9 @@ class ProcessEntry:
 
         (link, title, guid, author, author_email, content, date_start,
          comments) = self.get_entry_data()
-
+        # Ignore feed items where team is not Nokian Torpedo
+        if not content.startswith('Joukkue: Nokian Torpedo'):
+            return 0
         # skip entries that are older that fromtime
         if date_start < self.fromtime:
             return 0
