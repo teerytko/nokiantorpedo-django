@@ -4,7 +4,7 @@ import os
 SETTINGS_ROOT = os.path.dirname(os.path.realpath(__file__))
 PROJECT_ROOT = os.path.join(SETTINGS_ROOT, '../..')
 # The base dir
-BASEDIR = os.path.join(PROJECT_ROOT, '..')
+BASEDIR = os.path.join(PROJECT_ROOT, '../..')
 
 
 DEBUG = True

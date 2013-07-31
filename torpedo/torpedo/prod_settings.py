@@ -29,14 +29,14 @@ PIPELINE_COMPILERS = (
 )
 PIPELINE_LESS_BINARY='lessc'
 
-PIPELINE_CSS = {
-    'torpedo': {
-        'source_filenames': (
-          os.path.join('stylesheets','less','*.less'),
-        ),
-        'output_filename': os.path.join('stylesheets','css','torpedo.css'),
-        'extra_context': {
-            'media': 'screen,projection',
-        },
-    },
-}
+#PIPELINE_CSS = {
+#    'torpedo': {
+#        'source_filenames': (
+#          os.path.join('stylesheets','less','*.less'),
+##        ),
+#        'output_filename': os.path.join('stylesheets','css','torpedo.css'),
+#        'extra_context': {
+#            'media': 'screen,projection',
+#        },
+#    },
+#}
