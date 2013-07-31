@@ -21,3 +21,6 @@
 	line-height: 1;
 }
 
+.story-img img {
+	width: 640px;
+}
