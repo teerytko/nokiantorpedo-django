@@ -1,0 +1,102 @@
+{% extends "torpedo/fixedbase.html" %}
+{% block head_addition %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% endblock %}
+
+
+{% block main %}
+<ul id="torpedotabs" class="nav nav-tabs nav-justified">
+  <li class="active"><a href="#activity" data-toggle="tab">Toiminta</a></li>
+  <li><a href="#recent" data-toggle="tab">Ajankohtaista</a></li>
+  <li><a href="#team" data-toggle="tab">Joukkue</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active" id="activity">
+	  
+	<h4 class="label">Toiminta</h4>
+	<p>
+	Torpedossa pelataan tällä hetkellä salibandyä 6. divisiona tasolla. Toimintaa 
+	johtaa Matti Vartiala, ja valmentajana toimii Toni Lindberg.
+	</p>
+	
+	<h4 class="label">Harjoittelu</h4>
+	<p>
+	Harjoitukset ovat kerran viikossa Nokian liikuntakeskuksella Tiistaisin 20:30.
+	</p>
+	<h4 class="label">Pelit</h4>
+	<p>
+	Peliohjelma päivitty tähän kun se saadaan liitolta.
+	</p>
+	
+	<table class="table">
+	<tr>
+	  <td>Harjoituspeli Torpedo - Nops</td>
+	  <td>22.08.2013</td>
+	  <td><a href="http://www.osallistujat.com/intra.php?siteid=7gla7dyta44&ala=tapahtumat&tapahtumaid=683850&siteid=mvmgwq8673g#ilmoalku">
+	  Ilmoittaudu</a>
+	  </td>
+	</tr>
+	<tr>
+	  <td>Harjoituspeli Torpedo - KosBy</td>
+	  <td>29.08.2013</td>
+	  <td><a href="http://www.osallistujat.com/intra.php?siteid=nxqijag9r9y&ala=tapahtumat&tapahtumaid=683851&siteid=3trxigcyh0h#ilmoalku">
+	  Ilmoittaudu</a>
+	  </td>
+	</tr>
+	</table>
+  </div>
+  <div class="tab-pane" id="recent">
+	<br/>
+	<h2>Ajankohtaista</h2>
+	
+	<script type="text/javascript">
+	<!--
+	var leftfeed = {'titleurl': '/forum/1/',
+	        'feedurl': '/forum/feeds/forum/1/'}
+	var rightfeed = {'titleurl': 'http://salibandy.net/alueuutiset/sisa-suomi/',
+	        'feedurl': '/feeds/feed/atom/'}
+	
+	//-->
+	</script>
+	<div id="leftfeeds" class="feeds col-6">
+	</div>
+	
+	<div id="rightfeeds" class="feeds col-5">
+	</div>
+
+  </div>
+  <div class="tab-pane" id="team">
+	<br/>
+	<h4>{{ team.name }} Salibandyjoukkue</h4>
+	<table class="table table-striped">
+	<thead>
+	<td>#</td>
+	<td>Nimi</td>
+	</thead>
+	{% for player in players %}
+	<tr>
+	<td>{{ player.number }}</td>
+	<td>{{ player.name }}</td>
+	</tr>
+	{% endfor %}
+	</table>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block rightside %}
+<h3>Linkkejä</h3>
+<a href="http://salibandy.net/">Salibandy.net</a>
+<br>
+<a href="http://salibandy.net/kilpailutoiminta/tulospalvelu/sisa-suomi-miehet-6div-lohko-34-tilastot-2012-13-pirkanmaa-4-1">Sarjatilanne salibandy.net</a>
+<br>            
+<a href="http://www.osallistujat.com" target="blank"><img src="http://www.osallistujat.com/LinkkiLogoPieni.png" border="0" width="100" height="30" alt="Osallistujat.com" title="Osallistujat.com"></a>
+<br>
+<a href="http://www.facebook.com/group.php?gid=118127174888202&v=wall#!/group.php?gid=118127174888202&v=wall"><img src="{{ STATIC_URL }}facebook_logo.png" border="0" height="30" alt="Nokian Torpedo Facebookissa!" title="Nokian Torpedo Facebookissa!"></a>
+
+<div id="eventsfeed" class="feeds">
+</div>
+{% endblock %}

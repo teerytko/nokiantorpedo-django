@@ -28,21 +28,7 @@ class RootMenu(MenuItem):
 mymenu = RootMenu()
 mymenu.children['home'] = MenuItem(name='Koti', href='/')
 mymenu.children['floorball'] = MenuItem(name='Salibandy', href='/floorball')
-mymenu.children['floorball'].children['main'] = \
-    MenuItem(name='Salibandy', href='/floorball/')
-mymenu.children['floorball'].children['recent'] = \
-    MenuItem(name='Ajankohtaista', href='/floorball/recent')
-mymenu.children['floorball'].children['players'] = \
-    MenuItem(name='Joukkue', href='/floorball/team')
-
 mymenu.children['endurance'] = MenuItem(name='Kestävyysurheilu', href='/endurance')
-mymenu.children['endurance'].children['main'] = \
-    MenuItem(name='Kestävyysurheilu', href='/endurance/')
-mymenu.children['endurance'].children['recent'] = \
-    MenuItem(name='Ajankohtaista', href='/endurance/recent')
-mymenu.children['endurance'].children['events'] = \
-    MenuItem(name='Tapahtumat', href='/endurance/events')
-
 #mymenu.children['calendar'] = MenuItem(name='Kalenteri', href='/calendar', access='private')
 mymenu.children['association'] = MenuItem(**{'name': 'Yhdistys', 'href': '/association'})
 mymenu.children['forum'] = MenuItem(**{'name': 'Forum', 'href': '/forum'})

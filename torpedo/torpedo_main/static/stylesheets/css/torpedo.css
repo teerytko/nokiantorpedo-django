@@ -51,3 +51,16 @@ a {
 .story-img img {
 	width: 640px;
 }
+
+.nav-left > li {
+    float: none;
+}
+
+.nav-left > li > a {
+    border: 1px solid #dddddd;
+}
+
+.nav-left > li.active > a {
+    border: 1px solid #dddddd;
+	border-right-color: transparent;
+}

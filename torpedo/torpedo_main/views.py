@@ -29,10 +29,8 @@ def home(request):
     })
     return HttpResponse(t.render(c))
 
-def floorball_view(request, view):
-    if view == '':
-        view = 'main'
-    t = loader.get_template('torpedo/floorball_%s.html' % view)
+def floorball(request):
+    t = loader.get_template('torpedo/floorball.html')
     menu = get_menu()
     menu.active = 'floorball'
     team= Team.objects.get(name='Nokian Torpedo')
@@ -44,10 +42,8 @@ def floorball_view(request, view):
     })
     return HttpResponse(t.render(c))
 
-def endurance_view(request, view):
-    if view == '':
-        view = 'main'
-    t = loader.get_template('torpedo/endurance_%s.html' % view)
+def endurance(request):
+    t = loader.get_template('torpedo/endurance.html')
     menu = get_menu()
     menu.active = 'endurance'
     c = RequestContext(request, {
