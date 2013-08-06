@@ -6,12 +6,13 @@ Created on 7.7.2012
 
 from django.template import RequestContext, loader
 from django.http import HttpResponse
-from torpedo_main.menu import get_menu 
-from forms import UserProfileForm
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django_authopenid.views import signin as authsignin
 from django.contrib.auth.models import User
+from forms import UserProfileForm
 
+from torpedo_main.menu import get_menu 
 from statistics.models import Team
 
 
@@ -54,15 +55,20 @@ def endurance(request):
     })
     return HttpResponse(t.render(c))
 
+
+
 def manage(request):
-    t = loader.get_template('torpedo/manage.html')
-    menu = get_menu()
-    menu.active = 'manage'
-    c = RequestContext(request, {
-        'menu': menu,
-        'users': User.objects.all()
-    })
-    return HttpResponse(t.render(c))
+    if request.user.is_staff:
+        t = loader.get_template('torpedo/manage.html')
+        menu = get_menu()
+        menu.active = 'manage'
+        c = RequestContext(request, {
+            'menu': menu,
+            'users': User.objects.all()
+        })
+        return HttpResponse(t.render(c))
+    else:
+        raise PermissionDenied
 
 def calendar(request):
     t = loader.get_template('torpedo/calendar.html')
