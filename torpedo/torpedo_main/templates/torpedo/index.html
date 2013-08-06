@@ -5,13 +5,75 @@
 
 
 {% block main %}
-<br/>
-<p>Nokian torpedo on vuodesta 2008 vaikuttanut Nokialainen urheiluseura,
-jonka pääasiallista toimintaa on <a href="http://salibandy.net/">salibandy</a> ja muu yleinen kuntoilu.
-</p>
+<div class="col-10">
+
+	<br/>
+	<p>Nokian torpedo on vuodesta 2008 vaikuttanut Nokialainen urheiluseura,
+	jonka pääasiallista toimintaa on <a href="http://salibandy.net/">salibandy</a> ja muu yleinen kuntoilu.
+	</p>
+	
+	<div id="carousel" class="carousel slide">
+	  <!-- Indicators -->
+	  <ol class="carousel-indicators">
+	    <li data-target="#carousel" data-slide-to="0" class="active"></li>
+	    <li data-target="#carousel" data-slide-to="1"></li>
+	    <li data-target="#carousel" data-slide-to="2"></li>
+	  </ol>
+	
+	  <!-- Wrapper for slides -->
+	  <div class="carousel-inner">
+	    <div class="item active">
+	      <img src="{{MEDIA_URL}}Dropbox/Torpedo/joukkue.JPG" alt="Joukkue">
+	      <div class="carousel-caption">
+	        Joukkue @ 2008
+	      </div>
+	    </div>
+	    <div class="item">
+	      <img src="{{MEDIA_URL}}Dropbox/Torpedo/jukola2013_640.png" alt="1">
+	      <div class="carousel-caption">
+	        Torpedo @ Jämsä Jukola 2013
+	      </div>
+	    </div>
+	    <div class="item">
+	      <img src="{{MEDIA_URL}}Dropbox/Torpedo/marathon2011_640.png" alt="">
+	      <div class="carousel-caption">
+	        Torpedo @ HCM 2011
+	      </div>
+	    </div>
+	  </div>
+	
+	  <!-- Controls -->
+	  <a class="left carousel-control" href="#carousel" data-slide="prev">
+	    <span class="icon-prev"></span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel" data-slide="next">
+	    <span class="icon-next"></span>
+	  </a>
+	</div>
+
+    <div id="eventsfeed" class="feeds">
+    </div>
+</div>
 
 
+<div class="col-2">
+	<h3>Linkkejä</h3>
+	<a href="http://salibandy.net/">Salibandy.net</a>
+	<br>
+	<a href="http://salibandy.net/kilpailutoiminta/tulospalvelu/sisa-suomi-miehet-6div-lohko-34-tilastot-2012-13-pirkanmaa-4-1">Sarjatilanne salibandy.net</a>
+	<br>            
+	<a href="http://www.osallistujat.com" target="blank"><img src="http://www.osallistujat.com/LinkkiLogoPieni.png" border="0" width="100" height="30" alt="Osallistujat.com" title="Osallistujat.com"></a>
+	<br>
+	<a href="http://www.facebook.com/group.php?gid=118127174888202&v=wall#!/group.php?gid=118127174888202&v=wall"><img src="{{ STATIC_URL }}facebook_logo.png" border="0" height="30" alt="Nokian Torpedo Facebookissa!" title="Nokian Torpedo Facebookissa!"></a>
+	
 
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/index.view.js" ></script>
 {% endblock %}
 
 

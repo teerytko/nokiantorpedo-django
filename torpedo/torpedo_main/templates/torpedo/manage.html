@@ -1,0 +1,48 @@
+{% extends "torpedo/fixedbase.html" %}
+{% block head_addition %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% endblock %}
+
+
+{% block main %}
+<ul id="admintabs" class="nav nav-tabs nav-justified">
+  <li class="active"><a href="#members" data-toggle="tab">Jäsenrekisteri</a></li>
+  <li><a href="#recent" data-toggle="tab">Ajankohtaista</a></li>
+  <li><a href="/admin/">Database</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="members">
+	  
+	<h4 class="label">Jäsenrekisteri</h4>
+    <br/>
+    <table class="table table-striped">
+    <tr>
+      <th>Tunnus</th>
+      <th>Etunimi</th>
+      <th>Sukunimi</th>
+      <th>Email</th>
+      <th>Puhelin</th>
+    </row>
+    {% for user in users %}
+    <tr>
+    <td>{{ user.username }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.first_name }}</td>
+    <td>{{ user.last_name }}</td>
+    <td>{{ user.profile.phonenumber }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+  </div>
+  <div class="tab-pane fade" id="recent">
+  </div>
+  <div class="tab-pane fade" id="team">
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block rightside %}
+{% endblock %}

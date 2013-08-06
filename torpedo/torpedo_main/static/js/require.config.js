@@ -4,7 +4,7 @@
     paths: {
       'jquery':     'jquery-ui-1.9.2.custom/js/jquery-1.8.3',
       'jqui':       'jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom',
-      'bootstrap':  'bootstrap/js/bootstrap',
+      'bootstrap':  'bootstrap3/js/bootstrap',
       'backbone':   'vendor/backbone',
       'underscore': 'vendor/underscore',
       'date':       'vendor/date',

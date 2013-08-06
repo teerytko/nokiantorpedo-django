@@ -10,7 +10,10 @@ from torpedo_main.menu import get_menu
 from forms import UserProfileForm
 from django.http import HttpResponseRedirect
 from django_authopenid.views import signin as authsignin
+from django.contrib.auth.models import User
+
 from statistics.models import Team
+
 
 def signin(request, *args, **kwargs):
     menu = get_menu()
@@ -51,6 +54,15 @@ def endurance(request):
     })
     return HttpResponse(t.render(c))
 
+def manage(request):
+    t = loader.get_template('torpedo/manage.html')
+    menu = get_menu()
+    menu.active = 'manage'
+    c = RequestContext(request, {
+        'menu': menu,
+        'users': User.objects.all()
+    })
+    return HttpResponse(t.render(c))
 
 def calendar(request):
     t = loader.get_template('torpedo/calendar.html')

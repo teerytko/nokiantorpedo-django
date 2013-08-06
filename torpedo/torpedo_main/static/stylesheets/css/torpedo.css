@@ -4,6 +4,9 @@ a {
     color: #1e5799;
 }
 
+#carousel {
+	width: 640px;
+}
 
 #heading {
     background: #1e5799; /* Old browsers */
