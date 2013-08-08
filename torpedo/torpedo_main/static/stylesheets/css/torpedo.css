@@ -8,6 +8,17 @@ a {
 	width: 640px;
 }
 
+
+.editors-wrapper {
+	min-width: 48px;
+}
+
+.editors {
+	display: none;
+	float: right;
+}
+
+
 #heading {
     background: #1e5799; /* Old browsers */
     /* IE9 SVG, needs conditional override of 'filter' to 'none' */

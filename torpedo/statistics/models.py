@@ -1,3 +1,9 @@
+"""
+Statistics model
+"""
+
+from datetime import timedelta
+
 from django.db import models
 from django.contrib import admin
 from django.db.models import Sum
@@ -11,21 +17,28 @@ class League(models.Model):
     from_date = models.DateField(null=True, blank=True)
     to_date = models.DateField(null=True, blank=True)
 
+    def __unicode__(self):
+        return "%s" % self.name
+
 
 class Team(models.Model):
     """
     Team is a set of players.
     """
     name =  models.TextField(null=True, blank=True)
+    league = models.ForeignKey(League, null=True, blank=True)
+    players = models.ManyToManyField('Player', related_name="teams")
 
     def __unicode__(self):
         return "Team: %r" % self.name
+
 
 class Game(models.Model):
     date = models.DateTimeField()
     location = models.TextField(null=True, blank=True)
     home = models.ForeignKey(Team, related_name='home', null=True, blank=True)
     guest = models.ForeignKey(Team, related_name='guest', null=True, blank=True)
+    league = models.ForeignKey(League, null=True, blank=True)
 
     def get_home_name(self):
         return self.home.name
@@ -56,16 +69,15 @@ class Game(models.Model):
         return "Game: %s, %r - %r" % (self.date, self.home, self.guest)
 
 
-
 class Player(models.Model):
     number = models.IntegerField(blank=True)
     name = models.TextField(blank=True)
     role= models.TextField(blank=True)
-    team = models.ForeignKey(Team, related_name='player')
 
     @property
     def team_name(self):
-        return self.team.name
+        teams = self.teams.all()
+        return teams[self.teams.count()-1].name
 
     @property
     def goals(self):
@@ -81,7 +93,6 @@ class Player(models.Model):
 
     @property
     def penalties(self):
-        from datetime import timedelta
         penalty_time = timedelta()
         for penalty in self.penalty_set.all():
             penalty_time += timedelta(hours=penalty.length.hour,
@@ -93,6 +104,7 @@ class Player(models.Model):
     def __unicode__(self):
         return "Player: #%r: %r" % (self.number, self.name)
 
+
 class Goal(models.Model):
     time = models.TimeField(null=False)
     game = models.ForeignKey(Game)
@@ -103,6 +115,7 @@ class Goal(models.Model):
 
     def __unicode__(self):
         return "Goal: %r, %r" % (self.player, self.time)
+
 
 class Penalty(models.Model):
     time = models.TimeField(null=False)

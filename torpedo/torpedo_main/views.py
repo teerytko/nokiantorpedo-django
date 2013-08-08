@@ -41,10 +41,11 @@ def floorball(request):
     c = RequestContext(request, {
         'menu': menu,
         'team': team,
-        'players': team.player.all().order_by('number'),
+        'players': team.players.all().order_by('number'),
         
     })
     return HttpResponse(t.render(c))
+
 
 def endurance(request):
     t = loader.get_template('torpedo/endurance.html')
@@ -54,7 +55,6 @@ def endurance(request):
         'menu': menu,
     })
     return HttpResponse(t.render(c))
-
 
 
 def manage(request):
@@ -70,6 +70,7 @@ def manage(request):
     else:
         raise PermissionDenied
 
+
 def calendar(request):
     t = loader.get_template('torpedo/calendar.html')
     menu = get_menu()
@@ -78,6 +79,7 @@ def calendar(request):
         'menu': menu
     })
     return HttpResponse(t.render(c))
+
 
 def association(request):
     t = loader.get_template('torpedo/association.html')
@@ -88,9 +90,19 @@ def association(request):
     })
     return HttpResponse(t.render(c))
 
-def profile(request):
-    t = loader.get_template('torpedo/profile.html')
-    user = request.user 
+
+def profile(request, username=None, dialog=False):
+    if dialog is True:
+        t = loader.get_template('torpedo/profile_dlg.html')
+    else:
+        t = loader.get_template('torpedo/profile.html')
+    if username is None:
+        user = request.user
+    else:
+        if request.user.is_staff:
+            user = User.objects.get(username=username)
+        else:
+            raise PermissionDenied
     user_profile = user.profile
     menu = get_menu()
     if request.method == 'POST': # If the form has been submitted...
@@ -103,9 +115,7 @@ def profile(request):
             user_profile.phonenumber = form.cleaned_data['phonenumber']
             user.save()
             user_profile.save()
-            return HttpResponseRedirect('/') # Redirect after POST
-        else:
-            print form
+            return HttpResponseRedirect(request.META['HTTP_REFERER']) # Redirect after POST
     else:
         form = UserProfileForm(
             initial={'firstname': user.first_name,
@@ -115,7 +125,8 @@ def profile(request):
                      })
     c = RequestContext(request, {
         'form': form,
-        'menu': menu
+        'menu': menu,
+        'profileuser': user
     })
     return HttpResponse(t.render(c))
 
