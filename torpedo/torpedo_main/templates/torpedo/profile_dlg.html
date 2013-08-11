@@ -1,9 +1,9 @@
 <div id="profile-form">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <h2>Käyttäjän {{ profileuser }} profiili</h2>
-<form action="/profiledlg/{{ profileuser.username }}" method="post">{% csrf_token %}
+<form enctype="multipart/form-data" action="{{ form.action }}/{{ profileuser.username }}" method="post">{% csrf_token %}
     <fieldset id="profile">
-        <legend><span>Henkilökohtaiset tiedot</span></legend>
+        <legend><span>{{ form.name }}</span></legend>
         {{ form.non_field_errors }}
         {% for field in form %}
         <div class="form-group">
@@ -12,6 +12,9 @@
             {{ field }}
         </div>
         {% endfor %}
+        {% if form.submit %}
+        <input type="submit" value="{{ form.submit }}" class="btn btn-default">
+        {% endif %}
     </fieldset>
 </form>
 </div>

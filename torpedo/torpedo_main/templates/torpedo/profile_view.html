@@ -1,0 +1,72 @@
+{% extends "torpedo/fixedbase.html" %}
+{% block main %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<h2>{{ profileuser }} profiili</h2>
+
+<div id="profile-personal" class="panel">
+    <div class="editors-wrapper">
+      <div class="editors">
+        <a href="#" data-url="profiledlg/{{ profileuser.username }}"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+      </div>
+    </div>
+    <div class="panel-heading">Henkilökohtaiset tiedot</div>
+    <div class="row">
+    <div class="col-4">
+      <div class="editors-wrapper">
+      <div class="editors">
+        <a href="#" data-url="profileimg/{{ profileuser.username }}"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+      </div>
+      </div>
+      <img src="{{ MEDIA_URL }}{{ profileuser.profile.userimage }}" alt="" class="profile-img img-rounded"/>
+    </div> 
+    <div class="col-8">
+     <table class="table">
+       <tr>
+         <td><label>Etunimi</label></td>
+         <td><div>{{ profileuser.first_name }}</div></td>
+       </tr>
+       <tr>
+         <td><label>Sukunimi</label></td>
+         <td><div class="form-control-static">{{ profileuser.last_name }}</div></td>
+       </tr>
+       <tr>
+         <td><label>Email</label></td>
+         <td><div class="form-control-static">{{ profileuser.email }}</div></td>
+       </tr>
+       <tr>
+         <td><label>Puhelin</label></td>
+         <td><div class="form-control-static">{{ profileuser.profile.phonenumber }}</div></td>
+       </tr>
+     </table>
+    </div> 
+    </div>
+</div>
+
+<div class="panel">
+    <div class="panel-heading">Jäsenyys</div>
+    <div class="row">
+    <div class="col-4">
+    </div> 
+    <div class="col-8">
+     <table class="table">
+       <tr>
+         <td><label>Kausimaksu 2013-2014</label></td>
+         <td><div>0 / 120 €</div></td>
+       </tr>
+       <tr>
+         <td><label>Jaostot</label></td>
+         <td><div class="form-control-static">Salibandy, NotKU</div></td>
+       </tr>
+     </table>
+    </div> 
+    </div>
+</div>
+
+{% include "torpedo/modal.html" %}
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/profile.view.js" ></script>
+{% endblock %}
+

@@ -18,6 +18,10 @@ a {
 	float: right;
 }
 
+.profile-img {
+    width: 140px;
+    height: 140px;
+}
 
 #heading {
     background: #1e5799; /* Old browsers */

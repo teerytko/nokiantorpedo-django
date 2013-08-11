@@ -11,3 +11,12 @@ class UserProfile(models.Model):
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
 admin.site.register(UserProfile)
+
+
+class PlayerProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+
+
+User.playerprofile = property(lambda u: PlayerProfile.objects.get_or_create(user=u)[0])
+
+admin.site.register(PlayerProfile)

@@ -1,19 +1,35 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
 '''
 Created on 7.7.2012
 
 @author: teerytko
 '''
 
+import os
+
+from django.conf import settings
 from django.template import RequestContext, loader
 from django.http import HttpResponse
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django_authopenid.views import signin as authsignin
 from django.contrib.auth.models import User
-from forms import UserProfileForm
+from forms import UserProfileForm, UserImageForm
 
 from torpedo_main.menu import get_menu 
 from statistics.models import Team
+
+def media_file(name):
+    return os.path.join(settings.MEDIA_ROOT, name)
+
+
+def handle_uploaded_file(f):
+    filepath = media_file(f.name)
+    with open(filepath, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+    return f.name
 
 
 def signin(request, *args, **kwargs):
@@ -91,7 +107,7 @@ def association(request):
     return HttpResponse(t.render(c))
 
 
-def profile(request, username=None, dialog=False):
+def profile_edit(request, username=None, dialog=False):
     if dialog is True:
         t = loader.get_template('torpedo/profile_dlg.html')
     else:
@@ -130,3 +146,55 @@ def profile(request, username=None, dialog=False):
     })
     return HttpResponse(t.render(c))
 
+def profile_img(request, username=None, dialog=False):
+    if dialog is True:
+        t = loader.get_template('torpedo/profile_dlg.html')
+    else:
+        t = loader.get_template('torpedo/profile.html')
+    if username is None:
+        user = request.user
+    else:
+        if request.user.is_staff:
+            user = User.objects.get(username=username)
+        else:
+            raise PermissionDenied
+    user_profile = user.profile
+    menu = get_menu()
+    if request.method == 'POST': # If the form has been submitted...
+        form = UserImageForm(request.POST) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            filename = handle_uploaded_file(request.FILES['userimage'])
+            user_profile.userimage = filename
+            
+            user.save()
+            user_profile.save()
+            return HttpResponseRedirect(request.META['HTTP_REFERER']) # Redirect after POST
+    else:
+        form = UserImageForm(
+            initial={'userimage': user.profile.userimage,
+                     })
+    c = RequestContext(request, {
+        'form': form,
+        'menu': menu,
+        'profileuser': user
+    })
+    return HttpResponse(t.render(c))
+
+
+def profile(request, username=None):
+    t = loader.get_template('torpedo/profile_view.html')
+    if username is None:
+        user = request.user
+    else:
+        if request.user.is_staff:
+            user = User.objects.get(username=username)
+        else:
+            raise PermissionDenied
+    user_profile = user.profile
+    menu = get_menu()
+    c = RequestContext(request, {
+        'menu': menu,
+        'profileuser': user
+    })
+    return HttpResponse(t.render(c))

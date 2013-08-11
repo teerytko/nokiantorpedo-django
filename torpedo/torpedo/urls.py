@@ -1,5 +1,8 @@
 from django.conf.urls import patterns, include, url
 from sitemap import SitemapForum, SitemapTopic
+from django.conf import settings
+from django.conf.urls.static import static
+
 # from forms import RegistrationFormUtfUsername
 #from djangobb_forum import settings as forum_settings
 
@@ -32,4 +35,7 @@ urlpatterns = patterns('',
     #(r'^messages/', include('django_messages.urls')),
     (r'^feeds/', include('feedjack.urls')),
     (r'^events/', include('events.urls')),
-)
+) 
+
+if settings.SERVE_MEDIA:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
