@@ -33,9 +33,22 @@ define(['jquery'], function($) {
 			if (value.type != 'submit') {
 				datas[value.name] = value.value;
 			}
-		})
+		});
+		$('select').each(function(index, value) {
+			opts = [];
+			for (var i=0; i<value.selectedOptions.length; i++) {
+				var opt = value.selectedOptions[i];
+				opts.push(opt.value);
+			}
+			datas[value.name] =  opts;
+		});
 		console.log(datas);
-		$.post(action, datas).
+		$.ajax({
+			url: action,
+			type: "POST",
+			data: datas,
+			traditional: true
+		}).
 		done(function(data) {
 			retq = $(data);
 			$('.modal-body').empty();

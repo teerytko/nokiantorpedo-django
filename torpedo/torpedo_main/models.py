@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf8 -*-
+
 
 from django.db import models
 from django.contrib import admin
@@ -10,7 +13,28 @@ class UserProfile(models.Model):
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
-admin.site.register(UserProfile)
+
+class Section(models.Model):
+    name = models.CharField(blank=True, max_length=50)
+    fee = models.FloatField(blank=False, default=0)
+
+    def __unicode__(self):
+        return self.name
+
+
+class MemberProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    payments = models.FloatField(blank=False, default=0)
+    memberof = models.ManyToManyField(Section)
+
+    @property
+    def memberfee(self):
+        fee = 0
+        for membership in self.memberof.all():
+            fee += membership.fee
+        return fee
+
+User.memberprofile = property(lambda u: MemberProfile.objects.get_or_create(user=u)[0])
 
 
 class PlayerProfile(models.Model):
@@ -19,4 +43,7 @@ class PlayerProfile(models.Model):
 
 User.playerprofile = property(lambda u: PlayerProfile.objects.get_or_create(user=u)[0])
 
+admin.site.register(UserProfile)
+admin.site.register(MemberProfile)
 admin.site.register(PlayerProfile)
+admin.site.register(Section)

@@ -6,8 +6,10 @@ Created on 25.8.2012
 @author: teerytko
 '''
 
-from django import forms
 import re
+from django import forms
+from torpedo_main.models import Section
+
 
 class FIPhoneNumberField(forms.CharField):
     default_error_messages = {
@@ -37,17 +39,18 @@ class UserProfileForm(forms.Form):
     email = create_labeled_field(forms.EmailField, 'Email', required=False)
     phonenumber = create_labeled_field(FIPhoneNumberField, 'Puhelinnumero', required=False)
 
-    #userimage = create_labeled_field(forms.ImageField, 'Kuva', required=False)
-
-    def readonly(self):
-        """
-        Change the entire form to readonly
-        """
-        for field in self.fields:
-            self.base_fields[field].widget.attrs['readonly'] = True
 
 class UserImageForm(forms.Form):
     name = 'Käyttäjä kuva'
     submit = "Upload"
     action = '/profileimg'
     userimage = create_labeled_field(forms.ImageField, 'Kuva', required=False)
+
+
+class MemberProfileForm(forms.Form):
+    name = 'Jäsenyys tiedot'
+    action = '/memberdlg'
+    payments = create_labeled_field(forms.CharField, 'Kausimaksu', required=False)
+    memberof = create_labeled_field(forms.ModelMultipleChoiceField, 'Jaostot', 
+                                    queryset=Section.objects.all(),
+                                    required=False)
