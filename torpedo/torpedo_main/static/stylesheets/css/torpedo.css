@@ -8,14 +8,30 @@ a {
 	width: 640px;
 }
 
+#memberstable {
+    font-size: 11px;
+}
+
 
 .editors-wrapper {
-	min-width: 48px;
+    min-width: 100px;
 }
 
 .editors {
+    display: none;
+    float: right;
+}
+
+.member-editors {
 	display: none;
 	float: right;
+    min-width: 120px;
+    background-color: white;
+    border: 1px;
+    border-style:solid;
+    border-color: black;
+    padding: 4px;
+    position: absolute;
 }
 
 .profile-img {

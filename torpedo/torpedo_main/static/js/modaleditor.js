@@ -10,7 +10,7 @@ define(['jquery'], function($) {
 		$editors.hide();
 	}
 	var edit = function(event) {
-		$.ajax($(this).find('a').attr('data-url')).
+		$.ajax($(this).attr('data-url')).
 		done(function(data) {
 			$('.modal-body').empty();
 			$('.modal-body').append(data);

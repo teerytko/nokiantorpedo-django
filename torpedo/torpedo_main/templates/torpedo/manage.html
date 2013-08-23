@@ -16,29 +16,36 @@
 	  
 	<h4 class="label">Jäsenrekisteri</h4>
     <br/>
-    <table class="table table-striped">
+    <table id="memberstable" class="table table-striped">
     <tr>
       <th>Tunnus</th>
       <th>Etunimi</th>
       <th>Sukunimi</th>
       <th>Email</th>
-      <th colspan="2">Puhelin</th>
+      <th>Puhelin</th>
+      <th>Jäsenyys</th>
+      <th>Maksut</th>
     </row>
     {% for user in users %}
     <tr  class="memberrow" id="row_{{ user.username }}">
-    <td>{{ user.username }}</td>
+    <td>
+    <div class="editors-wrapper">
+        <div class="editors member-editors">
+            <a href="/profile/{{ user.username }}" data-url=""><span class="glyphicon glyphicon-user"></span>
+            View</a>
+            <a href="#" data-url="/profiledlg/{{ user.username }}"><span class="glyphicon glyphicon-edit"></span>
+            Edit</a>
+    </div>
+    {{ user.username }}
+    </div>
+    
+    </td>
     <td>{{ user.email }}</td>
     <td>{{ user.first_name }}</td>
     <td>{{ user.last_name }}</td>
     <td>{{ user.profile.phonenumber }}</td>
-    <td>
-    <div class="editors-wrapper">
-	    <div class="editors">
-	        <a href="#" data-url="profiledlg/{{ user.username }}"><span class="glyphicon glyphicon-edit"></span>
-	        Edit</a>
-	    </div>
-    </div>
-    </td>
+    <td>{{ user.memberprofile.memberof.all|join:", " }}</td>
+    <td>{{ user.memberprofile.payments }} / {{ user.memberprofile.memberfee }} €</td>
     </tr>
     {% endfor %}
     </table>
