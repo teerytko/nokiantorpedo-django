@@ -146,6 +146,7 @@ def profile_edit(request, username=None, dialog=False):
     })
     return HttpResponse(t.render(c))
 
+
 def member_edit(request, username=None, dialog=False):
     if dialog is True:
         t = loader.get_template('torpedo/profile_dlg.html')
