@@ -8,10 +8,11 @@ BASEDIR = os.path.join(PROJECT_ROOT, '../..')
 
 
 DEBUG = True
+SERVE_MEDIA = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('superuser', 'superuser@example.com'),
+     ('admin', 'admin@nokiantorpedo.fi'),
 )
 
 MANAGERS = ADMINS
