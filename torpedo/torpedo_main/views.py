@@ -78,9 +78,10 @@ def manage(request):
         t = loader.get_template('torpedo/manage.html')
         menu = get_menu()
         menu.active = 'manage'
+        users = User.objects.all()
         c = RequestContext(request, {
             'menu': menu,
-            'users': User.objects.all()
+            'users': users
         })
         return HttpResponse(t.render(c))
     else:

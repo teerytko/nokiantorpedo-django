@@ -29,7 +29,7 @@ mymenu = RootMenu()
 mymenu.children['home'] = MenuItem(name='Koti', href='/')
 mymenu.children['floorball'] = MenuItem(name='Salibandy', href='/floorball')
 mymenu.children['endurance'] = MenuItem(name='Kestävyysurheilu', href='/endurance')
-#mymenu.children['calendar'] = MenuItem(name='Kalenteri', href='/calendar', access='private')
+mymenu.children['calendar'] = MenuItem(name='Kalenteri', href='/calendar', access='private')
 mymenu.children['association'] = MenuItem(**{'name': 'Yhdistys', 'href': '/association'})
 mymenu.children['forum'] = MenuItem(**{'name': 'Forum', 'href': '/forum'})
 
