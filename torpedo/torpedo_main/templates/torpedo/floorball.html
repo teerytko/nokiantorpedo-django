@@ -6,9 +6,9 @@
 
 {% block main %}
 <ul id="torpedotabs" class="nav nav-tabs nav-justified">
-  <li class="active"><a href="#activity" data-toggle="tab">Toiminta</a></li>
-  <li><a href="#recent" data-toggle="tab">Ajankohtaista</a></li>
-  <li><a href="#team" data-toggle="tab">Joukkue</a></li>
+  <li class="active"><a id="activity-link" href="#activity" data-toggle="tab">Toiminta</a></li>
+  <li><a id="recent-link" href="#recent" data-toggle="tab">Ajankohtaista</a></li>
+  <li><a id="team-link" href="#team" data-toggle="tab">Joukkue</a></li>
 </ul>
 
 <div class="tab-content">
@@ -29,22 +29,6 @@
 	Peliohjelma päivitty tähän kun se saadaan liitolta.
 	</p>
 	
-	<table class="table">
-	<tr>
-	  <td>Harjoituspeli Torpedo - Nops</td>
-	  <td>22.08.2013</td>
-	  <td><a href="http://www.osallistujat.com/intra.php?siteid=7gla7dyta44&ala=tapahtumat&tapahtumaid=683850&siteid=mvmgwq8673g#ilmoalku">
-	  Ilmoittaudu</a>
-	  </td>
-	</tr>
-	<tr>
-	  <td>Harjoituspeli Torpedo - KosBy</td>
-	  <td>29.08.2013</td>
-	  <td><a href="http://www.osallistujat.com/intra.php?siteid=nxqijag9r9y&ala=tapahtumat&tapahtumaid=683851&siteid=3trxigcyh0h#ilmoalku">
-	  Ilmoittaudu</a>
-	  </td>
-	</tr>
-	</table>
   </div>
   <div class="tab-pane fade" id="recent">
 	<br/>
@@ -87,3 +71,6 @@
 {% endblock %}
 
 
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/floorball.view.js" ></script>
+{% endblock %}
