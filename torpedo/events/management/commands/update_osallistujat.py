@@ -228,7 +228,7 @@ class ProcessFeed:
                 return FEED_ERRHTTP, ret_values
 
         if hasattr(self.fpf, 'bozo') and self.fpf.bozo:
-            prints('[%d] !BOZO! Feed is not well formed: %s' % (
+            prints('[%s] !BOZO! Feed is not well formed: %s' % (
                 self.feed.name, self.feed.feed_url))
         
         if False and self.options.verbose:
@@ -306,7 +306,7 @@ def main():
     prints('* BEGIN: %s' % (unicode(now),))
 
     feed = Feed('Osallistujat.com', 
-         'http://www.osallistujat.com/RSS.php?id=1925&cal=h0g143ub5p')
+         'http://www.osallistujat.com/RSS.php?id=76735&cal=l9o0etv98c')
     pfeed = ProcessFeed(feed, options, now)
     ret_feed, ret_entries = pfeed.process()
     del pfeed
