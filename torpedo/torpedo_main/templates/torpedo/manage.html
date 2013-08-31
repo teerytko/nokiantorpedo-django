@@ -17,6 +17,13 @@
 	<h4 class="label">Jäsenrekisteri</h4>
     <a href="/admin/auth/user/add/" data-url=""><span class="glyphicon glyphicon-plus"></span>
             New User</a>
+    {% if request.GET.show == 'all'%}
+    <a href="{{request.path}}?show=members" data-url=""><span class="glyphicon glyphicon-eye-open"></span>
+            Show members</a>
+    {% else %}
+    <a href="{{request.path}}?show=all" data-url=""><span class="glyphicon glyphicon-eye-open"></span>
+            Show all</a>
+    {% endif %}
     <br/>
     <table id="memberstable" class="table table-striped">
     <tr>
@@ -29,6 +36,7 @@
       <th>Maksut</th>
     </row>
     {% for user in users %}
+    {% if request.GET.show == 'all' or user.memberprofile.memberof.all %}
     <tr  class="memberrow" id="row_{{ user.username }}">
     <td>
     <div class="editors-wrapper">
@@ -49,6 +57,7 @@
     <td>{{ user.memberprofile.memberof.all|join:", " }}</td>
     <td>{{ user.memberprofile.payments }} / {{ user.memberprofile.memberfee }} €</td>
     </tr>
+    {% endif %}
     {% endfor %}
     </table>
   </div>
