@@ -15,24 +15,28 @@ require(['jquery', 'jfeed'], function($, jfeed) {
 		jQuery.getFeed({
 			url:  feedurl,
 			success: function(feed) {
-				var $title = $('<a>' + feed.title + '</a>');
-				$title.attr('href', titleurl)
-				$div.append($title);
+				var title = $('<div class="panel-heading"><h3>' + feed.title + '</h3></div>');
+				title.attr('href', titleurl)
+				var feedsbody = $('<div/>');
+				feedsbody.addClass("panel-body");
+				$div.append(title);
+				$div.append(feedsbody);
+				
 				for (i=0; i<feed.items.length && i<maxitems; i++)
 				{
 					var post_id = 'newsfeed_post_'+i
-					var $feednode = $('<blockquote/>', {
+					var $feednode = $('<small/>', {
 						id: post_id,
 					});
 					var item = feed.items[i];
 					var dstr = item.updated.split('+')[0]
 					var updated = ' '+get_datetime(dstr);
 					var title = get_title(item);
-					var link = '<a href="'+item.link+'" title="'+updated+' '+item.title+'">'+item.title+'</a></br>';
-					var description = ''+item.description.substring(0, 80)+'</br>';
+					var link = '<a href="'+item.link+'" title="'+updated+' '+item.title+'">'+item.title+'</a>';
+					var description = $('<p>'+item.description.substring(0, 80)+'</p>');
 					$feednode.append(link);
-					$feednode.append('<p>'+description+'</p>');
-					$div.append($feednode)
+					$feednode.append(description);
+					feedsbody.append($feednode)
 				}
 			}
 		});
