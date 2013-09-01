@@ -36,9 +36,9 @@ define(['jquery'], function($) {
 		});
 		$('select').each(function(index, value) {
 			opts = [];
-			for (var i=0; i<value.selectedOptions.length; i++) {
-				var opt = value.selectedOptions[i];
-				opts.push(opt.value);
+			for (var i=0; i<value.length; i++) {
+				if (value[i].selected)
+					opts.push(value[i].value);
 			}
 			datas[value.name] =  opts;
 		});
