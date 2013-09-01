@@ -177,6 +177,8 @@ def member_edit(request, username=None, dialog=False):
             initial={'payments': member_profile.payments,
                      'memberof': member_profile.memberof.all(),
                      })
+    if not request.user.is_staff:
+        form.fields['payments'].widget.attrs['readonly'] = True
     c = RequestContext(request, {
         'form': form,
         'menu': menu,

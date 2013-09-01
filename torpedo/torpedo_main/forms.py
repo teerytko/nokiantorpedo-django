@@ -54,3 +54,4 @@ class MemberProfileForm(forms.Form):
     memberof = create_labeled_field(forms.ModelMultipleChoiceField, 'Jaostot', 
                                     queryset=Section.objects.all(),
                                     required=False)
+
