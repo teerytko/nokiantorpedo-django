@@ -108,18 +108,24 @@ def association(request):
     return HttpResponse(t.render(c))
 
 
-def profile_edit(request, username=None, dialog=False):
-    if dialog is True:
-        t = loader.get_template('torpedo/profile_dlg.html')
-    else:
-        t = loader.get_template('torpedo/profile.html')
+def get_user(request, username=None):
     if username is None:
+        user = request.user
+    elif username == request.user.username:
         user = request.user
     else:
         if request.user.is_staff:
             user = User.objects.get(username=username)
         else:
             raise PermissionDenied
+    return user
+
+def profile_edit(request, username=None, dialog=False):
+    if dialog is True:
+        t = loader.get_template('torpedo/profile_dlg.html')
+    else:
+        t = loader.get_template('torpedo/profile.html')
+    user = get_user(request, username)
     user_profile = user.profile
     menu = get_menu()
     if request.method == 'POST': # If the form has been submitted...
@@ -153,13 +159,7 @@ def member_edit(request, username=None, dialog=False):
         t = loader.get_template('torpedo/profile_dlg.html')
     else:
         t = loader.get_template('torpedo/profile.html')
-    if username is None:
-        user = request.user
-    else:
-        if request.user.is_staff:
-            user = User.objects.get(username=username)
-        else:
-            raise PermissionDenied
+    user = get_user(request, username)
     member_profile = user.memberprofile
     menu = get_menu()
     if request.method == 'POST': # If the form has been submitted...
@@ -189,13 +189,7 @@ def profile_img(request, username=None, dialog=False):
         t = loader.get_template('torpedo/profile_dlg.html')
     else:
         t = loader.get_template('torpedo/profile.html')
-    if username is None:
-        user = request.user
-    else:
-        if request.user.is_staff:
-            user = User.objects.get(username=username)
-        else:
-            raise PermissionDenied
+    user = get_user(request, username)
     user_profile = user.profile
     menu = get_menu()
     if request.method == 'POST': # If the form has been submitted...
@@ -222,13 +216,7 @@ def profile_img(request, username=None, dialog=False):
 
 def profile(request, username=None):
     t = loader.get_template('torpedo/profile_view.html')
-    if username is None:
-        user = request.user
-    else:
-        if request.user.is_staff:
-            user = User.objects.get(username=username)
-        else:
-            raise PermissionDenied
+    user = get_user(request, username)
     user_profile = user.profile
     menu = get_menu()
     c = RequestContext(request, {
