@@ -8,6 +8,7 @@ events update osallistujat
 """
 
 import os
+import re
 import time
 import optparse
 import datetime
@@ -98,7 +99,8 @@ class ProcessEntry:
         
         try:
             # parse the specific osallistujat time
-            dstr = title.split('-')[0].split(' ',1)[1]
+            dstr = re.match("^(\d{2}\.\d{2}\.\d{2}\s+\d{2}:\d{2}).*",  title).group(1)
+            # dstr = title.split('-')[0].split(' ',1)[1]
             df = datetime.datetime.strptime(dstr, '%d.%m.%y %H:%M')
             date_start = df
         except:
