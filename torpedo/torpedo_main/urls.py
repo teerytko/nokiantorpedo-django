@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url, include
 from torpedo_main.feeds import LatestTopicPosts
+from torpedo_main.views import TorpedoRegistrationView
 
 urlpatterns = patterns('',
     # Examples:
@@ -19,6 +20,9 @@ urlpatterns = patterns('',
     url(r'^profileimg/(?P<username>.*)$', 'torpedo_main.views.profile_img', 
         {'dialog': True}),
     url(r'^account/signin/$', 'torpedo_main.views.signin', name='user_signin'),
+    url(r'^account/signup/$', 
+        TorpedoRegistrationView.as_view(),
+        name='user_signup'),
     url(r'^account/', include('django_authopenid.urls')),
     url(r'^forum/account/', include('django_authopenid.urls')),
     url(r'^account/logout/$', 'django.contrib.auth.views.logout', 

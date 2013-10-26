@@ -9,18 +9,12 @@
 	<div class="box">
 		<form method="post" action="">
 			{% csrf_token %}
-			<div class="inform">
-				<div class="forminfo">
-				</div>
-				{{ form.non_field_errors.as_ul }}
-				<fieldset>
-					<legend>Anna käyttäjänimi</legend>
-					<div class="infldset">
-						{{ form.username.errors }}
-						<label><strong>{{ form.username.label }}</strong><br />{{ form.username }}<br /></label>
-					</div>
-				</fieldset>
-			</div>
+            {{ form.non_field_errors.as_ul }}
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username.errors }}
+                {{ form.username }}
+            </div>
 			<div class="inform">
 				<fieldset>
 					<legend>Anna salasana. Salasanat ovat case sensitiivisiä!</legend>

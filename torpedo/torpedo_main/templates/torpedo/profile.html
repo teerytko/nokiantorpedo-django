@@ -1,11 +1,13 @@
 {% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
+
 {% block main %}
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <div id="forms" class="panel">
 <h2>Käyttäjän {{ profileuser }} profiili</h2>
 <form action="/profile" method="post">{% csrf_token %}
     <fieldset id="profile">
-        <legend><span>Henkilökohtaiset tiedot</span></legend>
+        <legend><span>{% trans "Personal details" %}</span></legend>
         {{ form.non_field_errors }}
         {% for field in form %}
         <div class="form-group">

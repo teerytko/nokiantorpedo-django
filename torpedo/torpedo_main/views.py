@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf8 -*-
 '''
 Created on 7.7.2012
 
@@ -15,7 +14,10 @@ from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django_authopenid.views import signin as authsignin
 from django.contrib.auth.models import User
-from forms import UserProfileForm, UserImageForm, MemberProfileForm
+from forms import UserProfileForm, UserImageForm, MemberProfileForm, \
+TorpedoRegistrationForm
+from registration.backends.default.views import RegistrationView
+
 
 from torpedo_main.menu import get_menu 
 from statistics.models import Team
@@ -39,6 +41,9 @@ def signin(request, *args, **kwargs):
         'menu': menu
     }
     return authsignin(request, *args, **kwargs)
+
+class TorpedoRegistrationView(RegistrationView):
+    form_class = TorpedoRegistrationForm
 
 def home(request):
     t = loader.get_template('torpedo/index.html')

@@ -1,4 +1,6 @@
 {% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
+
 {% block main %}
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <h2>{{ profileuser }} profiili</h2>
@@ -9,12 +11,12 @@
         <a href="#" data-url="/profiledlg/{{ profileuser.username }}"><span class="glyphicon glyphicon-edit"></span>Edit</a>
       </div>
     </div>
-    <div class="panel-heading">Henkilökohtaiset tiedot</div>
+    <div class="panel-heading">{% trans "Personal details" %}</div>
     <div class="row">
     <div class="col-3">
       <div class="editors-wrapper">
       <div class="editors">
-        <a href="#" data-url="/profileimg/{{ profileuser.username }}"><span class="glyphicon glyphicon-edit"></span>Edit</a>
+        <a href="#" data-url="/profileimg/{{ profileuser.username }}"><span class="glyphicon glyphicon-edit"></span>{% trans "Edit" %}</a>
       </div>
       </div>
       <img src="{{ MEDIA_URL }}{{ profileuser.profile.userimage }}" alt="" class="profile-img img-rounded"/>
@@ -22,19 +24,19 @@
     <div class="col-9">
      <table class="table">
        <tr>
-         <td class="col-5"><label>Etunimi</label></td>
+         <td class="col-5"><label>{% trans "Forename" %}</label></td>
          <td><div>{{ profileuser.first_name }}</div></td>
        </tr>
        <tr>
-         <td><label>Sukunimi</label></td>
+         <td><label>{% trans "Surname" %}</label></td>
          <td><div>{{ profileuser.last_name }}</div></td>
        </tr>
        <tr>
-         <td><label>Email</label></td>
+         <td><label>{% trans "Email" %}</label></td>
          <td><div>{{ profileuser.email }}</div></td>
        </tr>
        <tr>
-         <td><label>Puhelin</label></td>
+         <td><label>{% trans "Phonenumber" %}</label></td>
          <td><div>{{ profileuser.profile.phonenumber }}</div></td>
        </tr>
      </table>
@@ -48,18 +50,18 @@
         <a href="#" data-url="/memberdlg/{{ profileuser.username }}"><span class="glyphicon glyphicon-edit"></span>Edit</a>
       </div>
     </div>
-    <div class="panel-heading">Jäsenyys</div>
+    <div class="panel-heading">{% trans "Membership" %}</div>
     <div class="row">
     <div class="col-3">
     </div> 
     <div class="col-9">
      <table class="table">
        <tr>
-         <td class="col-5"><label>Kausimaksu 2013-2014</label></td>
+         <td class="col-5"><label>{% trans "Seasonfee" %}</label></td>
          <td><div>{{ profileuser.memberprofile.payments }} / {{ profileuser.memberprofile.memberfee }} €</div></td>
        </tr>
        <tr>
-         <td><label>Jaostot</label></td>
+         <td><label>{% trans "Sections" %}</label></td>
          <td><div>{{ profileuser.memberprofile.memberof.all|join:", " }}
          </div></td>
        </tr>

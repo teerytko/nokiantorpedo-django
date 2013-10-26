@@ -1,0 +1,530 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-26 14:55+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Teemu Rytkönen <teemu.rytkonen@gmail.fi>\n"
+"Language-Team: Finnish <LL@li.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+#: feeds.py:12
+msgid "Latest posts on topic on forum"
+msgstr "Viimeisimmät postit foorumilla"
+
+#: feeds.py:13
+msgid "Latest post on topic on forum"
+msgstr "Viimeisimmät otsikot foorumilla"
+
+#: forms.py:22
+msgid "Give a valid phonenumber"
+msgstr "Anna validi puhelinnumero"
+
+#: forms.py:41 templates/torpedo/profile.html:10
+#: templates/torpedo/profile_view.html:14
+msgid "Personal details"
+msgstr "Henkilökohtaiset tiedon"
+
+#: forms.py:43
+msgid "Firstname"
+msgstr "Etunimi"
+
+#: forms.py:44 templates/torpedo/profile_view.html:31
+msgid "Surname"
+msgstr "Sukunimi"
+
+#: forms.py:45 templates/authopenid/complete.html:30
+#: templates/torpedo/profile_view.html:35
+msgid "Email"
+msgstr "Email"
+
+#: forms.py:46
+msgid "Telephone"
+msgstr "Puhelin"
+
+#: forms.py:50
+msgid "Profile image"
+msgstr "Profiilin kuva"
+
+#: forms.py:53
+msgid "Image"
+msgstr "Kuva"
+
+#: forms.py:57
+msgid "Membership details"
+msgstr "Jäsenyys tiedot"
+
+#: forms.py:59 templates/torpedo/profile_view.html:60
+msgid "Seasonfee"
+msgstr "Kausimaksu"
+
+#: forms.py:60 templates/torpedo/profile_view.html:64
+msgid "Sections"
+msgstr "Jaostot"
+
+#: menu.py:30
+msgid "Home"
+msgstr "Koti"
+
+#: menu.py:31 templates/torpedo/association.html:9
+msgid "Floorball"
+msgstr "Salibandy"
+
+#: menu.py:32 templates/torpedo/association.html:15
+msgid "Endurance"
+msgstr "Kestävyys"
+
+#: menu.py:33
+msgid "Calendar"
+msgstr "Kalenteri"
+
+#: menu.py:34 templates/torpedo/association.html:21
+msgid "Association"
+msgstr "Yhdistys"
+
+#: menu.py:35
+msgid "Forum"
+msgstr "Forum"
+
+#: templates/404.html:31
+msgid "Error 404"
+msgstr ""
+
+#: templates/404.html:36
+msgid "Page not found."
+msgstr "Sivua ei löydy"
+
+#: templates/404.html:42
+msgid "The requested URL was not found on this server."
+msgstr ""
+
+#: templates/404.html:43 templates/500.html:299
+msgid "Back home"
+msgstr ""
+
+#: templates/500.html:287
+msgid "Error 500"
+msgstr ""
+
+#: templates/500.html:292
+msgid "Internal server error."
+msgstr ""
+
+#: templates/500.html:298
+msgid ""
+"There is a problem with the resource you are looking for, and it cannot be "
+"displayed."
+msgstr ""
+
+#: templates/authopenid/associate.html:19
+msgid "Add a new OpenID URL"
+msgstr ""
+
+#: templates/authopenid/associate.html:25
+msgid "OpenId URL :"
+msgstr ""
+
+#: templates/authopenid/associate.html:26
+msgid "Add OpenID"
+msgstr ""
+
+#: templates/authopenid/complete.html:7
+msgid "OpenID is verified"
+msgstr ""
+
+#: templates/authopenid/complete.html:13
+msgid "Your OpenID is verified! "
+msgstr ""
+
+#: templates/authopenid/complete.html:14
+msgid ""
+"\n"
+"\t\t\t\t\t<p>Your OpenID can now be associated with a new or existing "
+"membership. You can change the association later in your preferences.</p>\n"
+"\t\t\t\t\t"
+msgstr ""
+
+#: templates/authopenid/complete.html:19
+msgid "Associate your OpenID"
+msgstr ""
+
+#: templates/authopenid/complete.html:20
+msgid ""
+"\n"
+"\t\t\t\t\t<p>If you're joining <strong>Sitename</strong>, associate your "
+"OpenID with a new account. If you're already a member, associate with your "
+"existing account.</p>\n"
+"\t\t\t\t\t"
+msgstr ""
+
+#: templates/authopenid/complete.html:25
+msgid "A new account"
+msgstr ""
+
+#: templates/authopenid/complete.html:29 templates/authopenid/complete.html:44
+msgid "Username"
+msgstr ""
+
+#: templates/authopenid/complete.html:31
+msgid "Create account"
+msgstr ""
+
+#: templates/authopenid/complete.html:40
+msgid "An existing account"
+msgstr ""
+
+#: templates/authopenid/complete.html:45
+msgid "Password"
+msgstr ""
+
+#: templates/authopenid/complete.html:46
+msgid "Verify"
+msgstr ""
+
+#: templates/authopenid/dissociate.html:21
+msgid "Dissociate OpenID URL"
+msgstr ""
+
+#: templates/authopenid/dissociate.html:23
+msgid "Dissociate OpenID"
+msgstr ""
+
+#: templates/authopenid/failure.html:7
+#: templates/registration/registration_complete.html:8
+msgid "Message"
+msgstr "Viesti"
+
+#: templates/authopenid/failure.html:11
+msgid "OpenID failed"
+msgstr ""
+
+#: templates/authopenid/password_change_form.html:12
+msgid "Set password"
+msgstr "Anna salasana"
+
+#: templates/authopenid/password_change_form.html:19
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+"Anna salasanasi kahdesti, jotta voimme verifioida että kirjoitit sen oikein."
+
+#: templates/authopenid/password_change_form.html:21
+#: templates/authopenid/password_change_form.html:49
+msgid "New password:"
+msgstr "Uusi salasana"
+
+#: templates/authopenid/password_change_form.html:23
+#: templates/authopenid/password_change_form.html:52
+msgid "Confirm password:"
+msgstr "Varmista salasana"
+
+#: templates/authopenid/password_change_form.html:29
+#: templates/authopenid/password_change_form.html:59
+msgid "Change my password"
+msgstr "Vaihda salasanani"
+
+#: templates/authopenid/password_change_form.html:29
+#: templates/authopenid/password_change_form.html:59
+#: templates/django_messages/compose.html:31
+msgid "Go back"
+msgstr "Takaisin"
+
+#: templates/authopenid/password_change_form.html:37
+msgid "Password change"
+msgstr "Salasanan vaihto"
+
+#: templates/authopenid/password_change_form.html:44
+msgid ""
+"Please enter your old password, for security's sake, and then enter your new "
+"password twice so we can verify you typed it in correctly."
+msgstr ""
+
+#: templates/authopenid/password_change_form.html:46
+msgid "Old password:"
+msgstr "Vanha salasana"
+
+#: templates/authopenid/signin.html:8 templates/authopenid/signin.html:42
+msgid "Login"
+msgstr ""
+
+#: templates/authopenid/signin.html:33
+msgid "Forgotten your password?"
+msgstr "Unohditko salasanasi?"
+
+#: templates/django_messages/compose.html:9
+msgid "Send a message"
+msgstr "Lähetä viesti"
+
+#: templates/django_messages/compose.html:17
+msgid "Write your message and submit"
+msgstr "Kirjoita viesti ja lähetä"
+
+#: templates/django_messages/compose.html:31
+msgid "Send"
+msgstr "Lähetä"
+
+#: templates/django_messages/inbox.html:6
+#: templates/django_messages/menu_pm.html:7
+msgid "Inbox"
+msgstr ""
+
+#: templates/django_messages/inbox.html:12
+#: templates/django_messages/outbox.html:12
+msgid "Subject"
+msgstr "Otsikko"
+
+#: templates/django_messages/inbox.html:13
+msgid "Sender"
+msgstr "Lähettäjä"
+
+#: templates/django_messages/inbox.html:14
+#: templates/django_messages/outbox.html:14
+msgid "Date"
+msgstr "Pvm"
+
+#: templates/django_messages/inbox.html:38
+#: templates/django_messages/outbox.html:34
+msgid "No messages"
+msgstr "Ei viestejä"
+
+#: templates/django_messages/menu_pm.html:3
+msgid "Private Messages"
+msgstr "Henkilökohtaiset viestit"
+
+#: templates/django_messages/menu_pm.html:8
+msgid "Sent"
+msgstr "Lähetetty"
+
+#: templates/django_messages/menu_pm.html:9
+msgid "Send new message"
+msgstr "Lähetä viesti"
+
+#: templates/django_messages/outbox.html:6
+msgid "Outbox"
+msgstr ""
+
+#: templates/django_messages/outbox.html:13
+msgid "Receiver"
+msgstr "Vastaanottaja"
+
+#: templates/django_messages/view.html:31
+msgid "Registered:"
+msgstr "Registeröity:"
+
+#: templates/django_messages/view.html:32
+msgid "Posts:"
+msgstr "Postit:"
+
+#: templates/django_messages/view.html:34
+msgid "IP:"
+msgstr ""
+
+#: templates/django_messages/view.html:36
+#: templates/djangobb_forum/header.html:24
+msgid "Profile"
+msgstr "Profiili"
+
+#: templates/django_messages/view.html:38
+msgid "E-mail"
+msgstr ""
+
+#: templates/django_messages/view.html:41
+msgid "Send e-mail"
+msgstr "Lähetä sähköpostia"
+
+#: templates/django_messages/view.html:45
+#: templates/djangobb_forum/header.html:26
+msgid "PM"
+msgstr ""
+
+#: templates/django_messages/view.html:67
+msgid "Online"
+msgstr ""
+
+#: templates/django_messages/view.html:69
+msgid "Offline"
+msgstr ""
+
+#: templates/django_messages/view.html:75
+msgid "Are you sure you want to delete this post?"
+msgstr "Oletko varma että haluat poistaa tämän viestin?"
+
+#: templates/django_messages/view.html:75
+msgid "Delete"
+msgstr "Poista"
+
+#: templates/django_messages/view.html:78
+msgid "Reply"
+msgstr "Vastaa"
+
+#: templates/djangobb_forum/header.html:17
+msgid "Index"
+msgstr ""
+
+#: templates/djangobb_forum/header.html:18
+msgid "User list"
+msgstr "Käyttäjä lista"
+
+#: templates/djangobb_forum/header.html:19
+msgid "Search"
+msgstr "Etsi"
+
+#: templates/djangobb_forum/header.html:21
+msgid "Administration"
+msgstr "Hallinta"
+
+#: templates/djangobb_forum/header.html:28
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+#: templates/djangobb_forum/header.html:30
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+#: templates/djangobb_forum/header.html:31
+msgid "Sign up"
+msgstr "Rekisteröidy"
+
+#: templates/djangobb_forum/header.html:39
+msgid "Logged in as"
+msgstr "Kirjautuneena"
+
+#: templates/djangobb_forum/header.html:40
+msgid "Last visit:"
+msgstr "Viimeisin käynti:"
+
+#: templates/djangobb_forum/header.html:42
+msgid "There are new messages"
+msgstr "Uusia viestejä"
+
+#: templates/djangobb_forum/header.html:45
+msgid "You are not logged in."
+msgstr "Et ole kirjautunut sisään"
+
+#: templates/djangobb_forum/header.html:48
+msgid "There are new reports"
+msgstr "Uusia raportteja"
+
+#: templates/djangobb_forum/header.html:53
+msgid "Show new posts since last visit"
+msgstr "Näytä uudet postit viimeksi kirjautumisen jälkeen"
+
+#: templates/djangobb_forum/header.html:54
+msgid "Mark all topics as read"
+msgstr "Merkkaa kaikki postit luetuiksi"
+
+#: templates/djangobb_forum/header.html:64
+msgid "Notice"
+msgstr ""
+
+#: templates/registration/activation_complete.html:9
+msgid "Activation"
+msgstr ""
+
+#: templates/registration/activation_email.txt:3
+msgid ""
+"\n"
+"Hi,\n"
+"\n"
+"Thank you for registering! To activate please click the link below:\n"
+msgstr ""
+"\n"
+"Moi,\n"
+"\n"
+"Kiitokset rekisteröitymisestä. Activoidaksesi tilisi klikkaa alla olevaa "
+"linkkiä :\n"
+
+#: templates/registration/activation_email_subject.txt:2
+msgid "Confirm your registration"
+msgstr "Varmista registeröityminen"
+
+#: templates/registration/registration_form.html:8
+#: templates/registration/registration_form.html:39
+msgid "Register"
+msgstr "Rekisteröidy"
+
+#: templates/torpedo/association.html:6
+msgid "Contacts"
+msgstr "Kontaktit"
+
+#: templates/torpedo/endurance.html:24 templates/torpedo/floorball.html:10
+#: templates/torpedo/floorball.html:18
+msgid "Activities"
+msgstr "Toiminta"
+
+#: templates/torpedo/endurance.html:25 templates/torpedo/floorball.html:11
+msgid "Recent"
+msgstr "Ajankohtaista"
+
+#: templates/torpedo/endurance.html:26
+msgid "Events"
+msgstr "Eventit"
+
+#: templates/torpedo/floorball.html:12
+msgid "Team"
+msgstr "Joukkue"
+
+#: templates/torpedo/header.html:48
+msgid "Manage"
+msgstr "Hallinta"
+
+#: templates/torpedo/manage.html:11 templates/torpedo/manage.html.py:18
+msgid "Members"
+msgstr "Jäsenet"
+
+#: templates/torpedo/manage.html:12
+msgid "Database"
+msgstr "Tietokanta"
+
+#: templates/torpedo/manage.html:20
+msgid "New user"
+msgstr "Uusi käyttäjä"
+
+#: templates/torpedo/manage.html:23
+msgid "Show members"
+msgstr "Näytä jäsenet"
+
+#: templates/torpedo/manage.html:26
+msgid "Show all"
+msgstr "Näytä kaikki"
+
+#: templates/torpedo/manage.html:29
+msgid "Group members"
+msgstr "Ryhmitä jäsenet"
+
+#: templates/torpedo/modal.html:8 templates/torpedo/profile_view.html:19
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: templates/torpedo/modal.html:13
+msgid "Close"
+msgstr "Sulje"
+
+#: templates/torpedo/modal.html:14
+msgid "Save"
+msgstr "Tallenna"
+
+#: templates/torpedo/profile_view.html:27
+#, fuzzy
+msgid "Forename"
+msgstr "Etunimi"
+
+#: templates/torpedo/profile_view.html:39
+msgid "Phonenumber"
+msgstr "Puhelinnumero"
+
+#: templates/torpedo/profile_view.html:53
+#, fuzzy
+msgid "Membership"
+msgstr "Jäsenyys tiedot"

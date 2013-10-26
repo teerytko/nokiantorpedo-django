@@ -1,23 +1,24 @@
 {% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
 {% block main %}
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <h2>Nokian Torpedo ry</h2>
-    <h3>Yhteyshenkilöt</h3>
+    <h3>{% trans "Contacts" %}</h3>
     <table class="table">
         <tr>
-          <td>Salibandy</td>
+          <td>{% trans "Floorball" %}</td>
           <td>Matti Vartiala</td>
           <td><a href="mailto:ovartiala@gmail.com">ovartiala@gmail.com</a></td>
           <td>040 032 8170</td>
        </tr>
         <tr>
-          <td>Kestävyysurheilu</td>
+          <td>{% trans "Endurance" %}</td>
           <td>Teemu Rytkönen</td>
           <td><a href="mailto:teemu.rytkonen@gmail.com">teemu.rytkonen@gmail.com</a></td>
           <td>040 707 2158</td>
        </tr>
         <tr>
-          <td>Yhdistys</td>
+          <td>{% trans "Association" %}</td>
           <td>Antti Tomminen</td>
           <td><a href="mailto:antti.tomminen@gmail.com">antti.tomminen@gmail.com</a></td>
           <td>040 731 3630</td>

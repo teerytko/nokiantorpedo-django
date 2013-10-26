@@ -1,5 +1,4 @@
 #!/usr/bin/python
-# -*- coding: utf8 -*-
 '''
 Created on 25.8.2012
 
@@ -9,11 +8,18 @@ Created on 25.8.2012
 import re
 from django import forms
 from torpedo_main.models import Section
+from django.utils.translation import gettext_lazy as _
+
+from registration.forms import RegistrationFormNoFreeEmail
+
+class TorpedoRegistrationForm(RegistrationFormNoFreeEmail):
+    def __init__(self, *args, **kwargs):
+        super(TorpedoRegistrationForm, self).__init__(*args, **kwargs)
 
 
 class FIPhoneNumberField(forms.CharField):
     default_error_messages = {
-        'invalid': 'Anna validi puhelin numero.',
+        'invalid': _('Give a valid phonenumber'),
     }
     VALID_PHONE_NUMBER = re.compile('^\d+$')
 
@@ -32,26 +38,26 @@ def create_labeled_field(field, label, *args, **kwargs):
 
 
 class UserProfileForm(forms.Form):
-    name = 'Henkilökohtaiset tiedot'
+    name = _('Personal details')
     action = '/profiledlg'
-    firstname = create_labeled_field(forms.CharField, 'Etunimi', required=False)
-    lastname = create_labeled_field(forms.CharField, 'Sukunimi', required=False)
-    email = create_labeled_field(forms.EmailField, 'Email', required=False)
-    phonenumber = create_labeled_field(FIPhoneNumberField, 'Puhelinnumero', required=False)
+    firstname = create_labeled_field(forms.CharField, _('Firstname'), required=False)
+    lastname = create_labeled_field(forms.CharField, _('Surname'), required=False)
+    email = create_labeled_field(forms.EmailField, _('Email'), required=False)
+    phonenumber = create_labeled_field(FIPhoneNumberField, _('Telephone'), required=False)
 
 
 class UserImageForm(forms.Form):
-    name = 'Käyttäjä kuva'
+    name = _('Profile image')
     submit = "Upload"
     action = '/profileimg'
-    userimage = create_labeled_field(forms.ImageField, 'Kuva', required=False)
+    userimage = create_labeled_field(forms.ImageField, _('Image'), required=False)
 
 
 class MemberProfileForm(forms.Form):
-    name = 'Jäsenyys tiedot'
+    name = _('Membership details')
     action = '/memberdlg'
-    payments = create_labeled_field(forms.CharField, 'Kausimaksu', required=False)
-    memberof = create_labeled_field(forms.ModelMultipleChoiceField, 'Jaostot', 
+    payments = create_labeled_field(forms.CharField, _('Seasonfee'), required=False)
+    memberof = create_labeled_field(forms.ModelMultipleChoiceField, _('Sections'), 
                                     queryset=Section.objects.all(),
                                     required=False)
 

@@ -1,4 +1,5 @@
 <!-- Header -->
+{% load i18n %}
 {% load menu_access %}
 <div id="heading">
     <img src="{{ STATIC_URL }}torpedo/nt.gif" class="pull-left"/>
@@ -44,7 +45,7 @@
     {% endif %}
     {% endfor %}
     {% if user.is_staff %}
-    <li><a id="manage" href="/manage">Manage</a></li>
+    <li><a id="manage" href="/manage">{% trans "Manage" %}</a></li>
     {% endif %}
 </div>
 {% endblock %}
