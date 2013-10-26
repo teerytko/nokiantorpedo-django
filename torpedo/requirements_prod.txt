@@ -1,40 +1,40 @@
-argparse (1.2.1)
-Django (1.5.4)
-django-authopenid (1.0.2)
-django-debug-toolbar (0.9.4)
-django-devserver (0.3.2)
-django-extensions (0.9)
-django-haystack (2.0.0)
-django-mailer (0.2a1.dev3, /home/tsrytkon/devel/nokiantorpedo-django/site-dir/src/django-mailer)
-django-messages (0.4.4)
-django-pagination (1.0.7)
-django-pipeline (1.2.14)
-django-registration (1.0)
-django-simple-captcha (0.4.0)
-django-webtest (1.5.3)
-djangobb-forum (0.0.1a0.dev0)
-djangorestframework (0.3.3)
-docutils (0.7)
-Feedjack (0.9.16.1)
-feedparser (5.1.2)
-MySQL-python (1.2.3)
-numpy (1.5.0)
-pep8 (1.3.3)
-PIL (1.1.7)
-postmarkup (1.2.0)
-psycopg2 (2.4.4)
-pycrypto (2.3)
-pyflakes (0.5.0)
-Pygments (1.5)
-python-openid (2.2.5)
-python-ptrace (0.6.4)
-pytz (2012d)
-reportlab (2.4)
-six (1.4.1)
-South (0.7.6)
-URLObject (2.0.2)
-virtualenv (1.7.2)
-WebOb (1.2.2)
-WebTest (1.3.4)
-Whoosh (2.4.1)
-wsgiref (0.1.2)
+Django==1.5.4
+Feedjack==0.9.16.1
+MySQL-python==1.2.3
+PIL==1.1.7
+Pygments==1.5
+South==0.7.6
+URLObject==2.0.2
+WebOb==1.2.2
+WebTest==1.3.4
+Whoosh==2.4.1
+argparse==1.2.1
+django-authopenid==1.0.2
+django-debug-toolbar==0.9.4
+django-devserver==0.3.2
+django-extensions==0.9
+django-haystack==2.0.0
+-e git://github.com/jtauber/django-mailer.git@af91e3b3556ea1a0ae9cb2c5b6520bacdab6a9fa#egg=django_mailer-dev
+django-messages==0.4.4
+django-pagination==1.0.7
+django-pipeline==1.2.14
+django-registration==1.0
+django-simple-captcha==0.4.0
+django-webtest==1.5.3
+djangobb-forum==0.0.1a0.dev0
+djangorestframework==0.3.3
+docutils==0.7
+feedparser==5.1.2
+numpy==1.5.0
+pep8==1.3.3
+postmarkup==1.2.0
+psycopg2==2.4.4
+pycrypto==2.3
+pyflakes==0.5.0
+python-openid==2.2.5
+python-ptrace==0.6.4
+pytz==2012d
+reportlab==2.4
+six==1.4.1
+virtualenv==1.7.2
+wsgiref==0.1.2
