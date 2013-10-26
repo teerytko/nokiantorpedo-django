@@ -6,4 +6,4 @@ Hi,
 Thank you for registering! To activate please click the link below:
 {% endblocktrans %}
 
-http://{{ site.domain }}{% url registration_activate activation_key %}
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}

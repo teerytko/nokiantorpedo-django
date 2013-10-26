@@ -1,7 +1,8 @@
 djangorestframework==0.3.3
 django-pipeline
+django-registration==1.0
 https://bitbucket.org/teerytko/django-authopenid-registration-1.0-support/get/tip.tar.gz
-django==1.4
+django==1.5.4
 whoosh==2.4.1
 # development
 webtest

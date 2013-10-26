@@ -42,7 +42,7 @@ USE_I18N = True
 USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
-USE_TZ = False
+USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
@@ -85,7 +85,7 @@ SECRET_KEY = ')+p+x#52b25!fe^znraw6!%w3f5djk0hf5g7*10)0(%w+x-psf'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -205,9 +205,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 # Haystack settings
-HAYSTACK_SITECONF = 'search_sites'
-HAYSTACK_SEARCH_ENGINE = 'whoosh'
-HAYSTACK_WHOOSH_PATH = os.path.join(SETTINGS_ROOT, 'djangobb_index')
+# Haystack settings
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(PROJECT_ROOT, 'djangobb_index'),
+        'INCLUDE_SPELLING': True,
+    },
+}
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
 DJANGOBB_FORUM_BASE_TITLE = 'Nokian Torpedo Forum'
 DJANGOBB_HEADER = 'Nokian Torpedo Forum'
 DJANGOBB_TAGLINE = 'Nokialaisen urheiluseuran keskustelu foorumi'

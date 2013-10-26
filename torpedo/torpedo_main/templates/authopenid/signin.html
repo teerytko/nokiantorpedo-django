@@ -24,7 +24,7 @@
 	{{ form2.password.errors }}
 	{{ form2.password.label }}
 	{{ form2.password }}
-    <a href="{% url auth_password_reset %}">{% trans "Forgotten your password?" %}</a>
+    <a href="{% url 'auth_password_reset' %}">{% trans "Forgotten your password?" %}</a>
 	</div>
     <input type="hidden" name="next" value="{{ next }}" />
     <input class="btn btn-default" type="submit" value="{% trans "Login" %}" />

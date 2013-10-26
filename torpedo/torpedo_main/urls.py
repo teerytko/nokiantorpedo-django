@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, url, include
 from torpedo_main.feeds import LatestTopicPosts
 from torpedo_main.views import TorpedoRegistrationView
+from django.views.generic import RedirectView
 
 urlpatterns = patterns('',
     # Examples:
@@ -23,6 +24,8 @@ urlpatterns = patterns('',
     url(r'^account/signup/$', 
         TorpedoRegistrationView.as_view(),
         name='user_signup'),
+    url(r'^forum/account/signin/$', RedirectView.as_view(url='/account/signin/')),
+    url(r'^forum/account/signup/$', RedirectView.as_view(url='/account/signup/')),
     url(r'^account/', include('django_authopenid.urls')),
     url(r'^forum/account/', include('django_authopenid.urls')),
     url(r'^account/logout/$', 'django.contrib.auth.views.logout', 

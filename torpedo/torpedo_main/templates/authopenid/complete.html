@@ -7,7 +7,7 @@
 	<h2><span>{% trans "OpenID is verified" %}</span></h2>
 	<div class="box">
 			<div class="inform">
-				<form name="fregister" action="{% url user_register %}" method="POST">
+				<form name="fregister" action="{% url 'user_register' %}" method="POST">
 				{% csrf_token %}
 				<div class="forminfo">
 					<h3>{% trans "Your OpenID is verified! " %}</h3>
@@ -34,7 +34,7 @@
 				</form>
 			</div>
 			<div class="inform">
-				<form name="fverify" action="{% url user_register %}" method="POST">
+				<form name="fverify" action="{% url 'user_register' %}" method="POST">
 				{% csrf_token %}
 				<fieldset>
 					<legend>{% trans "An existing account" %}</legend>
