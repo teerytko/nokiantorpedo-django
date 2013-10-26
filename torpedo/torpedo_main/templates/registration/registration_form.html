@@ -3,41 +3,34 @@
 {% load forum_extras %}
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-{% block main %}
-<div class="blockform">
-	<h2><span>{% trans "Register" %}</span></h2>
-	<div class="box">
-		<form method="post" action="">
-			{% csrf_token %}
-            {{ form.non_field_errors.as_ul }}
-            <div class="form-group">
-                {{ form.username.label }}
-                {{ form.username.errors }}
-                {{ form.username }}
-            </div>
-			<div class="inform">
-				<fieldset>
-					<legend>Anna salasana. Salasanat ovat case sensitiivisiä!</legend>
-					<div class="infldset">
-						{{ form.password1.errors }}
-						{{ form.password2.errors }}
-						<label class="conl"><strong>{{ form.password1.label }}</strong><br />{{ form.password1 }}<br /></label>
-						<label class="conl"><strong>{{ form.password2.label }}</strong><br />{{ form.password2 }}<br /></label>
-					</div>
-				</fieldset>
-			</div>
-			<div class="inform">
-				<fieldset>
-					<legend>Anna validi email osoite, johon lähetetään aktivointi maili.</legend>
-					<div class="infldset">
-					{{ form.email.errors }}
-					<label><strong>{{ form.email.label }}</strong><br />
-						{{ form.email }}<br /></label>
-					</div>
-				</fieldset>
-			</div>
-            <p><input type="submit" value="{% trans "Register" %}" /></p>
-		</form>
+{% block center %}
+<div class="row">
+<div class="col-offset-3 col-6">
+<h2><span>{% trans "Register" %}</span></h2>
+<form method="post" action="">
+	{% csrf_token %}
+    {{ form.non_field_errors.as_ul }}
+    <div class="form-group">
+        {{ form.username.label }}
+        {{ form.username.errors }}
+        {{ form.username }}
+    </div>
+    <div class="form-group">
+	{{ form.password1.errors }}
+	{{ form.password1.label }}
+	{{ form.password1 }}
+    {{ form.password2.errors }}
+	{{ form.password2.label }}
+	{{ form.password2 }}
 	</div>
+    <div class="form-group">
+	<legend>Anna validi email osoite, johon lähetetään aktivointi maili.</legend>
+	{{ form.email.errors }}
+	{{ form.email.label }}
+	{{ form.email }}
+	</div>
+    <input class="btn btn-default" type="submit" value="{% trans "Register" %}" />
+</form>
+</div>
 </div>
 {% endblock %}

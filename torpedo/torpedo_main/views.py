@@ -43,8 +43,15 @@ def signin(request, *args, **kwargs):
     return authsignin(request, auth_form=TorpedoAuthenticationForm,
                       *args, **kwargs)
 
+
 class TorpedoRegistrationView(RegistrationView):
     form_class = TorpedoRegistrationForm
+
+    def get_context_data(self, **kwargs):
+        menu = get_menu()
+        menu.active = None
+        kwargs['menu'] = menu
+        return kwargs
 
 def home(request):
     t = loader.get_template('torpedo/index.html')

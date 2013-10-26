@@ -11,26 +11,33 @@ from django.contrib.auth.forms import AuthenticationForm
 from torpedo_main.models import Section
 from django.utils.translation import gettext_lazy as _
 
-from registration.forms import RegistrationFormNoFreeEmail
+from registration.forms import RegistrationFormUniqueEmail
 
 def create_labeled_field(field, label, *args, **kwargs):
-        widget = field.widget(attrs={'class':'form-control',
+        widget_class = kwargs.get('widget', field.widget)
+        widget = widget_class(attrs={'class':'form-control',
                                      'placeholder':  _('Give %s') % label})
         kwargs['label'] = label
         kwargs['widget'] = widget
         return field(*args, **kwargs)
 
 
-class TorpedoRegistrationForm(RegistrationFormNoFreeEmail):
-    def __init__(self, *args, **kwargs):
-        super(TorpedoRegistrationForm, self).__init__(*args, **kwargs)
+class TorpedoRegistrationForm(RegistrationFormUniqueEmail):
+    username = create_labeled_field(forms.RegexField, regex=r'^[\w.@+-]+$',
+                                max_length=30,
+                                label=_("Username"),
+                                error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
+    email = create_labeled_field(forms.EmailField, label=_("E-mail"))
+    password1 = create_labeled_field(forms.CharField, widget=forms.PasswordInput,
+                                label=_("Password"))
+    password2 = create_labeled_field(forms.CharField, widget=forms.PasswordInput,
+                                label=_("Password (again)"))
+
 
 class TorpedoAuthenticationForm(AuthenticationForm):
     username = create_labeled_field(forms.CharField, label=_("Username"), max_length=30)
     password = create_labeled_field(forms.CharField, label=_("Password"), widget=forms.PasswordInput)
-    
-    def __init__(self, *args, **kwargs):
-        super(TorpedoAuthenticationForm, self).__init__(*args, **kwargs)
+
 
 
 class FIPhoneNumberField(forms.CharField):

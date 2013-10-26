@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 15:28+0300\n"
+"POT-Creation-Date: 2013-10-26 16:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Teemu Rytkönen <teemu.rytkonen@gmail.fi>\n"
 "Language-Team: Finnish <LL@li.org>\n"
@@ -26,63 +26,76 @@ msgstr "Viimeisimmät postit foorumilla"
 msgid "Latest post on topic on forum"
 msgstr "Viimeisimmät otsikot foorumilla"
 
-#: forms.py:18
+#: forms.py:19
 #, python-format
 msgid "Give %s"
 msgstr "Anna %s"
 
-#: forms.py:29 templates/authopenid/complete.html:29
+#: forms.py:28 forms.py:38 templates/authopenid/complete.html:29
 #: templates/authopenid/complete.html:44
 msgid "Username"
 msgstr ""
 
-#: forms.py:30 templates/authopenid/complete.html:45
+#: forms.py:29
+msgid "This value may contain only letters, numbers and @/./+/-/_ characters."
+msgstr ""
+
+#: forms.py:30 templates/django_messages/view.html:38
+msgid "E-mail"
+msgstr ""
+
+#: forms.py:32 forms.py:39 templates/authopenid/complete.html:45
 msgid "Password"
 msgstr ""
 
-#: forms.py:39
+#: forms.py:34
+#, fuzzy
+msgid "Password (again)"
+msgstr "Salasanan vaihto"
+
+#: forms.py:45
 msgid "Give a valid phonenumber"
 msgstr "Anna validi puhelinnumero"
 
-#: forms.py:50 templates/torpedo/profile.html:10
+#: forms.py:56 templates/torpedo/profile.html:10
 #: templates/torpedo/profile_view.html:14
 msgid "Personal details"
 msgstr "Henkilökohtaiset tiedon"
 
-#: forms.py:52
+#: forms.py:58
 msgid "Firstname"
 msgstr "Etunimi"
 
-#: forms.py:53 templates/torpedo/profile_view.html:31
+#: forms.py:59 templates/torpedo/profile_view.html:31
 msgid "Surname"
 msgstr "Sukunimi"
 
-#: forms.py:54 templates/authopenid/complete.html:30
+#: forms.py:60 templates/authopenid/complete.html:30
 #: templates/torpedo/profile_view.html:35
 msgid "Email"
 msgstr "Email"
 
-#: forms.py:55
+#: forms.py:61
 msgid "Telephone"
 msgstr "Puhelin"
 
-#: forms.py:59
+#: forms.py:65
 msgid "Profile image"
 msgstr "Profiilin kuva"
 
-#: forms.py:62
+#: forms.py:68
 msgid "Image"
 msgstr "Kuva"
 
-#: forms.py:66
+#: forms.py:72
 msgid "Membership details"
 msgstr "Jäsenyys tiedot"
 
-#: forms.py:68 templates/torpedo/profile_view.html:60
+#: forms.py:74 templates/torpedo/profile_view.html:60
 msgid "Seasonfee"
 msgstr "Kausimaksu"
 
-#: forms.py:69 templates/torpedo/profile_view.html:64
+#: forms.py:75 templates/torpedo/profile_view.html:64
 msgid "Sections"
 msgstr "Jaostot"
 
@@ -260,11 +273,11 @@ msgstr ""
 msgid "Old password:"
 msgstr "Vanha salasana"
 
-#: templates/authopenid/signin.html:7 templates/authopenid/signin.html:33
+#: templates/authopenid/signin.html:8 templates/authopenid/signin.html:30
 msgid "Login"
 msgstr ""
 
-#: templates/authopenid/signin.html:28
+#: templates/authopenid/signin.html:27
 msgid "Forgotten your password?"
 msgstr "Unohditko salasanasi?"
 
@@ -340,10 +353,6 @@ msgstr ""
 #: templates/djangobb_forum/header.html:24
 msgid "Profile"
 msgstr "Profiili"
-
-#: templates/django_messages/view.html:38
-msgid "E-mail"
-msgstr ""
 
 #: templates/django_messages/view.html:41
 msgid "Send e-mail"
@@ -455,8 +464,8 @@ msgstr ""
 msgid "Confirm your registration"
 msgstr "Varmista registeröityminen"
 
-#: templates/registration/registration_form.html:8
-#: templates/registration/registration_form.html:39
+#: templates/registration/registration_form.html:9
+#: templates/registration/registration_form.html:32
 msgid "Register"
 msgstr "Rekisteröidy"
 
