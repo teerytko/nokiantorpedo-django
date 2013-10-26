@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-26 14:55+0300\n"
+"POT-Creation-Date: 2013-10-26 15:28+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Teemu Rytkönen <teemu.rytkonen@gmail.fi>\n"
 "Language-Team: Finnish <LL@li.org>\n"
@@ -26,49 +26,63 @@ msgstr "Viimeisimmät postit foorumilla"
 msgid "Latest post on topic on forum"
 msgstr "Viimeisimmät otsikot foorumilla"
 
-#: forms.py:22
+#: forms.py:18
+#, python-format
+msgid "Give %s"
+msgstr "Anna %s"
+
+#: forms.py:29 templates/authopenid/complete.html:29
+#: templates/authopenid/complete.html:44
+msgid "Username"
+msgstr ""
+
+#: forms.py:30 templates/authopenid/complete.html:45
+msgid "Password"
+msgstr ""
+
+#: forms.py:39
 msgid "Give a valid phonenumber"
 msgstr "Anna validi puhelinnumero"
 
-#: forms.py:41 templates/torpedo/profile.html:10
+#: forms.py:50 templates/torpedo/profile.html:10
 #: templates/torpedo/profile_view.html:14
 msgid "Personal details"
 msgstr "Henkilökohtaiset tiedon"
 
-#: forms.py:43
+#: forms.py:52
 msgid "Firstname"
 msgstr "Etunimi"
 
-#: forms.py:44 templates/torpedo/profile_view.html:31
+#: forms.py:53 templates/torpedo/profile_view.html:31
 msgid "Surname"
 msgstr "Sukunimi"
 
-#: forms.py:45 templates/authopenid/complete.html:30
+#: forms.py:54 templates/authopenid/complete.html:30
 #: templates/torpedo/profile_view.html:35
 msgid "Email"
 msgstr "Email"
 
-#: forms.py:46
+#: forms.py:55
 msgid "Telephone"
 msgstr "Puhelin"
 
-#: forms.py:50
+#: forms.py:59
 msgid "Profile image"
 msgstr "Profiilin kuva"
 
-#: forms.py:53
+#: forms.py:62
 msgid "Image"
 msgstr "Kuva"
 
-#: forms.py:57
+#: forms.py:66
 msgid "Membership details"
 msgstr "Jäsenyys tiedot"
 
-#: forms.py:59 templates/torpedo/profile_view.html:60
+#: forms.py:68 templates/torpedo/profile_view.html:60
 msgid "Seasonfee"
 msgstr "Kausimaksu"
 
-#: forms.py:60 templates/torpedo/profile_view.html:64
+#: forms.py:69 templates/torpedo/profile_view.html:64
 msgid "Sections"
 msgstr "Jaostot"
 
@@ -171,20 +185,12 @@ msgstr ""
 msgid "A new account"
 msgstr ""
 
-#: templates/authopenid/complete.html:29 templates/authopenid/complete.html:44
-msgid "Username"
-msgstr ""
-
 #: templates/authopenid/complete.html:31
 msgid "Create account"
 msgstr ""
 
 #: templates/authopenid/complete.html:40
 msgid "An existing account"
-msgstr ""
-
-#: templates/authopenid/complete.html:45
-msgid "Password"
 msgstr ""
 
 #: templates/authopenid/complete.html:46
@@ -254,11 +260,11 @@ msgstr ""
 msgid "Old password:"
 msgstr "Vanha salasana"
 
-#: templates/authopenid/signin.html:8 templates/authopenid/signin.html:42
+#: templates/authopenid/signin.html:7 templates/authopenid/signin.html:33
 msgid "Login"
 msgstr ""
 
-#: templates/authopenid/signin.html:33
+#: templates/authopenid/signin.html:28
 msgid "Forgotten your password?"
 msgstr "Unohditko salasanasi?"
 

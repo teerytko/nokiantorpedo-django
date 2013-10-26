@@ -15,7 +15,7 @@ from django.http import HttpResponseRedirect
 from django_authopenid.views import signin as authsignin
 from django.contrib.auth.models import User
 from forms import UserProfileForm, UserImageForm, MemberProfileForm, \
-TorpedoRegistrationForm
+TorpedoRegistrationForm, TorpedoAuthenticationForm
 from registration.backends.default.views import RegistrationView
 
 
@@ -40,7 +40,8 @@ def signin(request, *args, **kwargs):
     kwargs['extra_context'] = {
         'menu': menu
     }
-    return authsignin(request, *args, **kwargs)
+    return authsignin(request, auth_form=TorpedoAuthenticationForm,
+                      *args, **kwargs)
 
 class TorpedoRegistrationView(RegistrationView):
     form_class = TorpedoRegistrationForm

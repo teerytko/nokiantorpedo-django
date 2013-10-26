@@ -3,47 +3,33 @@
 {% block head_addition %}
 {% endblock %}
 {% block center %}
-<div class="row"><div class="col-offset-3">
-<div class="blockform">
-    <h2><span>{% trans "Login" %}</span></h2>
-    <div class="box">
-		<form id="registration_form" action="." method="post">
-		{% csrf_token %}
-		<div class="form-group">
-			{% if msg %}
-			<ul class="errorlist">
-			    <li>{{ msg }}</li>
-			</ul>
-			{% endif %}
-			{{ form1.non_field_errors.as_ul }}
-			{{ form2.non_field_errors.as_ul }}
-			<fieldset>
-					<div class="infldset">
-                    <ul>
-                        <li>
-						{{ form2.username.errors }}
-						<label><strong>{{ form2.username.label }}</strong><br />{{ form2.username }}</label>
-						</li>
-					    <li>
-						{{ form2.password.errors }}
-						<label><strong>{{ form2.password.label }}</strong><br />{{ form2.password }}</label>
-						</li>
-                        <li>
-						<p>
-							<a href="{% url auth_password_reset %}">{% trans "Forgotten your password?" %}</a>
-						</p>
-                        </li>
-                     </ul>
-					</div>
-			</fieldset>
-		</div>
-		<p>
-            <input type="hidden" name="next" value="{{ next }}" />
-            <input type="submit" value="{% trans "Login" %}" />
-        </p>
-		</form>
-    </div>
+<div class="row">
+<div class="col-offset-3 col-5">
+<h2><span>{% trans "Login" %}</span></h2>
+<form id="registration_form" action="." method="post" role="form">
+{% csrf_token %}
+	{% if msg %}
+	<div class="errorlist">
+	    {{ msg }}
+	</div>
+	{% endif %}
+	{{ form1.non_field_errors.as_ul }}
+	{{ form2.non_field_errors.as_ul }}
+	<div class="form-group">
+	{{ form2.username.errors }}
+	{{ form2.username.label }}
+	{{ form2.username }}
+	</div>
+	<div class="form-group">
+	{{ form2.password.errors }}
+	{{ form2.password.label }}
+	{{ form2.password }}
+    <a href="{% url auth_password_reset %}">{% trans "Forgotten your password?" %}</a>
+	</div>
+    <input type="hidden" name="next" value="{{ next }}" />
+    <input class="btn btn-default" type="submit" value="{% trans "Login" %}" />
+</form>
 </div>
-</div></div>
+</div>
 
 {% endblock %}

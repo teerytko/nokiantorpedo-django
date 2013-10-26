@@ -18,7 +18,7 @@ django-haystack==1.2.7
 #django-messages==0.4.4
 django-pagination==1.0.7
 django-pipeline==1.2.14
-django-registration==0.8
+django-registration==1.0
 django-webtest==1.5.3
 -e git+https://github.com/slav0nic/DjangoBB/@c67ed01f3b00c72df925f11cf0091cd60a0a6a2e#egg=djangobb_forum-dev
 djangorestframework==0.3.3

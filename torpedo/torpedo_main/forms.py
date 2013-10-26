@@ -7,14 +7,30 @@ Created on 25.8.2012
 
 import re
 from django import forms
+from django.contrib.auth.forms import AuthenticationForm
 from torpedo_main.models import Section
 from django.utils.translation import gettext_lazy as _
 
 from registration.forms import RegistrationFormNoFreeEmail
 
+def create_labeled_field(field, label, *args, **kwargs):
+        widget = field.widget(attrs={'class':'form-control',
+                                     'placeholder':  _('Give %s') % label})
+        kwargs['label'] = label
+        kwargs['widget'] = widget
+        return field(*args, **kwargs)
+
+
 class TorpedoRegistrationForm(RegistrationFormNoFreeEmail):
     def __init__(self, *args, **kwargs):
         super(TorpedoRegistrationForm, self).__init__(*args, **kwargs)
+
+class TorpedoAuthenticationForm(AuthenticationForm):
+    username = create_labeled_field(forms.CharField, label=_("Username"), max_length=30)
+    password = create_labeled_field(forms.CharField, label=_("Password"), widget=forms.PasswordInput)
+    
+    def __init__(self, *args, **kwargs):
+        super(TorpedoAuthenticationForm, self).__init__(*args, **kwargs)
 
 
 class FIPhoneNumberField(forms.CharField):
@@ -27,14 +43,6 @@ class FIPhoneNumberField(forms.CharField):
         "Check if value consists valid phone number."
         if value and not self.VALID_PHONE_NUMBER.match(value):
             raise forms.ValidationError(self.default_error_messages['invalid'])
-
-
-def create_labeled_field(field, label, *args, **kwargs):
-        widget = field.widget(attrs={'class':'form-control',
-                                     'placeholder':  'Anna %s' % label})
-        kwargs['label'] = label
-        kwargs['widget'] = widget
-        return field(*args, **kwargs)
 
 
 class UserProfileForm(forms.Form):
