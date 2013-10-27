@@ -32,4 +32,5 @@ urlpatterns = patterns('',
         {'next_page': '/'}),
     url(r'^forum/feeds/topicposts/$', LatestTopicPosts(),
         name='forum_topicposts_feed'),
+    url(r'^captcha/', include('captcha.urls')),
 )

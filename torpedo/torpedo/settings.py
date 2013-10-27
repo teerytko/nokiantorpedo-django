@@ -141,6 +141,7 @@ INSTALLED_APPS = (
     'feedjack',
     'events',
     'south',
+    'captcha',
 )
 
 

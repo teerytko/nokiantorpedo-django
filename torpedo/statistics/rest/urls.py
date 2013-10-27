@@ -4,7 +4,7 @@ Created on 28.6.2012
 @author: teerytko
 '''
 
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 from djangorestframework.resources import ModelResource
 from statistics.models import Team, League, Game, Player, Goal, Penalty
 from statistics.rest.views import ListSearchModelView, MyInstanceModelView

@@ -12,6 +12,7 @@ from torpedo_main.models import Section
 from django.utils.translation import gettext_lazy as _
 
 from registration.forms import RegistrationFormUniqueEmail
+from captcha.fields import CaptchaField
 
 def create_labeled_field(field, label, *args, **kwargs):
         widget_class = kwargs.get('widget', field.widget)
@@ -32,6 +33,7 @@ class TorpedoRegistrationForm(RegistrationFormUniqueEmail):
                                 label=_("Password"))
     password2 = create_labeled_field(forms.CharField, widget=forms.PasswordInput,
                                 label=_("Password (again)"))
+    captcha = CaptchaField(label=_("Captcha"))
 
 
 class TorpedoAuthenticationForm(AuthenticationForm):

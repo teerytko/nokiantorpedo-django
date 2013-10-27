@@ -6,7 +6,7 @@ Gustavo Picón
 urls.py
 """
 
-from django.conf.urls.defaults import patterns
+from django.conf.urls import patterns
 from django.views.generic import RedirectView
 
 from feedjack import views

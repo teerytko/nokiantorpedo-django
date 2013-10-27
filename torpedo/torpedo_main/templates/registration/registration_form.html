@@ -29,6 +29,13 @@
 	{{ form.email.label }}
 	{{ form.email }}
 	</div>
+    <div class="form-group">
+    <legend>{% trans "Please, write the letters of" %} {{ form.captcha.label }}</legend>
+    {{ form.captcha.errors }}
+    <div > 
+    {{ form.captcha }}
+    </div>
+    </div>
     <input class="btn btn-default" type="submit" value="{% trans "Register" %}" />
 </form>
 </div>
