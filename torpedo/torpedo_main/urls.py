@@ -33,4 +33,5 @@ urlpatterns = patterns('',
     url(r'^forum/feeds/topicposts/$', LatestTopicPosts(),
         name='forum_topicposts_feed'),
     url(r'^captcha/', include('captcha.urls')),
+    url(r'^channel/$', 'torpedo_main.views.channel'),
 )

@@ -62,6 +62,7 @@ def home(request):
     })
     return HttpResponse(t.render(c))
 
+
 def floorball(request):
     t = loader.get_template('torpedo/floorball.html')
     menu = get_menu()
@@ -120,6 +121,14 @@ def association(request):
     })
     return HttpResponse(t.render(c))
 
+def channel(request):
+    t = loader.get_template('torpedo/channel.html')
+    menu = get_menu()
+    menu.active = 'home'
+    c = RequestContext(request, {
+        'menu': menu
+    })
+    return HttpResponse(t.render(c))
 
 def get_user(request, username=None):
     if username is None:

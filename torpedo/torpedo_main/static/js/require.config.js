@@ -13,6 +13,7 @@
       'prefix-free':'vendor/prefix-free',
       'jfeed':      'vendor/jfeed',
       'jfeeditem':  'vendor/jfeeditem',
+      'facebook':    '//connect.facebook.net/fi/all',
     },
     shim: {
       jqui: {
@@ -31,6 +32,9 @@
       jfeed: {
         deps: ['jquery', 'jfeeditem', 'jatom']
       },
+      facebook: {
+        exports: 'FB'
+      }
     }
   });
 }).call(this);

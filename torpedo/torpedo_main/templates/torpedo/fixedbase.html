@@ -16,7 +16,7 @@
 {% endblock %}
 </head>
 <body>
-      <div class="row">
+    <div class="row">
         <div class="col-0 col-sm-0 col-lg-2"></div>
         <div class="col-12 col-sm-12 col-lg-8">
           {% include 'torpedo/header.html' %}
@@ -40,14 +40,28 @@
         </div>
         {% endblock %}
       </div>
-      <div class="row">
-        <div class="col-0 col-sm-0 col-lg-2"></div>
-        <div id="footer" class="col-lg-8">
-          <p class="credit">&copy;&nbsp;Nokian Torpedo ry, 2012</p>
+    <div class="row">
+    <div class="col-0 col-sm-0 col-lg-2"></div>
+{% block footer %}
+    <div id="footer" class="col-lg-8">
+        <div class="credit">&copy;&nbsp;Nokian Torpedo ry, 2012</div>
+         <div class="fb-like"
+             data-height="30"
+             data-colorscheme="light"
+             data-layout="standard"
+             data-action="like"
+             data-show-faces="false"
+             data-send="true">
         </div>
-      </div>
+        <div id="fb-root"></div>
+     </div>
+{% endblock %}
+    </div>
     <!-- Scripts -->
-    <script type="text/javascript">var STATIC_URL = "{{STATIC_URL}}";</script>
+    <script type="text/javascript">
+    var STATIC_URL = "{{STATIC_URL}}";
+    var HTTP_HOST = "{{ request.META.HTTP_HOST }}";
+    </script>
     <script type="text/javascript" src="{{STATIC_URL}}js/require.js"></script>
     <script type="text/javascript" src="{{STATIC_URL}}js/require.config.js"></script>
     <!--[if lt IE 9]><script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
