@@ -7,6 +7,5 @@ define(['facebook'], function(){
     xfbml      : true  
   });
   FB.getLoginStatus(function(response) {
-    console.log(response);
   });
 });
