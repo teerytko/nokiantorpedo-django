@@ -13,7 +13,7 @@
       'prefix-free':'vendor/prefix-free',
       'jfeed':      'vendor/jfeed',
       'jfeeditem':  'vendor/jfeeditem',
-      'facebook':    '//connect.facebook.net/fi/all',
+      'facebook':    '//connect.facebook.net/fi_FI/all',
     },
     shim: {
       jqui: {
