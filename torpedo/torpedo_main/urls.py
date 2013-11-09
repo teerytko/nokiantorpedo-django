@@ -35,3 +35,9 @@ urlpatterns = patterns('',
     url(r'^captcha/', include('captcha.urls')),
     url(r'^channel/$', 'torpedo_main.views.channel'),
 )
+
+urlpatterns += patterns('django.contrib.flatpages.views',
+    url(r'^flattest/$', 'flatpage', {'url': '/test/'}, name='test'),
+    url(r'^license/$', 'flatpage', {'url': '/license/'}, name='license'),
+    (r'^pages/', include('django.contrib.flatpages.urls')),
+)

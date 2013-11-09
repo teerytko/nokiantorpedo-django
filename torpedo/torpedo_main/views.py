@@ -17,6 +17,7 @@ from django.contrib.auth.models import User
 from forms import UserProfileForm, UserImageForm, MemberProfileForm, \
 TorpedoRegistrationForm, TorpedoAuthenticationForm
 from registration.backends.default.views import RegistrationView
+from customflatpages.views import flatpage
 
 
 from torpedo_main.menu import get_menu 
@@ -57,10 +58,7 @@ def home(request):
     t = loader.get_template('torpedo/index.html')
     menu = get_menu()
     menu.active = 'home'
-    c = RequestContext(request, {
-        'menu': menu
-    })
-    return HttpResponse(t.render(c))
+    return flatpage(request, '/home/', menu=menu)
 
 
 def floorball(request):
@@ -68,23 +66,18 @@ def floorball(request):
     menu = get_menu()
     menu.active = 'floorball'
     team= Team.objects.get(name='Nokian Torpedo')
-    c = RequestContext(request, {
-        'menu': menu,
-        'team': team,
-        'players': team.players.all().order_by('number'),
-        
-    })
-    return HttpResponse(t.render(c))
+    return flatpage(request, '/floorball/', 
+                    menu=menu, 
+                    team=team,
+                    players=team.players.all().order_by('number'))
 
 
 def endurance(request):
     t = loader.get_template('torpedo/endurance.html')
     menu = get_menu()
     menu.active = 'endurance'
-    c = RequestContext(request, {
-        'menu': menu,
-    })
-    return HttpResponse(t.render(c))
+    return flatpage(request, '/endurance/', 
+                    menu=menu)
 
 
 def manage(request):
@@ -93,11 +86,9 @@ def manage(request):
         menu = get_menu()
         menu.active = 'manage'
         users = User.objects.all()
-        c = RequestContext(request, {
-            'menu': menu,
-            'users': users
-        })
-        return HttpResponse(t.render(c))
+        return flatpage(request, '/manage/', 
+                        menu=menu,
+                        users=users)
     else:
         raise PermissionDenied
 
@@ -106,29 +97,32 @@ def calendar(request):
     t = loader.get_template('torpedo/calendar.html')
     menu = get_menu()
     menu.active = 'calendar'
-    c = RequestContext(request, {
-        'menu': menu
-    })
-    return HttpResponse(t.render(c))
+    return flatpage(request, '/calendar/', 
+                    menu=menu)
 
 
 def association(request):
     t = loader.get_template('torpedo/association.html')
     menu = get_menu()
     menu.active = 'association'
-    c = RequestContext(request, {
-        'menu': menu
-    })
-    return HttpResponse(t.render(c))
+    return flatpage(request, '/association/', 
+                    menu=menu)
 
 def channel(request):
     t = loader.get_template('torpedo/channel.html')
     menu = get_menu()
     menu.active = 'home'
-    c = RequestContext(request, {
-        'menu': menu
-    })
-    return HttpResponse(t.render(c))
+    return flatpage(request, '/channel/', 
+                    menu=menu)
+
+def profile(request, username=None):
+    t = loader.get_template('torpedo/profile_view.html')
+    user = get_user(request, username)
+    user_profile = user.profile
+    menu = get_menu()
+    return flatpage(request, '/profile/', 
+                    menu=menu,
+                    profileuser=user)
 
 def get_user(request, username=None):
     if username is None:
@@ -238,13 +232,3 @@ def profile_img(request, username=None, dialog=False):
     return HttpResponse(t.render(c))
 
 
-def profile(request, username=None):
-    t = loader.get_template('torpedo/profile_view.html')
-    user = get_user(request, username)
-    user_profile = user.profile
-    menu = get_menu()
-    c = RequestContext(request, {
-        'menu': menu,
-        'profileuser': user
-    })
-    return HttpResponse(t.render(c))

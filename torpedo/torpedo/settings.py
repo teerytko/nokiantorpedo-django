@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'django.contrib.humanize',
+    'django.contrib.flatpages',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -142,6 +143,7 @@ INSTALLED_APPS = (
     'events',
     'south',
     'captcha',
+    'customflatpages'
 )
 
 

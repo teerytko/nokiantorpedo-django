@@ -46,6 +46,12 @@
     {% endfor %}
     {% if user.is_staff %}
     <li><a id="manage" href="/manage">{% trans "Manage" %}</a></li>
+    <div class="pull-right">
+      <a  data-toggle="tooltip" title="Edit this page"
+          href="{{ request.path }}?edit=true">
+          <span class="glyphicon glyphicon-edit">Edit</span></a>
+    </div> 
     {% endif %}
+    </ul>
 </div>
 {% endblock %}
