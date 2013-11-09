@@ -51,6 +51,8 @@ class Command(BaseCommand):
                     print "Uploading to url:", pageurl
                     with codecs.open(pagepath, 'r', 'utf8') as pf:
                         flatpage, created = FlatPage.objects.get_or_create(url=pageurl)
+                        if created:
+                            flatpage.sites.add(1)
                         flatpage.content = pf.read()
                         flatpage.save()
                         pf.close()
