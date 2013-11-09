@@ -1,0 +1,77 @@
+{% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
+{% block head_addition %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% endblock %}
+
+
+{% block main %}
+<ul id="torpedotabs" class="nav nav-tabs nav-justified">
+  <li class="active"><a id="activity-link" href="#activity" data-toggle="tab">{% trans "Activities" %}</a></li>
+  <li><a id="recent-link" href="#recent" data-toggle="tab">{% trans "Recent" %}</a></li>
+  <li><a id="team-link" href="#team" data-toggle="tab">{% trans "Team" %}</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="activity">
+	  
+	<h4 class="label">{% trans "Activities" %}</h4>
+	<p>
+	Torpedossa pelataan tällä hetkellä salibandyä 6. divisiona tasolla. Toimintaa 
+	johtaa <a href="/association#contacts">Matti Vartiala</a>, ja valmentajana toimii Toni Lindberg.
+	</p>
+	
+	<h4 class="label">Harjoittelu</h4>
+	<p>
+	Harjoitukset ovat kerran viikossa Nokian liikuntakeskuksella Tiistaisin 20:30.
+	</p>
+	<h4 class="label">Pelit</h4>
+	<p>
+	Peliohjelma päivitty tähän kun se saadaan liitolta.
+	</p>
+	
+  </div>
+  <div class="tab-pane fade" id="recent">
+	<br/>
+	<h2>Ajankohtaista</h2>
+	
+	<script type="text/javascript">
+	<!--
+	var leftfeed = {'titleurl': '/forum/1/',
+	        'feedurl': '/forum/feeds/forum/1/'}
+	var rightfeed = {'titleurl': 'http://salibandy.net/alueuutiset/sisa-suomi/',
+	        'feedurl': '/feeds/feed/atom/'}
+	
+	//-->
+	</script>
+	<div id="leftfeeds" class="feeds panel col-6">
+	</div>
+	
+	<div id="rightfeeds" class="feeds panel col-5">
+	</div>
+
+  </div>
+  <div class="tab-pane fade" id="team">
+	<br/>
+	<h4>{{ team.name }} Salibandyjoukkue</h4>
+	<table class="table table-striped">
+	<row>
+	  <th>#</th>
+	  <th>Nimi</th>
+	</row>
+	{% for player in players %}
+	<tr>
+	<td>{{ player.number }}</td>
+	<td>{{ player.name }}</td>
+	</tr>
+	{% endfor %}
+	</table>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/floorball.view.js" ></script>
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
+
+{% block head_addition %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% endblock %}
+
+{% block leftside %}
+<div id="events-nav" class="affix" style="display: none">
+<ul class="nav nav-pills nav-stacked">
+  <li><a href="#projektit">@Projektit 2014</a></li>
+  <li><a href="#jukola">@Jukola</a></li>
+  <li><a href="#puolimara">@Puolimaraton</a></li>
+  <li><a href="#challenge">@Torpedo Challenge</a></li>
+  <li><a href="#mara">@Maraton</a></li>
+</ul>
+</div>
+{% endblock %}
+
+
+{% block main %}
+<div class="col-9">
+	<ul id="endurancetabs" class="nav nav-tabs nav-justified">
+	  <li class="active"><a id="activity-link" href="#activity" data-toggle="tab">{% trans "Activities" %}</a></li>
+	  <li><a id="recent-link" href="#recent" data-toggle="tab">{% trans "Recent" %}</a></li>
+	  <li><a id="events-link" href="#events" data-toggle="tab">{% trans "Events" %}</a></li>
+	</ul>
+	
+	<div class="tab-content">
+	  <div class="tab-pane fade in active" id="activity">
+		<br/>
+		<h4>Kestävyys urheilu</h4>
+		<p>
+		17 Heinäkuuta 2013 perustettiin Nokian Torpedoon salibandyn rinnalle uusi 
+		kestävyysurheilujaosto (kts. <a href="https://docs.google.com/document/d/1ME2-VTBo4bujihzgGs_-K1-Tf_7yn0TfyPpDY1vrmh8/pub">Vuosikokous 2013</a>).
+		Sen tavoitteena on kannustaa kaikkia yhdistyksen jäseniä pitämään huolta 
+		fyysisestä kunnostaan, yhteisten tai henkilökohtaisten harjoitusten muodossa.
+		Toimintaa organisoi tällä hetkellä <a href="/association#contacts">Teemu Rytkönen</a>.
+		</p>
+		<h4 class="label">Toiminta</h4>
+		<p>
+		Lajit joita "harrastellaan" on juoksu, hiihto, pyöräily, triathlon, suunnistus 
+		ja kaikenlainen muu kestävyysurheiluun liittyvä toiminta. Jotta toiminta ei 
+		menisi vaan satunnaiseksi "juoksenteluksi", niin jaosto järjestää yhteisiä
+		<a href="/endurance/events">tapahtumia</a> joihin voi osallistua yksin tai
+		porukalla. Tarkoituksena onkin tarjota yhteinen ja muokattavissa oleva harjoitusohjelma
+		ja asettaa jonkinlainen päämäärä tai tavoite johon harjoitellaan. 
+		</p>
+		<h4 class="label">Kehittymisen testaus</h4>
+		<p>
+		Myös jonkinlaista testausta matkan varrella olisi tarkoitus suorittaa, jotta havaitsemaan mahdollisen
+		kehityksen. Testaus mekanismit ovat vielä suunnittelun alla mutta alustavasti
+		pohdittuja olisi:
+		<table class="table">
+		    <tr>
+		        <th>Testin nimi</th>
+		        <th>Linkki</th>
+		        <th>Kuvaus</th>
+		    </tr>
+		    <tr>
+		        <td>TesKun kuntotesti</td>
+		        <td><a href="http://tesku.nettiavain.fi/">http://tesku.nettiavain.fi/</a></td>
+		        <td>
+		        Kehon koostumuksen mittaus (InBody), joka kertoo kehon koostumuksen massan, 
+		        eli rasvan, lihaskudoksen, nesteen suhteet. Lisäksi aerobinen peruskuntotesti 
+		        6 - 8 x 1000 m / nouseva kuormitus tai muu kuntoilijan harrastaman lajin mukainen testi.
+		        </td>
+		    </tr>
+		    <tr>
+		        <td>Cooper testi</td>
+		        <td><a href="http://fi.wikipedia.org/wiki/Cooperin_testi">Wikipedia Cooperin testi</a></td>
+		        <td>Cooperin testi eli Cooper-testi on testi, jolla mitataan maksimikestävyyttä. Sen kehitti yhdysvaltalainen tohtori Kenneth H. Cooper 1968 Yhdysvaltain armeijalle. Ideana testissä on edetä 12 minuutissa niin pitkälle kuin pääsee. Cooper-testi korreloi koko väestössä hyvin maksimaalisen hapenottokyvyn (VO2max) kanssa ja sopii käytettäväksi suuren ihmisjoukon kuntotason selvittämiseen.</td>
+		    </tr>
+		    <tr>
+		        <td>Kympin testi</td>
+		        <td><a href="http://www.juoksija-lehti.fi/Default.aspx?tabid=3233">Kympin testi juoksija-lehti.fi</a></td>
+		        <td>Kympin testissä juostaan 10 Km mahdollisimman nopeasti.
+		        Juoksutestin suorittamisen kannalta on tärkeää pyrkiä mahdollisimman
+		        tasaiseen vauhtiin loppua kohti hieman kiihdyttäen. Vähemmän juoksua 
+		        harrastaneet voivat tehdä testin lyhyemmällä matkalla, esimerkiksi 6–8 km:n mittaisena. 
+		        </td>
+		    </tr>
+		</table>
+		
+		Jaosto järjestää yhteistä testaus tapahtumia joiden aikautaulut tulevat näkyviin
+		osallistujat.com:iin. Kaikki tulokset kerätään nokiantorpedo.fi kantaan ja
+		omia tuloksia / kehitystä voi seurata oman profiilinsa kautta.
+		
+	    <div id="eventsfeed" class="panel">
+	    </div>
+		</p>
+	  </div>
+	  <div class="tab-pane fade" id="recent">
+		<br/>
+		<h2>Ajankohtaista</h2>
+		<blockquote>
+		<h3>TERD startup</h3>
+		Kestävyysurheilujaosto käynnistelee toimintaansa! Tutustu oheiseen 
+		materiaaliin Torpedo Endurance Racing Division (TERD)
+        <a href="/torpedo/media/Dropbox/Torpedo/Data/NokianTorpedoTERD_3.pptx">
+        toiminnasta.
+        </a>
+        </blockquote>
+		
+        <div id="leftfeeds" class="feeds panel col-12">
+		</div>
+		
+	  </div>
+	  <div class="tab-pane fade" id="events">
+	
+		<h2>Tapahtumat</h2>
+		<h5 id="projektit" class="label">@Projektit 2014</h5>
+		<p>
+		Tarkoituksena olisi että Torpedo Endurance Racing Division (TERD),
+		järjestää joitain kestävyysurheilu tapahtumia, sekä osallistuu erilaisiin 
+		tapahtumiin hajanaisella joukolla. 
+		</p>
+		
+		<p>
+		Tapahtumat ovat projekti luonteisia jo siitä syystä että niihin osallistuminen
+		sovitaan projektin alkaessa kuten myös rahoitus, aikataulut yms. Suurin syy
+		miksi tapahtumia järjestetään, on tavoite saada mielekkyyttä ja päämäärää kestävyys
+		harjoitteluun. Kaikkiin tapahtumiin on kaikilla Nokian Torpedon Ry:n jäsenillä
+		oikeus, joskaan ei velvollisuutta :)
+		</p>
+		
+		<h5 id="jukola" class="label">@Jukolan Viesti 2014</h5>
+		<p>
+		Jo "perinteeksi" muodostunut Nokian Torpedon Jukolan joukkue on kisaillut
+		vuodesta 2012 lähtien. Historiaa ja kokemusta ei ole vielä hirveästi karttunut 
+		mutta intoa sitäkin enemmän.
+		</p>
+		<div class="thumbnail">
+		  <img src="{{MEDIA_URL}}Dropbox/Torpedo/jukola2013_640.png"
+		     class="img-thumbnail story-img"
+		     alt="Nokian Torpedo Jukola 2013"
+		     title="Torpedo @ Jukola 2013"/>
+		  <div class="caption">
+		    <a href="https://www.dropbox.com/sh/5ags68qhhvvsbjk/77ffeYtxm2"
+		       data-toggle="tooltip" title="Katso kaikki kuvat Jukolasta 2013">
+		      <b>Torpedo @ Jukola 2013</b>
+		    </a>
+		    <p>Torpedon joukkue juoksujärjestyksessä: Antti Mäkinen, Antti Tomminen,
+		    Teemu Rytkönen, Vili Vartiala, Veera Kangaspunta, Matti Vartiala ja Hannu 
+		    Harju.
+		    </p>
+		  </div>
+		</div>
+		<p>
+		Vuonna 2014 <a href="http://jukola2014.blogspot.fi/">Kuopio Jukola</a> juostaan
+		perinteisesti kesäkuun puolivälissä. Jukolan joukkuessaohan on Aleksis Kiven tarinan
+		mukaan seitsämän riuskaa veljestä, joskin naiset ovat myös tervetulleita! Naisille
+		tosin järjestetään ihan oma Venlojen viesti, johon voisi myös Torpedon joukkueen
+		ilmoittaa jos löydytään neljä halukasta.
+		</p>
+		
+		<h5 id="puolimara" class="label">@Puolimaraton 2014</h5>
+		<p>
+		Puolimaraton on hyvä mittari jos aikoo juosta koko maratonin joten tavoitteena
+		olisi juosta joskus alku keväästä puolikas johon toivottavasti saadaan hieman 
+		isompi osanotto koko TERDestä.
+		</p>
+		Esimerkiksi:
+		<table class="table">
+		  <tr>
+		    <td>Helsinki City Run</td>
+		    <td><a href="http://www.helsinkicityrun.fi/">helsinkicityrun.fi</a></td>
+		  </tr>
+		  <tr>
+		      <td>Nokia</td>
+		      <td>??</td>
+		  </tr>
+		</table>
+		
+		
+		<h5 id="challenge" class="label">@Torpedo Challenge 2014</h5>
+		<p>
+		Ensimmäisen kerran 2013 järjestetty Torpedo Challenge saa jatkoa myös vuonna
+		2014. Eri lajeista ja useasta osakilpailusta koostuva Challenge luultavasti
+		kehittyy ja muuttaa hieman muotoaan vuodelle 2014 ja runsasta osanottoa Torpedon
+		jäsenistä toivotaan. 
+		
+		Vuonna 2013 lajeina oli mm. salibandy, nopeus/ketteryys testi, koripallo, cooper,
+		suunnistus, frisbee golf, sovellettu maastojuoksu, seikkailu urheilu? Joten saa
+		nähdä mitä seuraavan vuoden kisassa on mukana!
+		
+		</p>
+		
+		<h5 id="mara" class="label">@Maraton 2014</h5>
+		
+		<img src="{{MEDIA_URL}}Dropbox/Torpedo/marathon2011_640.png"
+		     class="img-thumbnail img-responsive"
+		     alt="Nokian Torpedo ensimmäinen yhteinen marathon @ Helsinki 2011"
+		     title="Torpedo @ Helsinki 2011"/>
+		<p>
+		Tavoitteena on juosta täyspitkä maraton, jossain vuoden 2014 vuoden
+		loppupuoliskolla. Ja koska Tukholmassa on käyty ja Helsinki on nähty, niin vuoden 
+		2014 päätavoite on alustavasti asetettu jonnekin muulle euroopan maratonille. 
+		</p>
+		
+		Harkinnassa ovat esimerkiksi:
+		<table class="table">
+		  <tr>
+		    <th>#</th>
+		    <th>Saitti</th>
+		    <th>Osallistumismaksu</th>
+            <th>Kustannusarvio</th>
+            <th>Insider info</th>
+		  </tr>
+		  <tr>
+		    <td>Berliini 28.9.2014</td>
+		    <td><a href="http://www.bmw-berlin-marathon.com/en/">www.bmw-berlin-marathon.com</a></td>
+		    <td>116 €</td>
+            <td>500 €</td>
+            <td>Todella hyvin järjestetty marathon, Euroopan nopeimmalla/tasaisimmalla reitillä. 
+            Majoittuminen todennäköisesti halpaa, mutta maratonlippujen saaminen olla tiukassa (40000 paikkaa 
+            myydään 2 tunnissa).
+            </td>
+		  </tr>
+		  <tr>
+		      <td>Amsterdam 20.10.2014</td>
+		      <td><a href="http://www.tcsamsterdammarathon.nl/en/">www.tcsamsterdammarathon.nl</a></td>
+		      <td>65 €</td>
+              <td>500 €</td>
+              <td>Nopea reitti ja hyvä järjestelyt. Sisäpiiri kertoo että hinta/laatu suhde on parhaiten 
+              kohdallaan. Majoittuminen on hintavaa verrattuna muuhun keskieurooppaan.</td>
+		  </tr>
+          <tr>
+            <td>Munchen 12.10.2014</td>
+            <td><a href="http://www.muenchenmarathon.de/en/">www.muenchenmarathon.de</a></td>
+            <td>? €</td>
+            <td>? €</td>
+            <td>
+            </td>
+          </tr>
+		</table>
+	
+	  </div>
+	</div>
+  
+</div>
+
+<div class="col-2">
+	<h3>Virikkeitä harjoitteluun</h3>
+	<a href="http://www.juoksija-lehti.fi/Default.aspx?tabid=3000">Juoksija-lehti</a><br>
+	<a href="http://tesku.nettiavain.fi/harjoitusohjelmat/">Testaus ja Kuntotutkimusasema (TesKu)</a><br>
+	<br>            
+	<h3>Linkkejä</h3>
+	<a href="http://www.osallistujat.com" target="blank"><img src="http://www.osallistujat.com/LinkkiLogoPieni.png" border="0" width="100" height="30" alt="Osallistujat.com" title="Osallistujat.com"></a>
+	<br>
+	<a href="http://www.facebook.com/group.php?gid=118127174888202&v=wall#!/group.php?gid=118127174888202&v=wall"><img src="{{ STATIC_URL }}facebook_logo.png" border="0" height="30" alt="Nokian Torpedo Facebookissa!" title="Nokian Torpedo Facebookissa!"></a>
+	
+
+</div>
+
+{% endblock %}
+
+
+{% block rightside %}
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/endurance.view.js" ></script>
+{% endblock %}
+

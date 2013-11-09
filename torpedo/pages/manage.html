@@ -1,0 +1,99 @@
+{% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
+
+{% block head_addition %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% endblock %}
+
+
+{% block main %}
+<ul id="admintabs" class="nav nav-tabs nav-justified">
+  <li class="active"><a href="#members" data-toggle="tab">{% trans "Members" %}</a></li>
+  <li><a href="/admin/">{% trans "Database" %}</a></li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane active fade in" id="members">
+	
+	<h4 class="label">{% trans "Members" %}</h4>
+    <a href="/admin/auth/user/add/" data-url=""><span class="glyphicon glyphicon-plus"></span>
+            {% trans "New user" %}</a>
+    {% if request.GET.show == 'all'%}
+    <a href="{{request.path}}?show=members" data-url=""><span class="glyphicon glyphicon-eye-open"></span>
+            {% trans "Show members" %}</a>
+    {% else %}
+    <a href="{{request.path}}?show=all" data-url=""><span class="glyphicon glyphicon-eye-open"></span>
+            {% trans "Show all" %}</a>
+    {% endif %}
+    <a href="{{request.path}}?group=membership" data-url=""><span class="glyphicon glyphicon-eye-open"></span>
+            {% trans "Group members" %}</a>
+    <br/>
+    <table id="memberstable" class="table table-striped">
+    <tr>
+      <th>Tunnus</th>
+      <th>Etunimi</th>
+      <th>Sukunimi</th>
+      <th>Email</th>
+      <th>Puhelin</th>
+      <th>Jäsenyys</th>
+      <th>Maksut</th>
+    </row>
+    {% for user in users %}
+    {% if request.GET.show == 'all' or user.memberprofile.memberof.all %}
+    <tr  class="memberrow" id="row_{{ user.username }}">
+    <td>
+    <div class="editors-wrapper">
+        <div class="editors member-editors">
+            <a href="/profile/{{ user.username }}" data-url=""><span class="glyphicon glyphicon-user"></span>
+            View</a>
+            <a href="#" data-url="/profiledlg/{{ user.username }}"><span class="glyphicon glyphicon-edit"></span>
+            Edit</a>
+    </div>
+    {{ user.username }}
+    </div>
+    </td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.first_name }}</td>
+    <td>{{ user.last_name }}</td>
+    <td>{{ user.profile.phonenumber }}</td>
+    <td>{{ user.memberprofile.memberof.all|join:", " }}</td>
+    <td>{{ user.memberprofile.payments }} / {{ user.memberprofile.memberfee }} €</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    </table>
+  </div>
+  <div class="tab-pane fade" id="recent">
+  </div>
+  <div class="tab-pane fade" id="team">
+  </div>
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="editModal">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+         <h4 class="modal-title">Muokkaa</h4>
+       </div>
+       <div class="modal-body">
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <button id="editModalSave" type="button" class="btn btn-primary">Save changes</button>
+       </div>
+     </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+ </div><!-- /.modal -->
+{% endblock %}
+
+
+{% block rightside %}
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/manage.view.js" ></script>
+{% endblock %}
+

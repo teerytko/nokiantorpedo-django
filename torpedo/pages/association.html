@@ -1,0 +1,51 @@
+{% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
+{% block main %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<h2>Nokian Torpedo ry</h2>
+    <h3>{% trans "Contacts" %}</h3>
+    <table class="table">
+        <tr>
+          <td>{% trans "Floorball" %}</td>
+          <td>Matti Vartiala</td>
+          <td><a href="mailto:ovartiala@gmail.com">ovartiala@gmail.com</a></td>
+          <td>040 032 8170</td>
+       </tr>
+        <tr>
+          <td>{% trans "Endurance" %}</td>
+          <td>Teemu Rytkönen</td>
+          <td><a href="mailto:teemu.rytkonen@gmail.com">teemu.rytkonen@gmail.com</a></td>
+          <td>040 707 2158</td>
+       </tr>
+        <tr>
+          <td>{% trans "Association" %}</td>
+          <td>Antti Tomminen</td>
+          <td><a href="mailto:antti.tomminen@gmail.com">antti.tomminen@gmail.com</a></td>
+          <td>040 731 3630</td>
+        </tr>
+    </table>
+    <h3>Yhdistyksen hallitus kaudella 2013-2014</h3>
+    <ul>
+        <li>Antti Mäkinen, Puheenjohtaja</li>
+        <li>Pekka Villanen, Varapuheenjohtaja</li>
+        <li>Antti Tomminen, Rahastonhoitaja</li>
+        <li>Matti Vartiala, Salibandyjaoston edustaja</li>
+        <li>Teemu Rytkönen, Kestävyysurheilujaoston edustaja</li>
+    </ul>
+    <h3>Yhdistyksen materiaalia</h3>
+    <h4>Pöytäkirjat</h4>
+    <ul>
+        <li>Yhdistyksen vuosikokous 
+        <a href="https://docs.google.com/document/d/1ME2-VTBo4bujihzgGs_-K1-Tf_7yn0TfyPpDY1vrmh8/pub">17.7.2013</a>
+        <li>Yhdistyksen toimintasuunnitelma  
+        <a href="https://docs.google.com/document/d/12QOBG-AwZtoFJ3g5oWDGYZZHsdqGh1cIxGb8jmDM3So/edit?usp=sharing">2013-2014</a>
+        <li>Yhdistyksen budjetti 
+        <a href="https://docs.google.com/spreadsheet/ccc?key=0Ahxmddfm_ttcdGoyTTZDQ0JielhhbktXRXVwOU1iSUE&usp=sharing">1.10.2013</a>
+    </ul>
+    <h4>Muuta materiaalia</h4>
+    <ul>
+        <li>Yhdistyksen säännöt 6.6.2008
+        <a href="{{STATIC_URL}}yhdistysmateriaali/saannot.pdf" title="pdf-muodossa">
+        <img alt="Säännöt pdf-muodossa" src="{{STATIC_URL}}pdf_icon.png" style="width: 20px;"/></a></li>
+    </ul>
+{% endblock %}
