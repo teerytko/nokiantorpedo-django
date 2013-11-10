@@ -14,10 +14,19 @@
       'jfeed':      'vendor/jfeed',
       'jfeeditem':  'vendor/jfeeditem',
       'facebook':    '//connect.facebook.net/fi_FI/all',
+      'codemirror':  'codemirror/lib/codemirror',
+      'htmlmixedmode':  'codemirror/mode/htmlmixed/htmlmixed',
+      'xmlmode':  'codemirror/mode/xml/xml',
+      'javascriptmode':  'codemirror/mode/javascript/javascript',
+      'cssmode':  'codemirror/mode/css/css',
+      'vbscriptmode':  'codemirror/mode/vbscript/vbscript',
     },
     shim: {
       jqui: {
           deps: ['jquery']
+      },
+      htmlmixedmode: {
+          deps: ['codemirror', 'xmlmode', 'javascriptmode', 'cssmode', 'vbscriptmode']
       },
       bootstrap: {
           deps: ['jquery']
