@@ -7,7 +7,7 @@ define(['jquery'], function($) {
 	}
 	var hide_editors = function(event) {
 		$editors = $(this).find('.editors');
-		$editors.hide();
+		$editors.hide(200);
 	}
 	var edit = function(event) {
 		$.ajax($(this).attr('data-url')).
