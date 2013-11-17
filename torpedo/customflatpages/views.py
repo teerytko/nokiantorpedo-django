@@ -1,3 +1,5 @@
+
+import posixpath
 from django.conf import settings
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.sites.models import get_current_site
@@ -12,6 +14,17 @@ from django.http import HttpResponseRedirect
 from django.template import Template, TemplateSyntaxError
 
 from customflatpages.forms import ShortFlatpageForm
+
+
+def list(request):
+    """
+    """
+    prefix = posixpath.abspath(posixpath.join(request.path, '..'))
+    t = loader.get_template('flatpages/list.html')
+    c = RequestContext(request,
+                       {'urlprefix': prefix
+                       })
+    return HttpResponse(t.render(c))
 
 
 
@@ -36,6 +49,8 @@ def flatpage(request, url, **extra_content):
     """
     if request.GET.get('edit') == 'true':
         return flatpage_edit(request, url, **extra_content)
+    elif request.GET.get('delete') == 'true':
+        return flatpage_delete(request, url, **extra_content)
     else:
         return flatpage_show(request, url, **extra_content)
 
@@ -52,6 +67,23 @@ def flatpage_show(request, url, **extra_content):
     except Http404:
         return render_404_flatpage(request, **extra_content)
     return render_flatpage(request, f, **extra_content)
+
+def flatpage_delete(request, url, **extra_content):
+    """
+    """
+    prefix = request.path.replace(url, '')
+    listurl = posixpath.join(prefix, 'list')
+    if not url.startswith('/'):
+        url = '/' + url
+    site_id = get_current_site(request).id
+    try:
+        f = get_object_or_404(FlatPage,
+            url__exact=url, sites__id__exact=site_id)
+        f.delete()
+    except Http404:
+        return render_404_flatpage(request, **extra_content)
+    return HttpResponseRedirect(listurl) # Redirect after POST
+
 
 def flatpage_edit(request, url, **extra_content):
     t = loader.get_template('flatpages/edit.html')

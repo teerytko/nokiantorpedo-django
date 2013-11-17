@@ -6,6 +6,9 @@ require(['jquery', 'bootstrap', 'events', 'feeds', 'fb', 'htmlmixedmode'],
 			if (pageEditor.length == 1) {
 				var myCodeMirror = CodeMirror.fromTextArea(pageEditor[0], {
 					mode: 'htmlmixed',
+					lineNumbers: true,
+					autofocus: true,
+					coverGutterNextToScrollbar: true,
 				});
 			}
 		});

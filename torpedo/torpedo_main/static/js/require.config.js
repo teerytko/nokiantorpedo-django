@@ -25,8 +25,20 @@
       jqui: {
           deps: ['jquery']
       },
+      xmlmode: {
+          deps: ['codemirror']
+      },
+      javascriptmode: {
+          deps: ['codemirror']
+      },
+      cssmode: {
+          deps: ['codemirror']
+      },
+      vbscriptmode: {
+          deps: ['codemirror']
+      },
       htmlmixedmode: {
-          deps: ['codemirror', 'xmlmode', 'javascriptmode', 'cssmode', 'vbscriptmode']
+          deps: ['xmlmode', 'javascriptmode', 'cssmode', 'vbscriptmode']
       },
       bootstrap: {
           deps: ['jquery']

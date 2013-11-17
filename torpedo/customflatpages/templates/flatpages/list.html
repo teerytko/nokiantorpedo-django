@@ -1,0 +1,33 @@
+{% extends "torpedo/fixedbase.html" %}
+{% load flatpages %}
+{% load i18n %}
+{% block head_addition %}
+<title>{{ flatpage.title }}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+{% endblock %}
+
+
+{% block main %}
+<h1>List of pages</h1>
+
+{% get_flatpages as flatpages %}
+<table class="table">
+    {% for page in flatpages %}
+    <tr>
+        <td><a href="{{ urlprefix }}{{ page.url }}">{{ page.title }}</a></td>
+        <td>
+        <a href="{{ urlprefix }}{{ page.url }}?edit=true"><span class="pull-right glyphicon glyphicon-edit"></span></a>
+        <a href="{{ urlprefix }}{{ page.url }}?delete=true"><span class="pull-right glyphicon glyphicon-trash"></span></a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+
+{% block scripts %}
+{% endblock %}
+
+
+
+
