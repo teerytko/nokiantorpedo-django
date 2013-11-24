@@ -225,8 +225,11 @@ DJANGOBB_TAGLINE = 'Nokialaisen urheiluseuran keskustelu foorumi'
 # EMAIL settings
 DEFAULT_FROM_EMAIL = 'webmaster@nokiantorpedo.fi'
 EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_PORT = 465
 EMAIL_SUBJECT_PREFIX = '[NokianTorpedo] '
-
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = 'torpedo'
+EMAIL_HOST_PASSWORD = 'admin'
 
 # Account settings
 LOGIN_REDIRECT_URL = '/'
