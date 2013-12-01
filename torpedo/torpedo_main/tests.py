@@ -6,6 +6,7 @@ Replace this with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+from torpedo_main.management.commands.tests.test_group_mail import TestGroupMailCommand
 
 
 class SimpleTest(TestCase):

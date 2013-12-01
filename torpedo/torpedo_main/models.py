@@ -3,7 +3,7 @@
 
 from django.db import models
 from django.contrib import admin
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 class UserProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
@@ -14,11 +14,13 @@ User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
 
 class Section(models.Model):
-    name = models.CharField(blank=True, max_length=50)
+    group = models.ForeignKey(Group)
     fee = models.FloatField(blank=False, default=0)
 
     def __unicode__(self):
-        return self.name
+        return "%s" % self.group.name
+
+Group.section = property(lambda g: Section.objects.get_or_create(group=g)[0])
 
 
 class MemberProfile(models.Model):
