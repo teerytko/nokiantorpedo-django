@@ -8,7 +8,6 @@ Created on 25.8.2012
 import re
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from torpedo_main.models import Section
 from django.utils.translation import gettext_lazy as _
 
 from registration.forms import RegistrationFormUniqueEmail
