@@ -21,7 +21,6 @@ MEDIA_ROOT = os.path.join(BASEDIR, 'torpedo_static/media')
 MEDIA_URL = '/torpedo/media/'
 STATIC_ROOT = os.path.join(BASEDIR, 'torpedo_static/static')
 STATIC_URL = '/torpedo/static/'
-DEBUG = False
 
 # pipeline configuration
 PIPELINE_COMPILERS = (
