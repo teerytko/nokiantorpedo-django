@@ -19,7 +19,7 @@ from optparse import make_option
 import email
 
 
-from django.core.mail import send_mail, EmailMessage
+from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
 
@@ -58,24 +58,36 @@ class Command(BaseCommand):
             if user.memberprofile.memberof.filter(id=section.id).exists():
                 users.append(user)
         data = sys.stdin.read()
-        edata, maincontent = self.parse_email(data)
+        edata = self.parse_email(data)
+        maincontent = self.get_content_with_type(edata)
         sender = "%s@nokiantorpedo.fi" % section
         tousers = [user.email for user in users]
         print "Sending mail: %s" % edata['subject']
-        em = EmailMessage(subject=edata['subject'],
+        print "Content:\n%s" % maincontent
+
+        em = EmailMultiAlternatives(subject=edata['subject'],
                           body=maincontent,
                           from_email=sender,
                           to=tousers)
-        
+        if edata.is_multipart() and self.get_content_with_type(edata):
+            htmlcontent = self.get_content_with_type(edata, 'html/text')
+            em.attach_alternative(htmlcontent, 'html/text')
         em.send(True)
 
     def parse_email(self, data):
         """
         parse email subject, content from data.
         """
-        ep = email.message_from_string(data)
-        content = str(ep.get_payload(0))
-        return ep, content
+        return email.message_from_string(data)
+
+    def get_content_with_type(self, ep, contenttype='text/plain'):
+        """
+        parse email subject, content from data.
+        """
+        for payload in ep.get_payload():
+            _, typepart, content = unicode(payload).split('\n', 2)
+            if typepart.find(contenttype) != -1:
+                return content
 
     def handle(self, *args, **options):
         if (options['list_sections']):

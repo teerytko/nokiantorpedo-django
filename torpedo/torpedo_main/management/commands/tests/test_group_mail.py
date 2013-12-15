@@ -61,12 +61,12 @@ Content-Type: text/plain; charset=ISO-8859-1
 
 Another Test!
 
--xx
+-öt
 
 --047d7b10cae5b49e9804ec7cdfa8
 Content-Type: text/html; charset=ISO-8859-1
 
-<div dir="ltr">Another Test!<div><br></div><div>-xx</div></div>
+<div dir="ltr">Another Test!<div><br></div><div>-öt</div></div>
 
 --047d7b10cae5b49e9804ec7cdfa8--
 """
@@ -82,22 +82,17 @@ class TestGroupMailCommand(TestCase):
 
     def test_parse_email(self):
         cm = Command()
-        ret, content = cm.parse_email(multipart_maildata)
+        ret = cm.parse_email(multipart_maildata)
+        textcontent = cm.get_content_with_type(ret)
         self.assertEqual(ret['subject'], 'test 2')
-        self.assertEqual(content, """
+        self.assertEqual(textcontent, """
 Another Test!
 
--xx
+-öt
 """)
 
-    def test_parse_simple_email(self):
+    def test_parse_email_html(self):
         cm = Command()
-        msg = MIMEText(u'Test message\n  -Rytkönen', _charset='utf8')
-        print msg.as_string()
-#         ret, content = cm.parse_email(multipart_maildata)
-#         self.assertEqual(ret['subject'], 'test 2')
-#         self.assertEqual(content, """
-# Another Test!
-# 
-# -xx
-# """)
+        ret = cm.parse_email(multipart_maildata)
+        htmlcontent = cm.get_content_with_type(ret, 'text/html')
+        self.assertEqual(htmlcontent, """\n<div dir="ltr">Another Test!<div><br></div><div>-öt</div></div>\n""")
