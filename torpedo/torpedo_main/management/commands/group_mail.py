@@ -34,6 +34,9 @@ class Command(BaseCommand):
                                     action='store_true',
                                     default=False,
                                     help='List available section.'),
+                        make_option('--input',
+                                    help='Input file.',
+                                    default=None),
                         )
 
     def get_section(self, *args):
@@ -57,21 +60,30 @@ class Command(BaseCommand):
         for user in User.objects.all():
             if user.memberprofile.memberof.filter(id=section.id).exists():
                 users.append(user)
-        data = sys.stdin.read()
+        if options['input']:
+            with open(options['input']) as inf:
+                data = inf.read()
+        else:
+            data = sys.stdin.read()
+        print data
         edata = self.parse_email(data)
         maincontent = self.get_content_with_type(edata)
-        sender = "%s@nokiantorpedo.fi" % section
+        sectionemail = "%s@nokiantorpedo.fi" % section
+        fromemail = edata.get('From')
         tousers = [user.email for user in users]
         print "Sending mail: %s" % edata['subject']
         print "Content:\n%s" % maincontent
 
         em = EmailMultiAlternatives(subject=edata['subject'],
                           body=maincontent,
-                          from_email=sender,
-                          to=tousers)
+                          to=tousers,
+                          from_email=fromemail,
+                          headers=dict(edata.items()))
         if edata.is_multipart() and self.get_content_with_type(edata):
-            htmlcontent = self.get_content_with_type(edata, 'html/text')
-            em.attach_alternative(htmlcontent, 'html/text')
+            htmlcontent = self.get_content_with_type(edata, 'text/html')
+            print "htmlcontent:\n%s" % htmlcontent
+
+            em.attach_alternative(htmlcontent, 'text/html')
         em.send(True)
 
     def parse_email(self, data):
