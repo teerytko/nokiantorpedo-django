@@ -72,18 +72,14 @@ class Command(BaseCommand):
         sectionemail = "%s@nokiantorpedo.fi" % section
         fromemail = self.getheader(edata.get('From'))
         tousers = [user.email for user in users]
-        print "Sending mail: %s" % self.getheader(edata['subject'])
-        print "Content:\n%s" % maincontent
-
-        em = EmailMultiAlternatives(subject=self.getheader(edata['subject']),
+        subject = self.getheader(edata['subject'])
+        em = EmailMultiAlternatives(subject=subject,
                           body=maincontent,
                           to=tousers,
                           from_email=sectionemail,
                           headers=self.get_headers(edata))
         if edata.is_multipart() and self.get_content_with_type(edata):
             htmlcontent = self.get_content_with_type(edata, 'text/html')
-            print "htmlcontent:\n%s" % htmlcontent
-
             em.attach_alternative(htmlcontent, 'text/html')
         em.send(True)
 
