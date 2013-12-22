@@ -17,7 +17,8 @@ import traceback
 import sys
 from optparse import make_option
 import email
-
+from email.Iterators import typed_subpart_iterator
+from email.header import decode_header
 
 from django.core.mail import send_mail, EmailMessage, EmailMultiAlternatives
 from django.core.management.base import BaseCommand, CommandError
@@ -69,16 +70,16 @@ class Command(BaseCommand):
         edata = self.parse_email(data)
         maincontent = self.get_content_with_type(edata)
         sectionemail = "%s@nokiantorpedo.fi" % section
-        fromemail = edata.get('From')
+        fromemail = self.getheader(edata.get('From'))
         tousers = [user.email for user in users]
-        print "Sending mail: %s" % edata['subject']
+        print "Sending mail: %s" % self.getheader(edata['subject'])
         print "Content:\n%s" % maincontent
 
-        em = EmailMultiAlternatives(subject=edata['subject'],
+        em = EmailMultiAlternatives(subject=self.getheader(edata['subject']),
                           body=maincontent,
                           to=tousers,
                           from_email=fromemail,
-                          headers=dict(edata.items()))
+                          headers=self.get_headers(edata))
         if edata.is_multipart() and self.get_content_with_type(edata):
             htmlcontent = self.get_content_with_type(edata, 'text/html')
             print "htmlcontent:\n%s" % htmlcontent
@@ -92,14 +93,43 @@ class Command(BaseCommand):
         """
         return email.message_from_string(data)
 
-    def get_content_with_type(self, ep, contenttype='text/plain'):
+    def getheader(self, header_text, default="ascii"):
+        """Decode the specified header"""
+        headers = decode_header(header_text)
+        header_sections = [unicode(text, charset or default)
+                           for text, charset in headers]
+        return u"".join(header_sections)
+
+    def get_charset(self, message, default="ascii"):
+        """Get the message charset"""
+        if message.get_content_charset():
+            return message.get_content_charset()
+        if message.get_charset():
+            return message.get_charset()
+        return default
+
+    def get_content_with_type(self, message, contenttype='text/plain'):
         """
         parse email subject, content from data.
         """
-        for payload in ep.get_payload():
-            _, typepart, content = unicode(payload).split('\n', 2)
-            if typepart.find(contenttype) != -1:
-                return content
+        maintype, subtype = contenttype.split('/')
+        parts = [part
+                      for part in typed_subpart_iterator(message,
+                                                         maintype,
+                                                         subtype)]
+        body = []
+        for part in parts:
+            charset = self.get_charset(part, self.get_charset(message))
+            body.append(unicode(part.get_payload(decode=True),
+                                charset,
+                                "replace"))
+        return u"\n".join(body).strip()
+
+    def get_headers(self, ep):
+        """
+        parse email subject, content from data.
+        """
+        return dict([(item[0], self.getheader(item[1])) for item in ep.items()])
 
     def handle(self, *args, **options):
         if (options['list_sections']):
