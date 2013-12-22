@@ -78,7 +78,7 @@ class Command(BaseCommand):
         em = EmailMultiAlternatives(subject=self.getheader(edata['subject']),
                           body=maincontent,
                           to=tousers,
-                          from_email=fromemail,
+                          from_email=sectionemail,
                           headers=self.get_headers(edata))
         if edata.is_multipart() and self.get_content_with_type(edata):
             htmlcontent = self.get_content_with_type(edata, 'text/html')
