@@ -178,9 +178,9 @@ LOGGING = {
 
 try:
     import mailer
-    #INSTALLED_APPS += ('mailer',)
-    #EMAIL_BACKEND = "mailer.backend.DbBackend"
-    #MAILER_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    INSTALLED_APPS += ('mailer',)
+    EMAIL_BACKEND = "mailer.backend.DbBackend"
+    MAILER_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 except ImportError:
     pass
 

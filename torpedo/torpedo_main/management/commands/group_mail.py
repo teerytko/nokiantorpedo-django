@@ -71,12 +71,15 @@ class Command(BaseCommand):
         maincontent = self.get_content_with_type(edata)
         sectionemail = "%s@nokiantorpedo.fi" % section
         fromemail = self.getheader(edata.get('From'))
-        tousers = [user.email for user in users]
+        fromemail = re.match('.*<(.*)>', fromemail).group(1)
+        tousers = [user.email for user in users] # if user.email != fromemail]
         subject = self.getheader(edata['subject'])
+        headers = {'Reply-To': sectionemail}
         em = EmailMultiAlternatives(subject=subject,
                           body=maincontent,
                           to=tousers,
-                          from_email=sectionemail)
+                          from_email=fromemail,
+                          headers=headers)
         if edata.is_multipart() and self.get_content_with_type(edata):
             htmlcontent = self.get_content_with_type(edata, 'text/html')
             em.attach_alternative(htmlcontent, 'text/html')
