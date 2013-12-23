@@ -178,9 +178,9 @@ LOGGING = {
 
 try:
     import mailer
-    INSTALLED_APPS += ('mailer',)
-    EMAIL_BACKEND = "mailer.backend.DbBackend"
-    MAILER_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    #INSTALLED_APPS += ('mailer',)
+    #EMAIL_BACKEND = "mailer.backend.DbBackend"
+    #MAILER_EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 except ImportError:
     pass
 
@@ -228,6 +228,7 @@ EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_SUBJECT_PREFIX = '[NokianTorpedo] '
 EMAIL_HOST_USER = 'torpedo'
 EMAIL_HOST_PASSWORD = 'admin'
+EMAIL_PORT = 587
 
 # Account settings
 LOGIN_REDIRECT_URL = '/'
