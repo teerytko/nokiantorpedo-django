@@ -74,7 +74,10 @@ class Command(BaseCommand):
         fromemail = re.match('.*<(.*)>', fromemail).group(1)
         tousers = [user.email for user in users if user.email != fromemail]
         subject = self.getheader(edata['subject'])
-        headers = {'Reply-To': sectionemail}
+        headers = {'Reply-To': fromemail,
+                   'Sender': fromemail,
+                   'Return-Path': fromemail,
+                   'From': sectionemail}
         em = EmailMultiAlternatives(subject=subject,
                           body=maincontent,
                           to=tousers,
