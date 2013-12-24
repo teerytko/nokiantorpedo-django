@@ -6,6 +6,8 @@
  *
  */
 
+var STATIC_TABLE_LEN = 15;
+
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -17,16 +19,26 @@ function getQueryVariable(variable) {
     }
 }
 
+function format_date(date) {
+	return date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDate()+
+	" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+}
+
 function add_datarow(oTable, resource, data) {
-    $.post('/statistics/rest/'+resource, data, function() {
-        oTable.fnDraw();
+    $.post(SOURCEROOT+resource, data, function(ret, obj) {
+        console.log(ret, obj);
+    	oTable.fnDraw();
     });
 }
 
 function delete_datarow(oTable, resource, sId) {
-    $.delete('/torpedo/rest/'+resource+'/'+sId+'/', function() {
-        oTable.fnDraw();
-    });
+	$.ajax({
+		url: SOURCEROOT+resource+'/'+sId+'/', 
+		type: 'delete',
+		success: function() {
+			oTable.fnDraw();
+		},
+	});
 }
 
 /* Get the rows which are currently selected */

@@ -1,81 +1,12 @@
 {% extends 'statistics/base.html' %}
+{% load i18n %}
 {% block head_datatables %}
-<script type="text/javascript" charset="utf-8">
-var oTable
-var sid = getQueryVariable("sId");
-var editMode = false;
-$(document).ready(function() {
-    oTable = $('#players').dataTable( {
-        "bProcessing": true,
-        "bServerSide": true,
-        "bPaginate": false,
-        "bInfo": false,
-        "bFilter": false,
-        "sAjaxSource": "../statistics/rest/player?format=dlist&sQuery=team_id=="+sid,
-        "aaSorting": [[2,'asc']],
-        aoColumns: [{ "sName": "id", bVisible: false}, // the first column is invisible
-                    { "bVisible": false , "sName": "team_id"},
-                    { "sClass": "text", "sName": "number"},
-                    { "sClass": "text", "sName": "name"},
-                    { "sClass": "text", "sName": "role"},
-                   ],
-        "fnDrawCallback": function () {
-            if (editMode == true) {
-                $('td.text').create_edit({'oTable' : oTable, 
-                                          'sUpdateUrl': '../statistics/rest/player'});
-            }
-        }
-    });
-    /* Add a click handler to the rows - this could be used as a callback */
-    $("#players tbody").click(function(event) {
-        $(oTable.fnSettings().aoData).each(function (){
-            $(this.nTr).removeClass('row_selected');
-        });
-        $(event.target.parentNode).addClass('row_selected');
-    });
-
-    /* Add a click handler for the delete row */
-    $('#delete').click( function() {
-        var anSelected = fnGetSelected( oTable );
-        var sId = oTable.fnGetData(oTable.fnGetPosition(anSelected[0]))[0]
-        delete_datarow(oTable, 'player', sId);
-    });
-    /* Add a click handler for the delete row */
-    $('#add').click( function() {
-        add_datarow(oTable, 'player', {team: sid,
-                                       number: 1,
-                                       name: '',
-                                       role: ''});
-    });
-    /* Add a click handler for the delete row */
-    $('#edit').click( function() {
-        if (editMode == false) {
-            $('#edit').html('Lopeta muokkaus')
-            editMode = true
-            oTable.fnDraw();    
-        }
-        else {
-            $('#edit').html('Muokkaa');
-            editMode = false;
-            oTable.fnDraw();    
-        }
-    });
-
-    $.getJSON('../statistics/rest/team?format=dlist&sColumns=name&sQuery=id=='+sid, function(data) {
-        data = data['aaData'][0][0];
-        $('#team-name').html(data);
-    }); 
-
-});
-
-
-</script>
 {% endblock %} 
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
-{% block center %}
-<article id="fullmaincolumn">
-<div id="datatables">
-    <div id="container">
+{% block main %}
+{% include 'statistics/breadcrumb.html' %}
+
     <div class="full_width big">
         <i><div id="team-name"></div></i>
         </div>
@@ -86,11 +17,11 @@ $(document).ready(function() {
         <a href="./teams">Takaisin joukkueisiin</a>
         {% if perms.statistics.change_game %}
         /
-        <a href="javascript:void(0);" id="add">Lisää</a>
+        <a data-url="/statistics/" id="add">Lisää</a>
         /
-        <a href="javascript:void(0)" id="delete">Poista</a>
+        <a id="delete">Poista</a>
         /
-        <a href="javascript:void(0)" id="edit">Muokkaa</a>
+        <a id="edit">Muokkaa</a>
         {% endif %}
     </p>
     <table cellpadding="0" cellspacing="0" border="0" class="display" id="players">
@@ -114,8 +45,41 @@ $(document).ready(function() {
         </tbody>
     </table>
     </div>
-</div>
-</div>
 
-</article>
+<!-- Modal -->
+<div class="modal fade" id="addPlayerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Add player</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          Lisää uusi pelaaja tai kopio olemassa oleva.
+          <div class="input-group">
+            <div class="input-group-btn">
+                <button id="selected-player" data-selected='new' type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">New <span class="caret"></span></button>
+                <ul id="selectable-players" class="dropdown-menu">
+                    <li><a class="drp-btn" href="#">Dummy</a></li>
+                </ul>
+            </div><!-- /btn-group -->
+          </div><!-- /input-group -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="dlg-add-player" class="btn btn-primary">Add</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>var SOURCEROOT="{{source}}";</script>
+<script src="{{ STATIC_URL }}js/statistics.config.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/team.view.js" type="text/javascript"></script>
 {% endblock %}

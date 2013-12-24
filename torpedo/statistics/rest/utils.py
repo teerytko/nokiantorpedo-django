@@ -40,8 +40,10 @@ def to_dict(list_of_dicts, key, value):
     data = {}
     for obj in list_of_dicts:
         keyval = obj.get(key)
-        valueval = obj.get(value)
-        data[keyval] = valueval
+        values = []
+        for valkey in value.split(','):
+            values.append(unicode(obj.get(valkey)))
+        data[keyval] = " ".join(values)
     return data
 
 def get_columns(request):

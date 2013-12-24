@@ -27,7 +27,7 @@ class Team(models.Model):
     """
     name =  models.TextField(null=True, blank=True)
     league = models.ForeignKey(League, null=True, blank=True)
-    players = models.ManyToManyField('Player', related_name="teams")
+    #players = models.ManyToManyField('Player', related_name="teams", null=True, blank=True)
 
     def __unicode__(self):
         return "Team: %r" % self.name
@@ -73,11 +73,13 @@ class Player(models.Model):
     number = models.IntegerField(blank=True)
     name = models.TextField(blank=True)
     role= models.TextField(blank=True)
+    team=models.ForeignKey(Team, blank=True, null=True)
+    league = models.ForeignKey(League, null=True, blank=True)
 
     @property
     def team_name(self):
-        teams = self.teams.all()
-        return teams[self.teams.count()-1].name
+        #teams = self.teams.all()
+        return self.team.name
 
     @property
     def goals(self):
@@ -112,6 +114,7 @@ class Goal(models.Model):
     player = models.ForeignKey(Player, related_name='scoring', blank=True, null=True)
     assisting = models.ForeignKey(Player, related_name='assisting', blank=True, null=True)
     note = models.TextField(blank=True, null=True)
+    league = models.ForeignKey(League, null=True, blank=True)
 
     def __unicode__(self):
         return "Goal: %r, %r" % (self.player, self.time)
@@ -125,6 +128,7 @@ class Penalty(models.Model):
     player = models.ForeignKey(Player, blank=True, null=True)
     reason = models.IntegerField(blank=True, null=True)
     note = models.TextField(blank=True)
+    league = models.ForeignKey(League, null=True, blank=True)
 
     def __unicode__(self):
         return "Penalty: %r,  %r" % (self.time, self.player)

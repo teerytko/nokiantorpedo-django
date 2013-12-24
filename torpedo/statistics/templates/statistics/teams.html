@@ -1,56 +1,32 @@
 {% extends 'statistics/base.html' %}
 {% block head_datatables %}
-<script type="text/javascript" charset="utf-8">
-        var oTable;
-        $(document).ready(function() {
-        	
-            oTable = $('#teams').dataTable(
-            {
-                "bProcessing": true,
-                "bServerSide": true,
-                "sAjaxSource": "../statistics/rest/team?format=dlist",
-                "fnRowCallback": function( nRow, aData, iDisplayIndex ) {
-                    var alink = '<a href="team?sId=' + aData[0];
-                    alink += '">'+ aData[0]+' '+aData[1]+'</a>';
-                    $('td:eq(0)', nRow).html( alink );
-                    return nRow;
-                },
-                aoColumns: [{ "sName": "id"}, // the first column is invisible
-                            { "sClass": "text", "sName": "name"}
-                           ],
-                "fnDrawCallback": function () {
-                    $('td.text').create_edit({ 'oTable' : oTable, 
-                                               'sUpdateUrl': '../statistics/rest/team'})
-                }
-            });
-        });
-</script>
 {% endblock %}
 
 
-{% block center %}
-<article id="fullmaincolumn">
-<div id="datatables">
-<div id="container" style="width: 800px;">
-    {% if perms.statistics.change_game %}
-        <p><a href="javascript:void(0);" onclick="add_datarow(oTable, 'team', {name: 'Empty'});" style="color:black">Add team</a></p>
-    {% endif %}
-  <div id="container">
-	<table cellpadding="0" cellspacing="0" border="0" class="display" id="teams">
-	  <thead>
-	    <tr>
-	      <th width="10%">Id</th>
-	      <th width="20%">Nimi</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr>
-	      <td colspan="2">null</td>
-	     </tr>
-	  </tbody>
-	</table>
-  </div>
-</div>
-</article>
+{% block main %}
+{% include 'statistics/breadcrumb.html' %}
 
+{% if perms.statistics.change_game %}
+<button type="button" id="add-team-btn">Add team</button>
+{% endif %}
+
+<table class="display" id="teams">
+  <thead>
+    <tr>
+      <th width="10%">Id</th>
+      <th width="20%">Nimi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2">null</td>
+     </tr>
+  </tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script>var SOURCEROOT="{{source}}";</script>
+<script src="{{ STATIC_URL }}js/statistics.config.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/teams.view.js" type="text/javascript"></script>
 {% endblock %}

@@ -5,6 +5,7 @@ from djangorestframework.renderers import BaseRenderer
 from statistics.rest.renderers import DListRenderer, DictRenderer
 from django.db.models.fields import TextField
 from django.db.models.fields.related import ForeignKey
+from statistics.models import League
 
 from django.db.models import Q
 
@@ -15,6 +16,10 @@ class MyUpdateModelMixin(ModelMixin):
     """
     def put(self, request, *args, **kwargs):
         model = self.resource.model
+        if kwargs.has_key('league'):
+            kwargs.pop('league')
+#             if 'league' in self._resource._model_fields_set:
+#                 self.DATA['league'] = League.objects.get(id=lid)
         query_kwargs = self.get_query_kwargs(request, *args, **kwargs)
 
         # TODO: update on the url of a non-existing resource url doesn't work
@@ -53,6 +58,15 @@ class MyInstanceModelView(InstanceMixin, ReadModelMixin, MyUpdateModelMixin, Del
     renderers = (list(InstanceModelView.renderers) + [DListRenderer])
     _suffix = 'Instance'
 
+    def delete(self, request, *args, **kwargs):
+        """
+        delete.
+        """
+        if kwargs.has_key('league'):
+            lid = kwargs.pop('league')
+            if 'league' in self._resource._model_fields_set and self.DATA is not None:
+                self.DATA['league'] = lid
+        super(MyInstanceModelView, self).delete(request, *args, **kwargs)
 
 class SearchModelMixin(ListModelMixin, PaginatorMixin):
     """
@@ -110,6 +124,10 @@ class DataTableMixin(ListModelMixin):
         Get the data for the request.
         """
         queryset = self.get_queryset()
+        if kwargs.has_key('league') and \
+        'league' in self._resource._model_fields_set and \
+        kwargs['league'] != '0':
+            queryset = queryset.filter(league__id=kwargs.get('league'))
         query = self.get_query(request, *args, **kwargs)
         queryset = queryset.filter(query)
         return queryset
@@ -124,3 +142,18 @@ class ListSearchModelView(DataTableMixin, ListOrCreateModelView):
 
     _suffix = 'List'
 
+    def post(self, request, *args, **kwargs):
+        """
+        Create new.
+        """
+        if kwargs.has_key('league'):
+            lid = kwargs.pop('league')
+            if 'league' in self._resource._model_fields_set:
+                self.DATA['league'] = lid
+        resp = super(ListSearchModelView, self).post(request, *args, **kwargs)
+        nonfields = set(self.DATA)-set(self.CONTENT)
+        instance = resp.raw_content
+        for key in nonfields:
+            if hasattr(instance, key):
+                getattr(instance, key).add(self.DATA[key])
+        return resp

@@ -21,7 +21,7 @@ from customflatpages.views import flatpage
 
 
 from torpedo_main.menu import get_menu
-from statistics.models import Team
+from statistics.models import Team, Player, Game
 
 def media_file(name):
     return os.path.join(settings.MEDIA_ROOT, name)
@@ -54,10 +54,13 @@ def home(request):
 
 
 def floorball(request):
-    team= Team.objects.get(name='Nokian Torpedo')
+    team = Team.objects.get(name='Nokian Torpedo')
+    players = Player.objects.filter(team=team).order_by('number')
+    games = Game.objects.filter(league=team.league)
     return flatpage(request, '/floorball/', 
                     team=team,
-                    players=team.players.all().order_by('number'))
+                    players=players,
+                    games=games)
 
 
 def endurance(request):
