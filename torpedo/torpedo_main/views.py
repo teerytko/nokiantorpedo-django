@@ -20,7 +20,7 @@ from registration.backends.default.views import RegistrationView
 from customflatpages.views import flatpage
 
 
-from torpedo_main.menu import get_menu 
+from torpedo_main.menu import get_menu
 from statistics.models import Team
 
 def media_file(name):

@@ -38,6 +38,5 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('django.contrib.flatpages.views',
     url(r'^license/$', 'flatpage', {'url': '/license/'}, name='license'),
-    (r'^pages/', include('django.contrib.flatpages.urls')),
-    (r'^templates/', include('customflatpages.urls')),
+    (r'^pages/', include('customflatpages.urls')),
 )

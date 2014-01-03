@@ -14,6 +14,8 @@ from django.http import HttpResponseRedirect
 from django.template import Template, TemplateSyntaxError
 
 from customflatpages.forms import ShortFlatpageForm
+from torpedo_main.menu import get_menu
+menu = get_menu()
 
 
 def list(request):
@@ -22,7 +24,8 @@ def list(request):
     prefix = posixpath.abspath(posixpath.join(request.path, '..'))
     t = loader.get_template('flatpages/list.html')
     c = RequestContext(request,
-                       {'urlprefix': prefix
+                       {'urlprefix': prefix,
+                        'menu': menu
                        })
     return HttpResponse(t.render(c))
 
@@ -47,6 +50,7 @@ def flatpage(request, url, **extra_content):
         flatpage
             `flatpages.flatpages` object
     """
+    extra_content.setdefault('menu', menu)
     if request.GET.get('edit') == 'true':
         return flatpage_edit(request, url, **extra_content)
     elif request.GET.get('delete') == 'true':
@@ -85,12 +89,22 @@ def flatpage_delete(request, url, **extra_content):
     return HttpResponseRedirect(listurl) # Redirect after POST
 
 
+def base_content():
+    try:
+        return FlatPage.objects.get(url='/uusi').content
+    except FlatPage.DoesNotExist:
+        return ''
+
+
 def flatpage_edit(request, url, **extra_content):
     t = loader.get_template('flatpages/edit.html')
+    url = '/'+url
     site_id = get_current_site(request).id
     flatpage, created = FlatPage.objects.get_or_create(url=url)
     if created:
         flatpage.sites.add(site_id)
+        flatpage.content = base_content()
+        flatpage.title = url.replace('/', '')
     if request.method == 'POST': # If the form has been submitted...
         form = ShortFlatpageForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
