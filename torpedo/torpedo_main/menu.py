@@ -29,7 +29,7 @@ class RootMenu(MenuItem):
 mymenu = RootMenu()
 mymenu.children['home'] = MenuItem(name=_('Home'), href='/')
 mymenu.children['floorball'] = MenuItem(name=_('Floorball'), href='/floorball')
-mymenu.children['endurance'] = MenuItem(name=_('Endurance'), href='/endurance')
+mymenu.children['endurance'] = MenuItem(name=_('Torpedo Endurance'), href='/endurance')
 mymenu.children['calendar'] = MenuItem(name=_('Calendar'), href='/calendar', access='private')
 mymenu.children['association'] = MenuItem(**{'name': _('Association'), 'href': '/association'})
 mymenu.children['forum'] = MenuItem(**{'name': _('Forum'), 'href': '/forum'})
