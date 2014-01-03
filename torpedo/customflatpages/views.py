@@ -50,6 +50,8 @@ def flatpage(request, url, **extra_content):
         flatpage
             `flatpages.flatpages` object
     """
+    if not url.startswith('/'):
+        url = '/' + url
     extra_content.setdefault('menu', menu)
     if request.GET.get('edit') == 'true':
         return flatpage_edit(request, url, **extra_content)
@@ -62,8 +64,6 @@ def flatpage(request, url, **extra_content):
 def flatpage_show(request, url, **extra_content):
     """
     """
-    if not url.startswith('/'):
-        url = '/' + url
     site_id = get_current_site(request).id
     try:
         f = get_object_or_404(FlatPage,
@@ -77,8 +77,6 @@ def flatpage_delete(request, url, **extra_content):
     """
     prefix = request.path.replace(url, '')
     listurl = posixpath.join(prefix, 'list')
-    if not url.startswith('/'):
-        url = '/' + url
     site_id = get_current_site(request).id
     try:
         f = get_object_or_404(FlatPage,
@@ -98,7 +96,6 @@ def base_content():
 
 def flatpage_edit(request, url, **extra_content):
     t = loader.get_template('flatpages/edit.html')
-    url = '/'+url
     site_id = get_current_site(request).id
     flatpage, created = FlatPage.objects.get_or_create(url=url)
     if created:
