@@ -19,7 +19,7 @@
 {% block nav %}
 <div>
     <ul class="nav nav-tabs">
-    {% for key, mainitem in menu.items %}
+    {% for key, mainitem in torpedo_menu.items %}
     {% if mainitem|can_see:user %}
     <li 
     {% if menu.active == key %}class="active"{% endif %}

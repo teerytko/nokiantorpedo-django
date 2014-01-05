@@ -33,6 +33,7 @@ mymenu.children['endurance'] = MenuItem(name=_('Torpedo Endurance'), href='/endu
 mymenu.children['calendar'] = MenuItem(name=_('Calendar'), href='/calendar', access='private')
 mymenu.children['association'] = MenuItem(**{'name': _('Association'), 'href': '/association'})
 mymenu.children['forum'] = MenuItem(**{'name': _('Forum'), 'href': '/forum'})
+mymenu.children['blog'] = MenuItem(**{'name': _('Blogs'), 'href': '/weblog'})
 
 
 def get_menu():

@@ -1,0 +1,75 @@
+From teemu.rytkonen@gmail.com  Thu Dec 19 17:53:06 2013
+Return-Path: <teemu.rytkonen@gmail.com>
+X-Original-To: script-1563a2f8a76cda1783acc7a23694b3bb4296c476@mx8.webfaction.com
+Delivered-To: script-1563a2f8a76cda1783acc7a23694b3bb4296c476@mx8.webfaction.com
+Received: from localhost (localhost.localdomain [127.0.0.1])
+    by mx8.webfaction.com (Postfix) with ESMTP id 9D0654B014B;
+    Thu, 19 Dec 2013 17:53:06 +0000 (UTC)
+X-Spam-Flag: NO
+X-Spam-Score: -1.397
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.397 tagged_above=-999 required=3
+    tests=[BAYES_00=-1.9, FREEMAIL_FROM=0.001, HTML_MESSAGE=0.001,
+    RCVD_IN_DNSWL_NONE=-0.0001, TVD_SPACE_RATIO=0.001, T_DKIM_INVALID=0.5]
+Received: from mx8.webfaction.com ([127.0.0.1])
+    by localhost (mail8.webfaction.com [127.0.0.1]) (amavisd-new, port 10024)
+    with ESMTP id BW+jfp6ocTLE; Thu, 19 Dec 2013 17:53:06 +0000 (UTC)
+Received: from mail-pd0-f180.google.com (mail-pd0-f180.google.com [209.85.192.180])
+    by mx8.webfaction.com (Postfix) with ESMTP id C0DE04B0155
+    for <terd@nokiantorpedo.fi>; Thu, 19 Dec 2013 17:53:05 +0000 (UTC)
+Received: by mail-pd0-f180.google.com with SMTP id q10so1422045pdj.11
+        for <terd@nokiantorpedo.fi>; Thu, 19 Dec 2013 09:53:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20120113;
+        h=mime-version:date:message-id:subject:from:to:content-type;
+        bh=VRP/2oJjHGUcbx++pWLEZork8DzumBHQR6WYGRIqOk4=;
+        b=0CHO85vERdD9HdBY/b9s1qnN9DsWoC/OTkekdcmDOgvbsJeYxFY46P7Ev+ww5vERkz
+         ToSWFY28eHyust0eLKhwZKruQnGSb6OU3PkWZlRuhoYaxMgBMhN8lZYnn/K0aM5N+Tc0
+         h5v/vsNB//1gEC0pS7513hOOyUM5llOhRPacDYXCCDeD+KUkIhbQI/puVa42ZLPN7+lr
+         UAsUPYo7Fl5Q4LkTYPa5kmWWIJZFJHZ2vwMavAqwOmSbAZ1cmiLU7dvewR8Ulw63TIrY
+         GZpA/Xr/7WFVHD4+CRLO1KoEGySXj9YIy3f5ndOwUy2MR7AxbNB5naOE2ZucXlntvSfH
+         wZ5Q==
+MIME-Version: 1.0
+X-Received: by 10.66.170.138 with SMTP id am10mr3142979pac.51.1387475584863;
+ Thu, 19 Dec 2013 09:53:04 -0800 (PST)
+Received: by 10.68.79.4 with HTTP; Thu, 19 Dec 2013 09:53:04 -0800 (PST)
+Date: Thu, 19 Dec 2013 19:53:04 +0200
+Message-ID: <CAEZ8r2t7nVC_BkR-wD5pSsdkxkw5s+NPJ=cQ4cs18LrYMqsT=Q@mail.gmail.com>
+Subject: =?ISO-8859-1?B?beTk5A==?=
+From: =?ISO-8859-1?Q?Teemu_Rytk=F6nen?= <teemu.rytkonen@gmail.com>
+To: terd@nokiantorpedo.fi
+Content-Type: multipart/alternative; boundary=047d7bb050005ed2c504ede6d5b7
+
+--047d7bb050005ed2c504ede6d5b7
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+M=F6=F6=F6!
+
+
+-Teemu
+
+--047d7bb050005ed2c504ede6d5b7
+Content-Type: text/html; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">M=F6=F6=F6!<div><br></div><div><br></div><div>-Teemu</div>=
+</div>
+
+--047d7bb050005ed2c504ede6d5b7--
+
+Sending mail: =?ISO-8859-1?B?beTk5A==?=
+Content:
+Content-Transfer-Encoding: quoted-printable
+
+M=F6=F6=F6!
+
+
+-Teemu
+
+htmlcontent:
+Content-Transfer-Encoding: quoted-printable
+
+<div dir=3D"ltr">M=F6=F6=F6!<div><br></div><div><br></div><div>-Teemu</div>=
+</div>
+

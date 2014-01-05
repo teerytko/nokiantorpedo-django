@@ -10,17 +10,22 @@ WebTest==1.3.4
 Whoosh==2.5.4
 argparse==1.2.1
 https://bitbucket.org/teerytko/django-authopenid-registration-1.0-support/get/tip.tar.gz
+beautifulsoup4==4.3.2
+django-blog-zinnia==0.13
 django-debug-toolbar==0.9.4
 django-devserver==0.3.2
 django-extensions==0.9
 django-haystack==2.1.0
 -e git://github.com/jtauber/django-mailer.git@af91e3b3556ea1a0ae9cb2c5b6520bacdab6a9fa#egg=django_mailer-dev
 django-messages==0.4.4
+django-mptt==0.6.0
 django-pagination==1.0.7
 django-pipeline==1.2.14
 django-registration==1.0
 django-simple-captcha==0.4.0
+django-tagging==0.3.1
 django-webtest==1.5.3
+django-xmlrpc==0.1.5
 https://bitbucket.org/slav0nic/djangobb/get/stable.tar.gz
 djangorestframework==0.3.3
 docutils==0.7
@@ -31,6 +36,7 @@ postmarkup==1.2.0
 psycopg2==2.4.4
 pycrypto==2.3
 pyflakes==0.5.0
+pyparsing==2.0.1
 python-openid==2.2.5
 python-ptrace==0.6.4
 pytz==2013.7

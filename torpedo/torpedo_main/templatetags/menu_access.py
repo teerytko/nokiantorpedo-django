@@ -6,6 +6,8 @@ Created on 14.11.2012
 
 from django import template
 register = template.Library()
+from torpedo_main.menu import get_menu
+from django import template
 
 @register.filter('can_see')
 def can_see(menuitem, user):
@@ -20,3 +22,13 @@ def can_see(menuitem, user):
         else:
             return False
     return True
+
+@register.tag(name='get_menu')
+def get_menu(parser, token):
+    return DefaultMenuNode()
+
+class DefaultMenuNode(template.Node):
+    def __init__(self, format_string):
+        pass
+    def render(self, context):
+        return get_menu()

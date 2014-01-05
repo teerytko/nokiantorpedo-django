@@ -35,7 +35,9 @@ urlpatterns = patterns('',
     #(r'^messages/', include('django_messages.urls')),
     (r'^feeds/', include('feedjack.urls')),
     (r'^events/', include('events.urls')),
-) 
+    # Zinnia blog
+    url(r'^weblog/', include('zinnia.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),) 
 
 if settings.SERVE_MEDIA:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

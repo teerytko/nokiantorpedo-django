@@ -36,11 +36,6 @@ def handle_uploaded_file(f):
 
 
 def signin(request, *args, **kwargs):
-    menu = get_menu()
-    menu.active = None
-    kwargs['extra_context'] = {
-        'menu': menu
-    }
     return authsignin(request, auth_form=TorpedoAuthenticationForm,
                       *args, **kwargs)
 
@@ -55,73 +50,49 @@ class TorpedoRegistrationView(RegistrationView):
         return kwargs
 
 def home(request):
-    t = loader.get_template('torpedo/index.html')
-    menu = get_menu()
-    menu.active = 'home'
-    return flatpage(request, '/home/', menu=menu)
+    return flatpage(request, '/home/')
 
 
 def floorball(request):
-    t = loader.get_template('torpedo/floorball.html')
-    menu = get_menu()
-    menu.active = 'floorball'
     team= Team.objects.get(name='Nokian Torpedo')
     return flatpage(request, '/floorball/', 
-                    menu=menu, 
                     team=team,
                     players=team.players.all().order_by('number'))
 
 
 def endurance(request):
-    t = loader.get_template('torpedo/endurance.html')
-    menu = get_menu()
-    menu.active = 'endurance'
-    return flatpage(request, '/endurance/', 
-                    menu=menu)
+    return flatpage(request, '/endurance/')
 
 
 def manage(request):
     if request.user.is_staff:
-        t = loader.get_template('torpedo/manage.html')
-        menu = get_menu()
-        menu.active = 'manage'
         users = User.objects.all()
         return flatpage(request, '/manage/', 
-                        menu=menu,
                         users=users)
     else:
         raise PermissionDenied
 
 
 def calendar(request):
-    t = loader.get_template('torpedo/calendar.html')
-    menu = get_menu()
-    menu.active = 'calendar'
-    return flatpage(request, '/calendar/', 
-                    menu=menu)
+    return flatpage(request, '/calendar/')
 
 
 def association(request):
-    t = loader.get_template('torpedo/association.html')
     menu = get_menu()
     menu.active = 'association'
     return flatpage(request, '/association/', 
                     menu=menu)
 
 def channel(request):
-    t = loader.get_template('torpedo/channel.html')
     menu = get_menu()
     menu.active = 'home'
     return flatpage(request, '/channel/', 
                     menu=menu)
 
 def profile(request, username=None):
-    t = loader.get_template('torpedo/profile_view.html')
     user = get_user(request, username)
     user_profile = user.profile
-    menu = get_menu()
     return flatpage(request, '/profile/', 
-                    menu=menu,
                     profileuser=user)
 
 def get_user(request, username=None):
@@ -143,7 +114,6 @@ def profile_edit(request, username=None, dialog=False):
         t = loader.get_template('torpedo/profile.html')
     user = get_user(request, username)
     user_profile = user.profile
-    menu = get_menu()
     if request.method == 'POST': # If the form has been submitted...
         form = UserProfileForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -164,7 +134,6 @@ def profile_edit(request, username=None, dialog=False):
                      })
     c = RequestContext(request, {
         'form': form,
-        'menu': menu,
         'profileuser': user
     })
     return HttpResponse(t.render(c))
@@ -177,7 +146,6 @@ def member_edit(request, username=None, dialog=False):
         t = loader.get_template('torpedo/profile.html')
     user = get_user(request, username)
     member_profile = user.memberprofile
-    menu = get_menu()
     if request.method == 'POST': # If the form has been submitted...
         form = MemberProfileForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -197,7 +165,6 @@ def member_edit(request, username=None, dialog=False):
         form.fields['payments'].widget.attrs['readonly'] = True
     c = RequestContext(request, {
         'form': form,
-        'menu': menu,
         'profileuser': user
     })
     return HttpResponse(t.render(c))
@@ -209,7 +176,6 @@ def profile_img(request, username=None, dialog=False):
         t = loader.get_template('torpedo/profile.html')
     user = get_user(request, username)
     user_profile = user.profile
-    menu = get_menu()
     if request.method == 'POST': # If the form has been submitted...
         form = UserImageForm(request.POST) # A form bound to the POST data
         if form.is_valid(): # All validation rules pass
@@ -226,7 +192,6 @@ def profile_img(request, username=None, dialog=False):
                      })
     c = RequestContext(request, {
         'form': form,
-        'menu': menu,
         'profileuser': user
     })
     return HttpResponse(t.render(c))

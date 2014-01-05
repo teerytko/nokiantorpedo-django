@@ -126,7 +126,8 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.humanize',
     'django.contrib.flatpages',
-    # Uncomment the next line to enable the admin:
+    'django.contrib.comments',
+      # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -143,7 +144,10 @@ INSTALLED_APPS = (
     'events',
     'south',
     'captcha',
-    'customflatpages'
+    'customflatpages',
+    'tagging',
+    'mptt',
+    'zinnia',
 )
 
 
@@ -202,6 +206,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django_authopenid.context_processors.authopenid',
     #'django_messages.context_processors.inbox',
     'djangobb_forum.context_processors.forum_settings',
+    'torpedo_main.context_processors.load_menu'
 )
 
 # Pipeline configuration
