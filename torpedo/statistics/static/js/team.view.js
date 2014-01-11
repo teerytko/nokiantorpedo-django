@@ -61,24 +61,24 @@ require(['jquery', 'bootstrap', 'jeditable', 'dataTables', 'jutils'],
 					$('#selected-player').text(target.textContent);
 					$('#selected-player').attr('data-selected', target.data-player);
 				});
-				$('#dlg-add-player').click(function(e) {
-					var selected = $('#selected-player').attr('data-selected');
-					if (selected === 'new') {
-						var number = '1';
-						var name = '-';
-					}
-					else {
-						var nn = $('#selected-player').text();
-						var number = nn.split(' ')[0];
-						var name = nn.replace(number+' ', '');
-					}
-					add_datarow(oTable, 'player', {team: sid,
-						number: number,
-						name: name,
-						role: ''});
-					$('#addPlayerModal').modal('hide');
-				});
 			});
+		});
+		$('#dlg-add-player').click(function(e) {
+			var selected = $('#selected-player').attr('data-selected');
+			if (selected === 'new') {
+				var number = '1';
+				var name = '-';
+			}
+			else {
+				var nn = $('#selected-player').text();
+				var number = nn.split(' ')[0];
+				var name = nn.replace(number+' ', '');
+			}
+			add_datarow(oTable, 'player', {team: sid,
+				number: number,
+				name: name,
+				role: ''});
+			$('#addPlayerModal').modal('hide');
 		});
 		/* Add a click handler for the delete row */
 		$('#edit').click( function() {
