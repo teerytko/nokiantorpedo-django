@@ -52,7 +52,7 @@ a {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-8 */
 	color: white;
 	height: 120px;
-	min-width: 600px;
+	min-width: 800px;
 }
 
 #heading a {
@@ -84,6 +84,10 @@ a {
 
 .story-img img {
 	width: 640px;
+}
+
+#navigation {
+	min-width: 800px;
 }
 
 .nav-left > li {

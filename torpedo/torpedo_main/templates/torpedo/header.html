@@ -17,7 +17,7 @@
 
 <!-- Navigation -->
 {% block nav %}
-<div>
+<div id="navigation">
     <ul class="nav nav-tabs">
     {% for key, mainitem in torpedo_menu.items %}
     {% if mainitem|can_see:user %}
