@@ -1,5 +1,5 @@
 (function() {
-require(['jquery', 'bootstrap', 'events', 'feeds', 'fb', 'htmlmixedmode'], 
+require(['jquery', 'bootstrap', 'feeds', 'fb', 'htmlmixedmode'], 
 	function($, bootstrap, events, feeds, fb, htmlmode) {
 		$(document).ready(function() {
 			pageEditor = $('#id_content');

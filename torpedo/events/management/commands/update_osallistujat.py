@@ -20,6 +20,7 @@ os.environ['HTTP_PROXY'] = ''
 
 import feedparser
 from django.core.management.base import BaseCommand, CommandError
+from events.models import OsallistujatEvent
 
 try:
     import threadpool
@@ -92,57 +93,60 @@ class ProcessEntry:
             author_email = 'nospam@nospam.com'
         
         try:
-            content = self.entry.content[0].value
+            description = self.entry.content[0].value
         except:
-            content = self.entry.get('summary',
+            description = self.entry.get('summary',
                                      self.entry.get('description', ''))
         
         try:
             # parse the specific osallistujat time
-            dstr = re.match("^(\d{2}\.\d{2}\.\d{2}\s+\d{2}:\d{2}).*",  title).group(1)
+            m = re.match("^(\d{2}\.\d{2}\.\d{2})\s+(\d{2}:\d{2})-(\d{2}:\d{2})\s+(.*)",  title)
+            startstr = "%s %s" % (m.group(1), m.group(2))
+            endstr = "%s %s" % (m.group(1), m.group(3))
             # dstr = title.split('-')[0].split(' ',1)[1]
-            df = datetime.datetime.strptime(dstr, '%d.%m.%y %H:%M')
-            date_start = df
+            start_date = datetime.datetime.strptime(startstr, '%d.%m.%y %H:%M')
+            end_date = datetime.datetime.strptime(endstr, '%d.%m.%y %H:%M')
+            title = m.group(4)
         except:
-            date_start = None
+            start_date = None
+            end_date = None
 
         comments = self.entry.get('comments', '')
 
-        return (link, title, guid, author, author_email, content, 
-                date_start, comments)
+        return (link, title, guid, author, author_email, description, 
+                start_date, end_date,comments)
 
     def process(self):
         """ Process a post in a feed and saves it in the DB if necessary.
         """
-        from events import models
 
-        (link, title, guid, author, author_email, content, date_start,
-         comments) = self.get_entry_data()
-        # Ignore feed items where team is not Nokian Torpedo
-        if not content.startswith('Joukkue: Nokian Torpedo'):
-            return 0
+        (link, title, guid, author, author_email, description, start_date,
+         end_date, comments) = self.get_entry_data()
+        type = re.search('Joukkue:\s+(.*)', description).group(1)
         # skip entries that are older that fromtime
-        if date_start < self.fromtime:
+        if start_date < self.fromtime:
             return 0
         if guid in self.postdict:
             tobj = self.postdict[guid]
-            if tobj.content != content or (date_start and
-                    tobj.date_start != date_start):
+            if tobj.description != description or (start_date and
+                    tobj.start_date != start_date):
                 retval = ENTRY_UPDATED
                 if self.options.verbose:
                     prints('[%d] Updating existing event: %s' % (
                            self.feed.id, link))
-                if not date_start:
+                if not start_date:
                     # damn non-standard feeds
-                    date_start = tobj.date_start
+                    start_date = tobj.start_date
                 tobj.title = title
                 tobj.link = link
-                tobj.content = content
+                tobj.description = description
                 tobj.guid = guid
-                tobj.date_start = date_start
+                tobj.start_date = start_date
+                tobj.end_date = end_date
                 tobj.author = author
                 tobj.author_email = author_email
                 tobj.comments = comments
+                tobj.type = type
                 tobj.save()
             else:
                 retval = ENTRY_SAME
@@ -153,19 +157,19 @@ class ProcessEntry:
             retval = ENTRY_NEW
             if self.options.verbose:
                 prints('[%d] Saving new post: %s' % (self.feed.name, link))
-            if not date_start and self.fpf:
-                # if the feed has no date_start info, we use the feed
+            if not start_date and self.fpf:
+                # if the feed has no start_date info, we use the feed
                 # mtime or the current time
                 if self.fpf.feed.has_key('modified_parsed'):
-                    date_start = mtime(self.fpf.feed.modified_parsed)
+                    start_date = mtime(self.fpf.feed.modified_parsed)
                 elif self.fpf.has_key('modified'):
-                    date_start = mtime(self.fpf.modified)
-            if not date_start:
-                date_start = datetime.datetime.now()
-            tobj = models.Event(title=title, link=link,
-                content=content, guid=guid, date_start=date_start,
-                author=author, author_email=author_email,
-                comments=comments)
+                    start_date = mtime(self.fpf.modified)
+            if not start_date:
+                start_date = datetime.datetime.now()
+            tobj = OsallistujatEvent(title=title, link=link,
+                description=description, guid=guid, start_date=start_date,
+                end_date=end_date, author=author, author_email=author_email,
+                comments=comments, type=type)
             tobj.save()
         return retval
 
@@ -189,7 +193,6 @@ class ProcessFeed:
     def process(self):
         """ Downloads and parses a feed.
         """
-        from events import models
 
         ret_values = {
             ENTRY_NEW:0,
@@ -237,7 +240,7 @@ class ProcessFeed:
             prints(u'[%d] Feed info for: %s\n' % (
                 self.feed.name, self.feed.feed_url))
         #delete events that occur in past
-        oldevents = models.Event.objects.filter(date_start__lte=self.fromtime)
+        oldevents = OsallistujatEvent.objects.filter(start_date__lte=self.fromtime)
         oldevents.delete()
 
         guids = []
@@ -248,7 +251,7 @@ class ProcessFeed:
                 guids.append(entry.link)
         if guids:
             postdict = dict([(post.guid, post) 
-              for post in models.Event.objects.filter(guid__in=guids)])
+              for post in OsallistujatEvent.objects.filter(guid__in=guids)])
         else:
             postdict = {}
 
@@ -299,7 +302,6 @@ def main():
         os.environ["DJANGO_SETTINGS_MODULE"] = options.settings
 
 
-    from events import models
 
     # settting socket timeout (default= 10 seconds)
     socket.setdefaulttimeout(options.timeout)

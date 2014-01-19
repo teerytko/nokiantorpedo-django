@@ -14,21 +14,33 @@ class EventsFeed(Feed):
 
     feed_type = feedgenerator.Atom1Feed
 
-    def items(self):
-        return Event.objects.order_by('date_start')[:5]
+    def get_object(self,  request, *args, **kwargs):
+        if kwargs.has_key('type'):
+            return Event.objects.filter(type=kwargs['type'])
+        else:
+            return None
+
+    def items(self, obj):
+        if obj is not None:
+            return obj.order_by('start_date')[:5]
+        else:
+            return Event.objects.order_by('start_date')[:5]
 
     def item_title(self, item):
-        return item.title
+        return "%s %s" % (item.start_date, item.title)
 
     def item_description(self, item):
-        return item.content
+        return item.description
 #
     def item_pubdate(self, item):
         """
         Takes an item, as returned by items(), and returns the item's
         pubdate.
         """
-        return item.date_start
+        return item.start_date
+
+    def item_link(self, item):
+        return item.link or ''
 
 #    def feed_guid(self, item):
 #        return item.title

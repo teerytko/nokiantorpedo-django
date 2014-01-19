@@ -1,0 +1,6 @@
+
+.slidingcalendar-month li {
+	float: left;
+	width: 20px;
+	height: 30px;
+}

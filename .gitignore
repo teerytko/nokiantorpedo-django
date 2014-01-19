@@ -3,3 +3,5 @@
 .hg
 *.*~
 local_settings.py
+site-dir*
+

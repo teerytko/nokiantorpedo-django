@@ -1,32 +1,35 @@
 (function() {
-require(['jquery', 'jfeed'], function($, jfeed) {
+  define(['jquery', 'jfeed'], function($, jfeed) {
 	var MAXEVENTS=5;
-	var update_events = function(maxevents) {
+	var update_events = function(maxevents, eventsfeed) {
 		$.getFeed({
-			url: '/events/feed/',
+			url: eventsfeed,
 			success: function(feed) {
 				var title = '<div class="panel-heading"><h3>' + feed.title + '</h3></div>';
-				var feedsbody = $('<div/>');
+				var feedsbody = $('<div><table class="table"></table></div>');
 				feedsbody.addClass("panel-body");
 				$('#eventsfeed').append(title);
 				$('#eventsfeed').append(feedsbody);
+				var table = $('#eventsfeed').find('table');
 				for (i=0; i<feed.items.length && i<maxevents; i++)
 				{
 					var post_id = 'eventsfeed_post_'+i;
-					var post = $('<small/>', {id: post_id});
-					feedsbody.append(post);
+					var post = $('<tr/>', {id: post_id});
 					var item = feed.items[i];
 					var description = ''+item.description;
-					var link = '<a href="'+item.link+'" title="'+item.title+' '+description+'">'+item.title+'</a></br>';
-					$('#'+post_id).append(link);
-					// $('#'+post_id).append('<p/>');
-					//$('#'+post_id+' p').append(description);
+					var datetime = item.title.split(' ').slice(0, 2);
+					var datestr = datetime.join(' ')
+					var title = item.title.replace(datestr, '');
+					var link = '<a href="'+item.link+'" title="'+datestr+title+' '+description+'">'+datetime[0]+title+'</a></br>';
+					post.append('<td>'+link+'</td>');
+					table.append(post);
+					
 				}
 			}
 		});
-	}
-	
-	$(document).ready(update_events(MAXEVENTS));
-
-});
+	};
+	return {
+		update_events: update_events
+	};
+  })
 }).call(this);

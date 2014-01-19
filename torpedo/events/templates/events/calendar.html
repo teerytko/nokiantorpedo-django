@@ -1,0 +1,23 @@
+{% extends "torpedo/fixedbase.html" %}
+{% load i18n %}
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+{% block main %}
+<ul id="calendartabs" class="nav nav-tabs nav-justified">
+    <li ><a href="./list">{% trans "List" %}</a></li>
+    <li class="active"><a href="./calendar">{% trans "Calendar" %}</a></li>
+</ul>
+
+<div id="eventcalendar">
+</div>
+{% endblock %}
+
+{% block scripts %}
+<link rel="stylesheet" href="{{ STATIC_URL }}events/css/eventCalendar.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_URL }}events/css/eventCalendar_theme_responsive.css" type="text/css" media="screen" />
+
+
+<script type="text/javascript" src="{{ STATIC_URL }}events/js/require.config.js" ></script>
+<script type="text/javascript" src="{{ STATIC_URL }}events/js/calendar.view.js" ></script>
+{% endblock %}

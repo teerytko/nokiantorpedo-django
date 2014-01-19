@@ -16,24 +16,24 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-0 col-sm-0 col-lg-2"></div>
-        <div class="col-12 col-sm-12 col-lg-8">
+        <div class="col-sm-0 col-md-0 col-lg-2"></div>
+        <div class="col-sm-12 col-md-12 col-lg-8">
           {% include 'torpedo/header.html' %}
         </div>
-        <div class="col-0 col-sm-0 col-lg-2"></div>
+        <div class="col-sm-0 col-md-0 col-lg-2"></div>
       </div>
       <!-- Main Body -->	
       <div class="row">
         {% block center %}
-        <div id="leftside" class="col-0 col-sm-0 col-lg-2">
+        <div id="leftside" class="col-sm-0 col-md-2 col-lg-2">
           {% block leftside %}
           {% endblock %}
         </div>
-        <div class="col-12 col-sm-12 col-lg-8">
+        <div class="col-sm-12 col-md-8 col-lg-8">
           {% block main %}
           {% endblock %}
         </div>
-        <div class="col-0 col-sm-0 col-lg-2">
+        <div class="col-sm-0 col-md-2 col-lg-2">
           {% block rightside %}
           {% endblock %}
         </div>

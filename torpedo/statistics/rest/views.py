@@ -3,7 +3,7 @@ from djangorestframework.mixins import ListModelMixin, PaginatorMixin, ModelMixi
 from djangorestframework.views import InstanceModelView, ListOrCreateModelView, ModelView
 from djangorestframework.renderers import BaseRenderer
 from statistics.rest.renderers import DListRenderer, DictRenderer
-from django.db.models.fields import TextField
+from django.db.models.fields import TextField, CharField
 from django.db.models.fields.related import ForeignKey
 from statistics.models import League
 
@@ -106,7 +106,7 @@ class DataTableMixin(ListModelMixin):
         sSearch = kwargs.get('sSearch')
         if sSearch is not None:
             for field in self._resource.model._meta.fields:
-                if isinstance(field, TextField):
+                if isinstance(field, TextField) or isinstance(field, CharField):
                     query |=  Q(**{'{0}__{1}'.format(field.attname, 'contains'): sSearch})
                 elif isinstance(field, ForeignKey):
                     query |=  Q(**{'{0}__{1}'.format(field.name, 'name__contains'): sSearch})
