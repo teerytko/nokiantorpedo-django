@@ -6,15 +6,6 @@
 {% endblock %}
 
 {% block leftside %}
-<div id="events-nav" class="affix" style="display: none">
-<ul class="nav nav-pills nav-stacked">
-  <li><a href="#projektit">@Projektit 2014</a></li>
-  <li><a href="#jukola">@Jukola</a></li>
-  <li><a href="#puolimara">@Puolimaraton</a></li>
-  <li><a href="#challenge">@Torpedo Challenge</a></li>
-  <li><a href="#mara">@Maraton</a></li>
-</ul>
-</div>
 {% endblock %}
 
 
@@ -22,11 +13,10 @@
 <div class="col-9">
 	<ul id="endurancetabs" class="nav nav-tabs nav-justified">
 	  <li class="active"><a id="activity-link" href="#activity" data-toggle="tab">{% trans "Activities" %}</a></li>
+	  <li><a id="events-link" href="#events" data-toggle="tab">{% trans "Projects" %}</a></li>
 	  <li><a id="recent-link" href="#recent" data-toggle="tab">{% trans "Recent" %}</a></li>
-	  <li><a id="events-link" href="#events" data-toggle="tab">{% trans "Events" %}</a></li>
-	</ul>
-	
-	<div class="tab-content">
+    </ul>
+	<div class="tab-content">  
 	  <div class="tab-pane fade in active" id="activity">
 		<br/>
 		<h4>Kestävyys urheilu</h4>
@@ -42,7 +32,7 @@
 		Lajit joita "harrastellaan" on juoksu, hiihto, pyöräily, triathlon, suunnistus 
 		ja kaikenlainen muu kestävyysurheiluun liittyvä toiminta. Jotta toiminta ei 
 		menisi vaan satunnaiseksi "juoksenteluksi", niin jaosto järjestää yhteisiä
-		<a href="/endurance/events">tapahtumia</a> joihin voi osallistua yksin tai
+		<a href="/endurance#events">tapahtumia ja projekteja</a> joihin voi osallistua yksin tai
 		porukalla. Tarkoituksena onkin tarjota yhteinen ja muokattavissa oleva harjoitusohjelma
 		ja asettaa jonkinlainen päämäärä tai tavoite johon harjoitellaan. 
 		</p>
@@ -88,27 +78,11 @@
 		
 	    <div id="eventsfeed" class="panel">
 	    </div>
-		</p>
 	  </div>
-	  <div class="tab-pane fade" id="recent">
-		<br/>
-		<h2>Ajankohtaista</h2>
-		<blockquote>
-		<h3>TERD startup</h3>
-		Kestävyysurheilujaosto käynnistelee toimintaansa! Tutustu oheiseen 
-		materiaaliin Torpedo Endurance Racing Division (TERD)
-        <a href="/torpedo/media/Dropbox/Torpedo/Data/NokianTorpedoTERD_3.pptx">
-        toiminnasta.
-        </a>
-        </blockquote>
-		
-        <div id="leftfeeds" class="feeds panel col-12">
-		</div>
-		
-	  </div>
-	  <div class="tab-pane fade" id="events">
+
+      <div class="tab-pane fade" id="events">
 	
-		<h2>Tapahtumat</h2>
+		<h2>Projektit</h2>
 		<h5 id="projektit" class="label">@Projektit 2014</h5>
 		<p>
 		Tarkoituksena olisi että Torpedo Endurance Racing Division (TERD),
@@ -124,118 +98,85 @@
 		oikeus, joskaan ei velvollisuutta :)
 		</p>
 		
-		<h5 id="jukola" class="label">@Jukolan Viesti 2014</h5>
-		<p>
-		Jo "perinteeksi" muodostunut Nokian Torpedon Jukolan joukkue on kisaillut
-		vuodesta 2012 lähtien. Historiaa ja kokemusta ei ole vielä hirveästi karttunut 
-		mutta intoa sitäkin enemmän.
-		</p>
-		<div class="thumbnail">
-		  <img src="{{MEDIA_URL}}Dropbox/Torpedo/jukola2013_640.png"
-		     class="img-thumbnail story-img"
-		     alt="Nokian Torpedo Jukola 2013"
-		     title="Torpedo @ Jukola 2013"/>
-		  <div class="caption">
-		    <a href="https://www.dropbox.com/sh/5ags68qhhvvsbjk/77ffeYtxm2"
-		       data-toggle="tooltip" title="Katso kaikki kuvat Jukolasta 2013">
-		      <b>Torpedo @ Jukola 2013</b>
-		    </a>
-		    <p>Torpedon joukkue juoksujärjestyksessä: Antti Mäkinen, Antti Tomminen,
-		    Teemu Rytkönen, Vili Vartiala, Veera Kangaspunta, Matti Vartiala ja Hannu 
-		    Harju.
-		    </p>
-		  </div>
-		</div>
-		<p>
-		Vuonna 2014 <a href="http://jukola2014.blogspot.fi/">Kuopio Jukola</a> juostaan
-		perinteisesti kesäkuun puolivälissä. Jukolan joukkuessaohan on Aleksis Kiven tarinan
-		mukaan seitsämän riuskaa veljestä, joskin naiset ovat myös tervetulleita! Naisille
-		tosin järjestetään ihan oma Venlojen viesti, johon voisi myös Torpedon joukkueen
-		ilmoittaa jos löydytään neljä halukasta.
-		</p>
+        <h4>Tapahtumat</h4>
+		<ul>
+          <li><a href="/pages/torpedochallenge2014">Torpedo Challenge 2014</a></li>
+        </ul>
 		
-		<h5 id="puolimara" class="label">@Puolimaraton 2014</h5>
-		<p>
-		Puolimaraton on hyvä mittari jos aikoo juosta koko maratonin joten tavoitteena
-		olisi juosta joskus alku keväästä puolikas johon toivottavasti saadaan hieman 
-		isompi osanotto koko TERDestä.
-		</p>
-		Esimerkiksi:
-		<table class="table">
-		  <tr>
-		    <td>Helsinki City Run</td>
-		    <td><a href="http://www.helsinkicityrun.fi/">helsinkicityrun.fi</a></td>
-		  </tr>
-		  <tr>
-		      <td>Nokia</td>
-		      <td>??</td>
-		  </tr>
-		</table>
-		
-		
-		<h5 id="challenge" class="label">@Torpedo Challenge 2014</h5>
-		<p>
-		Ensimmäisen kerran 2013 järjestetty Torpedo Challenge saa jatkoa myös vuonna
-		2014. Eri lajeista ja useasta osakilpailusta koostuva Challenge luultavasti
-		kehittyy ja muuttaa hieman muotoaan vuodelle 2014 ja runsasta osanottoa Torpedon
-		jäsenistä toivotaan. 
-		
-		Vuonna 2013 lajeina oli mm. salibandy, nopeus/ketteryys testi, koripallo, cooper,
-		suunnistus, frisbee golf, sovellettu maastojuoksu, seikkailu urheilu? Joten saa
-		nähdä mitä seuraavan vuoden kisassa on mukana!
-		
-		</p>
-		
-		<h5 id="mara" class="label">@Maraton 2014</h5>
-		
-		<img src="{{MEDIA_URL}}Dropbox/Torpedo/marathon2011_640.png"
-		     class="img-thumbnail img-responsive"
-		     alt="Nokian Torpedo ensimmäinen yhteinen marathon @ Helsinki 2011"
-		     title="Torpedo @ Helsinki 2011"/>
-		<p>
-		Tavoitteena on juosta täyspitkä maraton, jossain vuoden 2014 vuoden
-		loppupuoliskolla. Ja koska Tukholmassa on käyty ja Helsinki on nähty, niin vuoden 
-		2014 päätavoite on alustavasti asetettu jonnekin muulle euroopan maratonille. 
-		</p>
-		
-		Harkinnassa ovat esimerkiksi:
-		<table class="table">
-		  <tr>
-		    <th>#</th>
-		    <th>Saitti</th>
-		    <th>Osallistumismaksu</th>
-            <th>Kustannusarvio</th>
-            <th>Insider info</th>
-		  </tr>
-		  <tr>
-		    <td>Berliini 28.9.2014</td>
-		    <td><a href="http://www.bmw-berlin-marathon.com/en/">www.bmw-berlin-marathon.com</a></td>
-		    <td>116 €</td>
-            <td>500 €</td>
-            <td>Todella hyvin järjestetty marathon, Euroopan nopeimmalla/tasaisimmalla reitillä. 
-            Majoittuminen todennäköisesti halpaa, mutta maratonlippujen saaminen olla tiukassa (40000 paikkaa 
-            myydään 2 tunnissa).
-            </td>
-		  </tr>
-		  <tr>
-		      <td>Amsterdam 20.10.2014</td>
-		      <td><a href="http://www.tcsamsterdammarathon.nl/en/">www.tcsamsterdammarathon.nl</a></td>
-		      <td>65 €</td>
-              <td>500 €</td>
-              <td>Nopea reitti ja hyvä järjestelyt. Sisäpiiri kertoo että hinta/laatu suhde on parhaiten 
-              kohdallaan. Majoittuminen on hintavaa verrattuna muuhun keskieurooppaan.</td>
-		  </tr>
-          <tr>
-            <td>Munchen 12.10.2014</td>
-            <td><a href="http://www.muenchenmarathon.de/en/">www.muenchenmarathon.de</a></td>
-            <td>? €</td>
-            <td>? €</td>
-            <td>
-            </td>
-          </tr>
-		</table>
+        <h4>Projektit</h4>
+		<ul>
+          <li><a href="/pages/jukola2014">Jukolan Viesti 2014</a></li>
+          <li><a href="/pages/paavonurmi2014">Paavo Nurmi Marathon 2014</a></li>
+          <li><a href="/pages/hcr2014">Helsinki City Run 2014</a></li>
+          <li><a href="/pages/rogaining2014">Rogaining 2014</a></li>
+          <li><a href="/pages/amsterdam2014">Amsterdam Marathon 2014</a></li>
+        </ul>
+        <h3>Aikataulu</h3>
+    	<p>TERD:n harjoitteluaikataulu on suunniteltu siten että se sopii osapuilleen
+      	kahteen pääkisatapahtumaan kauden aikana. Ensimmäinen "kuntopiikki" ajoitetaan
+      	touko/kesäkuuhun ja toinen lokakuuhun.</p>
+  		<h4>Tammikuu</h4>
+   		 <li>Peruskunto kausi alkaa.</li>
+ 		<h4>Helmikuu</h4>
+    	<li>Peruskunto jatkuu.</li>
+    	<li>10 KM Testi</li>
+  		<h4>Maaliskuu</h4>
+   		 <li>Peruskunto jatkuu.</li>
+ 		<h4>Huhtikuu</h4>
+ 		<li>Vauhtikestävyys kausi alkaa.</li>
+    	<li>10 KM Testi</li>
+	 <h4>Toukokuu</h4>
+    <li>Kisa/Vauhtikestävyys kausi.</li>
+    <li>HCR 2014</li>
+  <h4>Kesäkuu</h4>
+    <li>Kuopioa Jukola</li>
+    <li>Kisa/Vauhtikestävyys kausi.</li>
+  <h4>Heinäkuu</h4>
+    <li>Peruskunto kausi.</li>
+  <h4>Elokuu</h4>
+    <li>Peruskunto kausi.</li>
+  <h4>Syyskuu</h4>
+    <li>Vauhtikestävyys kausi.</li>
+    <li>10 KM Testi</li>
+  <h4>Lokakuu</h4>
+    <li>Valmistava kausi.</li>
+    <li>42 KM Lopullinen testi (Amsterdam)</li>
 	
 	  </div>
+           <div class="tab-pane fade in" id="recent">
+		<br/>
+		<h2>Ajankohtaista</h2>
+		<blockquote>
+        
+		<h3>TESKU testi 28.11.2013 - Päivämäärä muutettu!</h3>
+        Sää ajoi testiä vielä kerran eteenpäin! Mutta TESKU testi pidetään torstaina 28.11.2013. Käykää kurkkaamassa
+        <a href="http://tesku.nettiavain.fi/kuntoilijalle/testiin_valmistautuminen/">
+        valmistautumis ohjeet</a> TESKUn sivuilta.
+        <ul>
+          <li>Ei kovaa kuormittavaa harjoitusta edeltävinä päivinä</li>
+		  <li>Ei muuta kovaa fyysistä rasitusta</li>
+          <li>Ei lihaksia kipeyttäviä kokeiluja</li>
+          <li>Testiin tullessa tulee olla terve. Ei akuutteja sairauksia</li>
+          <li>Hoidossa olevat sairaudet eivät estä osallistumista, mikäli yleensä on lupa liikkua</li>
+          <li>Normaali yöuni tarpeen</li>
+          <li>Ruokailusta riittävä aika 2 – 4 h tai välipala/kahvi 1 ½ - 2 h</li>
+          <li>Keliin sopivat asusteet</li>
+          <li>Lenkkeilyyn sopivat jalkineet</li>
+          </ul>      
+        </blockquote>
+		<blockquote>
+		<h3>TERD startup</h3>
+		Kestävyysurheilujaosto käynnistelee toimintaansa! Tutustu oheiseen 
+		materiaaliin Torpedo Endurance Racing Division (TERD)
+        <a href="/torpedo/media/Dropbox/Torpedo/Data/NokianTorpedoTERD_3.pptx">
+        toiminnasta.
+        </a>
+        </blockquote>
+		
+        <div id="leftfeeds" class="feeds panel col-12">
+		</div>
+		
+	  </div> 
 	</div>
   
 </div>
