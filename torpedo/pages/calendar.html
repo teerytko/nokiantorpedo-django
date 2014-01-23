@@ -4,10 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
 {% block main %}
-<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;height=600&amp;wkst=2&amp;bgcolor=%23FFFFFF&amp;src=5l0oibsrjpa96ibs1oit9nt660%40group.calendar.google.com&amp;color=%232952A3&amp;src=bbmauio91s9fc7dss74advj8qp464ec2%40import.calendar.google.com&amp;color=%23875509&amp;ctz=Europe%2FHelsinki" style=" border-width:0 " width="800" height="600" frameborder="0" scrolling="no"></iframe>
+<h3>Events</h3>
+<div id="eventcalendar">
+</div>
 
 {% endblock %}
 
 {% block scripts %}
+<!-- 
+<link rel="stylesheet" href="{{ STATIC_URL }}eventCalendar/css/eventCalendar_theme_responsive.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_URL }}eventCalendar/css/eventCalendar.css" type="text/css" media="screen" />
+-->
+
 <script type="text/javascript" src="{{ STATIC_URL }}js/calendar.view.js" ></script>
 {% endblock %}
