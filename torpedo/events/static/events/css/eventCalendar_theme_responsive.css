@@ -290,6 +290,7 @@
 
 #eventcalendar li.empty {
     margin-bottom: 0px;
+    min-height: 28px;
 }
 
 
