@@ -8,10 +8,6 @@ require(['jquery', 'bootstrap', 'events'], function($, bootstrap, events) {
 			e.preventDefault();
 			$(this).tab('show');
 			loc.hash = $(this).attr('href');
-			if ($(this).attr('href') == '#events') {
-				$('body').scrollspy({target: "#events-nav",
-						offset: 2});
-			}
 		})
 		if (loc.hash) {
 			tab = $(loc.hash + '-link');

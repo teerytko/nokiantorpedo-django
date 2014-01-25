@@ -14,12 +14,12 @@
 {% block main %}
 <div class="col-12">
 	<ul id="endurancetabs" class="nav nav-tabs nav-justified">
-	  <li class="active"><a id="activity-link" href="#activity" data-toggle="tab">{% trans "Activities" %}</a></li>
-	  <li><a id="events-link" href="#events" data-toggle="tab">{% trans "Projects" %}</a></li>
-	  <li><a id="recent-link" href="#recent" data-toggle="tab">{% trans "Recent" %}</a></li>
+	  <li class="active"><a id="activity-link" href="#activitytab" data-toggle="tab">{% trans "Activities" %}</a></li>
+	  <li><a id="events-link" href="#eventstab" data-toggle="tab">{% trans "Projects" %}</a></li>
+	  <li><a id="recent-link" href="#recenttab" data-toggle="tab">{% trans "Recent" %}</a></li>
     </ul>
 	<div class="tab-content">  
-	  <div class="tab-pane fade in active" id="activity">
+	  <div class="tab-pane fade in active" id="activitytab">
 		<br/>
 		<h4>Kestävyys urheilu</h4>
 		<p>
@@ -78,9 +78,8 @@
 		osallistujat.com:iin. Kaikki tulokset kerätään nokiantorpedo.fi kantaan ja
 		omia tuloksia / kehitystä voi seurata oman profiilinsa kautta.
 		
-	  </div>
-
-      <div class="tab-pane fade" id="events">
+	</div>
+	<div class="tab-pane fade" id="eventstab">
 	
 		<h2>Projektit</h2>
 		<h5 id="projektit" class="label">@Projektit 2014</h5>
@@ -142,8 +141,8 @@
     <li>Valmistava kausi.</li>
     <li>42 KM Lopullinen testi (Amsterdam)</li>
 	
-	  </div>
-           <div class="tab-pane fade in" id="recent">
+	</div>
+    <div class="tab-pane fade in" id="recenttab">
 		<br/>
 		<h2>Ajankohtaista</h2>
 		<blockquote>
@@ -172,13 +171,12 @@
         toiminnasta.
         </a>
         </blockquote>
-		
-        <div id="leftfeeds" class="feeds panel col-8">
+		<div id="leftfeeds" class="feeds panel col-8">
 		</div>
 		
 	  </div> 
 	</div>
-  
+
 </div>
 {% endblock %}
 
