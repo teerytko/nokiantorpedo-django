@@ -24,6 +24,12 @@ require(['jquery', 'bootstrap', 'dataTables'], function($, bootstrap, datatables
 		});
 		$('#eventtable_length').addClass('pull-left');
 		$('#eventtable_filter').addClass('pull-right');
+		$('#eventtable_info').addClass('pull-left');
+		$('#eventtable_paginate').addClass('pull-right');
+		$('.paginate_disabled_previous').html('<button><span class="glyphicon glyphicon-arrow-left" disabled="disabled" /></button>');
+		$('.paginate_enabled_previous').html('<button><span class="glyphicon glyphicon-arrow-left"/></button>');
+		$('.paginate_disabled_next').html('<button><span class="glyphicon glyphicon-arrow-right" disabled="disabled"/></button>');
+		$('.paginate_enabled_next').html('<button><span class="glyphicon glyphicon-arrow-right"/></button>');
 	});
 });
 }).call(this);

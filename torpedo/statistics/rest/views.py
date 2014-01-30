@@ -5,7 +5,6 @@ from djangorestframework.renderers import BaseRenderer
 from statistics.rest.renderers import DListRenderer, DictRenderer
 from django.db.models.fields import TextField, CharField
 from django.db.models.fields.related import ForeignKey
-from statistics.models import League
 
 from django.db.models import Q
 
@@ -124,13 +123,20 @@ class DataTableMixin(ListModelMixin):
         Get the data for the request.
         """
         queryset = self.get_queryset()
+        self.maxcount = queryset.count()
         if kwargs.has_key('league') and \
         'league' in self._resource._model_fields_set and \
         kwargs['league'] != '0':
             queryset = queryset.filter(league__id=kwargs.get('league'))
         query = self.get_query(request, *args, **kwargs)
         queryset = queryset.filter(query)
-        return queryset
+        self.totalcount = queryset.count()
+        try:
+            start = int(request.GET['iDisplayStart'])
+            length = int(request.GET['iDisplayLength'])
+            return queryset[start:start+length]
+        except KeyError:
+            return queryset
 
 
 class ListSearchModelView(DataTableMixin, ListOrCreateModelView):
