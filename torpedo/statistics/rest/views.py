@@ -134,7 +134,10 @@ class DataTableMixin(ListModelMixin):
         try:
             start = int(request.GET['iDisplayStart'])
             length = int(request.GET['iDisplayLength'])
-            return queryset[start:start+length]
+            if length == -1:
+                return queryset
+            else:
+                return queryset[start:start+length]
         except KeyError:
             return queryset
 
