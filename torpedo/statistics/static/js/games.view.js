@@ -4,13 +4,16 @@ require(['jquery', 'bootstrap', 'jeditable', 'dataTables', 'jutils'],
 	var oTable;
 	var rowcb = function( nRow, aData, iDisplayIndex ) {
 		var alink = '<a href="game?sId=' + aData[0] + '"';
-		alink += '>'+aData[1]+'</a>';
+		var date = new Date(aData[1]);
+		alink += '>'+format_date(date)+'</a>';
 		$('td:eq(0)', nRow).html( alink );
 		return nRow;
 	};
 	var addGame = function() {
 		var now = new Date;
-		add_datarow(oTable, 'game',{'date': format_date(now)});
+		var datestr = format_date(now);
+		console.log(datestr);
+		add_datarow(oTable, 'game',{'date': datestr});
 	};
 
 	$(document).ready(function() {

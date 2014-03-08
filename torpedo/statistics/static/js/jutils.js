@@ -19,9 +19,23 @@ function getQueryVariable(variable) {
     }
 }
 
+function two_decimal(number) {
+    if (number < 10)
+        return "0"+number;
+    else
+        return number;
+}
+
 function format_date(date) {
-	return date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDate()+
-	" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var day = date.getDate();
+    var hour = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    
+	return year+"-"+two_decimal(month)+"-"+two_decimal(day)+
+	" "+two_decimal(hour)+":"+two_decimal(minutes)+":"+two_decimal(seconds);
 }
 
 function add_datarow(oTable, resource, data) {

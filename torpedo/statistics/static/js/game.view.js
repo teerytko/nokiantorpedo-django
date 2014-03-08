@@ -22,7 +22,7 @@ require(['jquery', 'bootstrap', 'jeditable', 'dataTables', 'jutils'],
 		var penaltyquery = SOURCEROOT+"penalty?format=dlist&sQuery=game__id=="+sid+" and team__id==";
 		function update_data(data)
 		{
-			var gamedate = data[0][1];
+			var gamedate = format_date(new Date(data[0][1]));
 			var gamelocation = data[0][2];
 			hometeam = data[0][3];
 			if (data[0][4] != '-') { hometeam_id = data[0][4]; }
@@ -31,6 +31,11 @@ require(['jquery', 'bootstrap', 'jeditable', 'dataTables', 'jutils'],
 			$('#game-info').html(gamedate+' '+gamelocation);
 			$('#home-team-info').html('Koti: <a href="team?sId='+hometeam_id+'">'+hometeam+'</a>');
 			$('#guest-team-info').html('Vieras: <a href="team?sId='+guestteam_id+'">'+guestteam+'</a>');
+		};
+		var gameRowCb = function (nRow, aData, iDisplayIndex) {
+			var date = format_date(new Date(aData[1]));
+			$('td:eq(0)', nRow).html( date );
+			return nRow;
 		};
 		var gameDrawCb = function () {
 			$('#salibandy_game td.text').create_edit({
@@ -116,6 +121,7 @@ require(['jquery', 'bootstrap', 'jeditable', 'dataTables', 'jutils'],
 		                     { sName: "home_goals"},
 		                     { sName: "guest_goals"},
 		                     ],
+		        fnRowCallback: gameRowCb,
 		        fnDrawCallback: gameDrawCb
 		        }) );
 		    homeGoal = $('#homegoal').dataTable( {
