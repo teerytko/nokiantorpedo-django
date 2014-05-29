@@ -5,9 +5,12 @@ require(['jquery', 'bootstrap', 'events'], function($, bootstrap, events) {
 	$(document).ready(function() {
 		var loc = window.location;
 		$('#endurancetabs a').click(function (e) {
-			e.preventDefault();
-			$(this).tab('show');
-			loc.hash = $(this).attr('href');
+			var href = $(this).attr('href');
+			if (href[0] == '#') {
+				loc.hash = $(this).attr('href');
+				e.preventDefault();
+				$(this).tab('show');
+			}
 		})
 		if (loc.hash) {
 			tab = $(loc.hash + '-link');
