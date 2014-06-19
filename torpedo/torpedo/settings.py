@@ -241,6 +241,9 @@ ACCOUNT_ACTIVATION_DAYS = 10
 LOGIN_URL = '/forum/account/signin/'
 AUTH_PROFILE_MODULE = "torpedo_main.UserProfile"
 
+# Zinnia blog settings
+ZINNIA_AUTO_MODERATE_COMMENTS = True
+
 try:
     from local_settings import *
 except ImportError:
