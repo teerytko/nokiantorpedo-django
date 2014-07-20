@@ -32,7 +32,7 @@ mymenu.children['floorball'] = MenuItem(name=_('Floorball'), href='/floorball')
 mymenu.children['endurance'] = MenuItem(name=_('Torpedo Endurance'), href='/endurance')
 mymenu.children['events'] = MenuItem(name=_('Events'), href='/events', access='private')
 mymenu.children['association'] = MenuItem(**{'name': _('Association'), 'href': '/association'})
-mymenu.children['forum'] = MenuItem(**{'name': _('Forum'), 'href': '/forum'})
+#mymenu.children['forum'] = MenuItem(**{'name': _('Forum'), 'href': '/forum'})
 mymenu.children['blog'] = MenuItem(**{'name': _('Blogs'), 'href': '/weblog'})
 
 
