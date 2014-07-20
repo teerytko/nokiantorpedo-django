@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django.contrib.flatpages',
     'django.contrib.comments',
+    'captchacomments',
       # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -150,6 +151,7 @@ INSTALLED_APPS = (
     'zinnia',
 )
 
+COMMENTS_APP = 'captchacomments'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -241,8 +243,6 @@ ACCOUNT_ACTIVATION_DAYS = 10
 LOGIN_URL = '/forum/account/signin/'
 AUTH_PROFILE_MODULE = "torpedo_main.UserProfile"
 
-# Zinnia blog settings
-ZINNIA_AUTO_MODERATE_COMMENTS = True
 
 try:
     from local_settings import *

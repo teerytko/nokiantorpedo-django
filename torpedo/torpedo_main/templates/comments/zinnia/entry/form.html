@@ -1,0 +1,37 @@
+{% load comments i18n %}
+<form action="{% comment_form_target %}" method="post" id="comment-form">
+  <div>{% csrf_token %}</div>
+  <fieldset>
+    <legend>{% trans "Post your comment" %}</legend>
+    <input type="hidden" name="next" value="{% url 'zinnia_comment_success' %}"/>
+    {% for field in form %}
+    {% if field.name != 'captcha' %}
+    {% if field.is_hidden %}{{ field }}{% else %}
+    {% if user.email and field.name in "namemailurl" %}{% else %}
+    <div{% if field.errors %} class="error"{% endif %}{% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
+      {{ field.label_tag }}
+      {% if field.errors %}{{ field.errors }}{% endif %}
+      {{ field }}
+    </div>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    {% if user.is_authenticated %}
+    <p class="auth">
+      {% trans "Comment as" %} <strong>{% firstof user.get_full_name user.username %}</strong>. <a href="{% url 'admin:logout' %}">{% trans "Log out" %}</a>.
+    </p>
+    {% else %}
+    <div class="form-group">
+    <legend>{% trans "Please, write the letters of" %} {{ form.captcha.label }}</legend>
+    {{ form.captcha.errors }}
+    <div > 
+    {{ form.captcha }}
+    </div>
+    {% endif %}
+    <p class="submit">
+      <input type="submit" name="submit" class="submit-post" value="{% trans "Post" %}" />
+      <input type="submit" name="preview" class="submit-preview" value="{% trans "Preview" %}" />
+    </p>
+  </fieldset>
+</form>
