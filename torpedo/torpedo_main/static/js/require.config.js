@@ -51,7 +51,7 @@
           exports: '_'
       },
       jfeed: {
-        deps: ['jquery', 'jfeeditem', 'jatom']
+        deps: ['jquery', 'jfeeditem', 'jatom', 'jrss']
       },
       facebook: {
         exports: 'FB'
