@@ -3,7 +3,7 @@ Statistics model
 """
 
 from datetime import timedelta
-
+from datetime import datetime
 from django.db import models
 from django.contrib import admin
 from django.db.models import Sum
@@ -68,6 +68,11 @@ class Game(models.Model):
     def __unicode__(self):
         return "Game: %s, %r - %r" % (self.date, self.home, self.guest)
 
+    @property
+    def played(self):
+        now = datetime.now()
+        gamedate = self.date.replace(tzinfo=None)
+        return (now-gamedate).total_seconds() > 0
 
 class Player(models.Model):
     number = models.IntegerField(blank=True)
