@@ -5,6 +5,7 @@ require(['jquery', 'bootstrap', 'feeds', 'fb', 'htmlmixedmode'],
 				'feedurl': '/weblog/feeds/'};
 		$(document).ready(function() {
 
+			$('#carousel').carousel({interval: 3000})
 			pageEditor = $('#id_content');
 			if (pageEditor.length == 1) {
 				var myCodeMirror = CodeMirror.fromTextArea(pageEditor[0], {
