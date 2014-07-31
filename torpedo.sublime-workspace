@@ -1,0 +1,839 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"T",
+				"toYYYYMMDD"
+			],
+			[
+				"st",
+				"start_date"
+			],
+			[
+				"mini",
+				"miniclass"
+			],
+			[
+				"slid",
+				"slidingcalendar-main"
+			],
+			[
+				"cur",
+				"currentMonth"
+			],
+			[
+				"curr",
+				"currentYear"
+			],
+			[
+				"sel",
+				"selected"
+			],
+			[
+				"select",
+				"selectDay"
+			],
+			[
+				"get",
+				"getDay"
+			],
+			[
+				"main",
+				"main-calendar"
+			],
+			[
+				"_create",
+				"_createEdits"
+			],
+			[
+				"gl",
+				"glyphicon-chevron-left"
+			],
+			[
+				"HTTP",
+				"HttpResponseRedirect	(imported, instance)"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"gly",
+				"glyphicon-chevron-left"
+			],
+			[
+				"Fea",
+				"FeatureModel"
+			],
+			[
+				"c",
+				"coffee"
+			],
+			[
+				"e",
+				"equal"
+			],
+			[
+				"r",
+				"rbcbase"
+			],
+			[
+				"cons",
+				"constructor"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "torpedo/events/static/events/js/dateutils.js",
+			"settings":
+			{
+				"buffer_size": 1689,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "torpedo/events/urls.py",
+			"settings":
+			{
+				"buffer_size": 890,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "torpedo/events/views.py",
+			"settings":
+			{
+				"buffer_size": 1295,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "torpedo/events/static/events/js/calendar.view.js",
+			"settings":
+			{
+				"buffer_size": 1289,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "torpedo/events/static/events/js/show.view.js",
+			"settings":
+			{
+				"buffer_size": 1524,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "torpedo/events/templates/events/show.html",
+			"settings":
+			{
+				"buffer_size": 892,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "torpedo/events/static/events/js/scalendar.js",
+			"settings":
+			{
+				"buffer_size": 12428,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<h4>Tulokset</h4>\n<table class=\"table\">\n<tr>\n  <th>Taistelija</th>\n  <th>Vauhditon pituus</th>\n  <th>Vatsalihasliike</th>\n  <th>Selkälihasliike</th>\n  <th>Etunojapunnerrus</th>\n  <th>Leuanveto</th>\n  <th>Yhteensä</th>\n</tr>\n<tr>\n  <td>Vili Vartiala</td>\n  <td>3.5 </td>\n  <td>2.25</td>\n  <td>5</td>\n  <td>5</td>\n  <td>3.75</td>\n  <td>19.5</td>\n</tr>\n<tr>\n  <td>Matti Vartiala</td>\n  <td>4</td>\n  <td>2</td>\n  <td>5</td>\n  <td>5</td>\n  <td>1.25</td>\n  <td>17.25</td>\n</tr>\n<tr>\n  <td>Hannu Harju</td>\n  <td>2</td>\n  <td>4</td>\n  <td>5</td>\n  <td>4.75</td>\n  <td>0.5</td>\n  <td>16.25</td>\n</tr>\n<tr>\n  <td>Antti Tomminen</td>\n  <td>4.25</td>\n  <td>3.5</td>\n  <td>1.75</td>\n  <td>4</td>\n  <td>2.25</td>\n  <td>15.75</td>\n</tr>\n<tr>\n  <td>Veera Kangaspunta</td>\n  <td>0.5</td>\n  <td>4</td>\n  <td>5</td>\n  <td>4.5</td>\n  <td>0</td>\n  <td>14</td>\n</tr>\n<tr>\n  <td>Jani Jäntti</td>\n  <td>3.25</td>\n  <td>2.25</td>\n  <td>5</td>\n  <td>0.75</td>\n  <td>1.5</td>\n  <td>12.75</td>\n</tr>\n<tr>\n  <td>Antti Mäkinen</td>\n  <td>3.25</td>\n  <td>1.25</td>\n  <td>2</td>\n  <td>1</td>\n  <td>0.25</td>\n  <td>7.75</td>\n</tr>\n</table>\n  <table class=\"table\">\n  <tr>\n      <th>60 sekuntia/laji</th>\n      <td>5</td>\n      <td>4,75</td>\n      <td>4,5</td>\n      <td>4,25</td>\n      <td>4</td>\n      <td>3,75</td>\n      <td>3,5</td>\n      <td>3,35</td>\n      <td>3</td>\n      <td>2,75</td>\n      <td>2,5</td>\n      <td>2,25</td>\n      <td>2</td>\n      <td>1,75</td>\n      <td>1,5</td>\n      <td>1,25</td>\n      <td>1</td>\n      <td>0,75</td>\n      <td>0,5</td>\n      <td>0,25</td>\n    </tr>\n  <tr>\n      <th>Vatsalihasliike</th>\n      <td>47</td>\n      <td>46</td>\n      <td>45</td>\n      <td>44</td>\n      <td>43</td>\n      <td>42</td>\n      <td>41</td>\n      <td>40</td>\n      <td>39</td>\n      <td>38</td>\n      <td>37</td>\n      <td>36</td>\n      <td>35</td>\n      <td>34</td>\n      <td>33</td>\n      <td>28</td>\n      <td>23</td>\n      <td>18</td>\n      <td>13</td>\n      <td>8</td>\n    </tr>\n  <tr>\n      <th>Etunojapunnerrus</th>\n      <td>44</td>\n      <td>43</td>\n      <td>42</td>\n      <td>41</td>\n      <td>40</td>\n      <td>39</td>\n      <td>38</td>\n      <td>37</td>\n      <td>36</td>\n      <td>35</td>\n      <td>34</td>\n      <td>33</td>\n      <td>32</td>\n      <td>31</td>\n      <td>30</td>\n      <td>25</td>\n      <td>20</td>\n      <td>15</td>\n      <td>10</td>\n      <td>5</td>\n    </tr>\n  <tr>\n      <th>Selkälihasliike</th>\n      <td>60</td>\n      <td>59</td>\n      <td>58</td>\n      <td>57</td>\n      <td>56</td>\n      <td>55</td>\n      <td>54</td>\n      <td>53</td>\n      <td>52</td>\n      <td>51</td>\n      <td>50</td>\n      <td>49</td>\n      <td>48</td>\n      <td>47</td>\n      <td>46</td>\n      <td>30</td>\n      <td>25</td>\n      <td>20</td>\n      <td>15</td>\n      <td>10</td>\n    </tr>\n  <tr>\n      <th>Koukistajaliike/leuat</th>\n      <td>20</td>\n      <td>19</td>\n      <td>18</td>\n      <td>17</td>\n      <td>16</td>\n      <td>15</td>\n      <td>14</td>\n      <td>13</td>\n      <td>12</td>\n      <td>11</td>\n      <td>10</td>\n      <td>9</td>\n      <td>8</td>\n      <td>7</td>\n      <td>6</td>\n      <td>5</td>\n      <td>4</td>\n      <td>3</td>\n      <td>2</td>\n      <td>1</td>\n    </tr>\n  <tr>\n      <th>Vauhditon pituus</th>\n      <td>2,50 m</td>\n      <td>2,45 m</td>\n      <td>2,40 m</td>\n      <td>2,35 m</td>\n      <td>2,30 m</td>\n      <td>2,25 m</td>\n      <td>2,20 m</td>\n      <td>2,15 m</td>\n      <td>2,10 m</td>\n      <td>2,05 m</td>\n      <td>2,00 m</td>\n      <td>1,95 m</td>\n      <td>1,90 m</td>\n      <td>1,85 m</td>\n      <td>1,80 m</td>\n      <td>1,75 m</td>\n      <td>1,70 m</td>\n      <td>1,65 m</td>\n      <td>1,60 m</td>\n      <td>1,55 m</td>\n    </tr>\n  </table>\n",
+			"file": "torpedo/events/templates/events/test.html",
+			"file_size": 3588,
+			"file_write_time": 130401654635077127,
+			"settings":
+			{
+				"buffer_size": 3689,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/tsrytkon/bin/gdbwrapper.sh",
+			"settings":
+			{
+				"buffer_size": 559,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "torpedo/events/static/events/css/scalendar.css",
+			"settings":
+			{
+				"buffer_size": 1728,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"command_palette":
+	{
+		"height": 327.0,
+		"selected_items":
+		[
+			[
+				"pac",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"",
+				"Bookmarks: Clear All"
+			],
+			[
+				"repl",
+				"SublimeREPL: Python - virtualenv"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 304.0,
+		"history":
+		[
+			"sublime.log_commands(False)",
+			"sublime.log_input(False)",
+			"sublime.log_commands(True)",
+			"sublime.log_input(True)",
+			"os.environ[\"http_proxy\"]",
+			"os.environ[\"https_proxy\"] = \"http://proxy-ir.intel.com:911\"",
+			"os.environ[\"http_proxy\"]",
+			"os.environ[\"http_proxy\"] = \"http://proxy-ir.intel.com:911\"",
+			"os.environ[\"http_proxy\"]",
+			"os.environ['http_proxy']",
+			"os.environ",
+			"os.env",
+			"import os",
+			"env",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/tsrytkon/mount_winshare.sh",
+		"/home/tsrytkon/Documents/Moorefield/PR1_0_token_full.htm",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/templates/events/show.html",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/templates/events/test.html",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/static/events/js/scalendar.js",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/static/events/js/dateutils.js",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/models.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/static/events/css/scalendar.css",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/statistics/rest/views.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/templates/events/calendar.html",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/views.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/urls.py",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/SublimeGDB/SublimeGDB.sublime-settings",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/SublimePythonIDE/SublimePython.sublime-settings",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo.sublime-project",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/PythonBreakpoints/Default (Linux).sublime-keymap",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/PythonBreakpoints/PythonBreakpoints.sublime-settings",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/rest/urls.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/__init__.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/torpedo_main/static/js/events.js",
+		"/home/tsrytkon/devel/nokiantorpedo-django/site-dir/build-bundle4/setuptools/setuptools/tests/entries-v10",
+		"/home/tsrytkon/devel/nokiantorpedo-django/.gitignore",
+		"/home/tsrytkon/devel/nokiantorpedo-django/.project",
+		"/home/tsrytkon/devel/nokiantorpedo-django/.pydevproject",
+		"/home/tsrytkon/devel/nokiantorpedo-django/README.md",
+		"/home/tsrytkon/devel/nokiantorpedo-django/README.md~",
+		"/home/tsrytkon/devel/nokiantorpedo-django/lessc.cmd",
+		"/home/tsrytkon/devel/nokiantorpedo-django/setup.cmd",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/Git/Git.sublime-settings",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/statistics/templates/statistics/main.html",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/statistics/static/js/games.view.js",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/statistics/static/js/game.view.js",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/statistics/static/js/jutils.js",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/User/Package Control.sublime-settings",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/tsrytkon/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/static/events/js/calendar.view.js",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/templates/events/add_event_dlg.html",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/torpedo_main/menu.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/static/events/js/require.config.js",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/torpedo/settings.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/events/management/commands/update_osallistujat.py",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/torpedo_main/templates/torpedo/profile_dlg.html",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/SublimeREPL/SublimeREPL.sublime-settings",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/SublimeGDB/SublimeGDB.sublime-settings",
+		"/home/tsrytkon/devel/nokiantorpedo-django/torpedo/manage.py",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/SublimeRope/SublimeRope.sublime-settings",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/SublimeRope/README.markdown",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/User/SublimeGDB.sublime-settings",
+		"/home/tsrytkon/workspace/confserver/app/mongoconnection.js",
+		"/home/tsrytkon/workspace/confserver/app/models/mongoconnection.coffee",
+		"/home/tsrytkon/workspace/confserver/app/controllers/users_controller.coffee",
+		"/home/tsrytkon/workspace/confserver/package.json",
+		"/home/tsrytkon/workspace/confserver/app/models/view_model.coffee",
+		"/home/tsrytkon/workspace/confserver/app/models/feature_model.coffee",
+		"/home/tsrytkon/workspace/confserver/app/models/changeset_model.coffee",
+		"/home/tsrytkon/workspace/confserver/app/controllers/authentication.coffee",
+		"/home/tsrytkon/workspace/confserver/app/models/configuration_model.coffee",
+		"/home/tsrytkon/workspace/confserver/app/test/test_configuration.coffee",
+		"/home/tsrytkon/workspace/confserver/app/test/user_model_test.coffee",
+		"/home/tsrytkon/workspace/confserver/app/controllers/user.coffee",
+		"/home/tsrytkon/workspace/confserver/app/models/user_model.coffee",
+		"/home/tsrytkon/workspace/confserver/app/views/tree.jade",
+		"/home/tsrytkon/workspace/confserver/app/views/index.jade",
+		"/home/tsrytkon/workspace/confserver/app/helpers/menu_helper.coffee",
+		"/home/tsrytkon/workspace/confserver/app/views/header.jade",
+		"/home/tsrytkon/workspace/confserver/app/views/layout.jade",
+		"/home/tsrytkon/workspace/confserver/app/controllers/configurationapi.coffee",
+		"/home/tsrytkon/workspace/confserver/app/confserver.coffee",
+		"/home/tsrytkon/workspace/confserver/app/confserver",
+		"/home/tsrytkon/workspace/confserver/app/test/test_configurationapi.coffee",
+		"/home/tsrytkon/workspace/confserver/app/models/rpcbase.coffee",
+		"/home/tsrytkon/workspace/confserver/app/models/configurationapi.coffee",
+		"/home/tsrytkon/workspace/confserver/app/assets/js/tree.coffee",
+		"/home/tsrytkon/workspace/confserver/app/assets/css/site.styl",
+		"/home/tsrytkon/workspace/confserver/app/models/inheritance.js",
+		"/home/tsrytkon/workspace/confserver/app/models/extend.js",
+		"/home/tsrytkon/workspace/confserver/app/app.coffee",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/tsrytkon/workspace/confserver/test.cpp",
+		"/home/tsrytkon/workspace/confserver/test.java",
+		"/home/tsrytkon/workspace/confserver/app/assets/tree.coffee",
+		"/home/tsrytkon/workspace/confserver/app/assets/js/site.coffee",
+		"/home/tsrytkon/workspace/confserver/app/config/routes.coffee",
+		"/home/tsrytkon/workspace/confserver/app/controllers/tree_controller.coffee",
+		"/home/tsrytkon/workspace/logserver/client/public/static/js/streaming.ui.js",
+		"/home/tsrytkon/workspace/confserver/app/helpers/auth_helper.coffee",
+		"/home/tsrytkon/workspace/confserver/test.py",
+		"/home/tsrytkon/workspace/confserver/server.js",
+		"/home/tsrytkon/workspace/confserver/app/views/users/index.jade",
+		"/home/tsrytkon/workspace/confserver/Cakefile",
+		"/home/tsrytkon/workspace/confserver/app/assets/js/vendor/jquery.js",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/Nodejs/Nodejs.sublime-settings",
+		"/home/tsrytkon/bin/Sublime Text 2/Pristine Packages/Package Control.sublime-package",
+		"/home/tsrytkon/.config/sublime-text-2/Packages/User/Preferences.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/home/tsrytkon/workspace/confserver/app/",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"mainedit",
+			"$listdiv",
+			"_createEventView",
+			"_createEditView",
+			"_createViewEdit",
+			"getEvent",
+			"getEvents",
+			"data",
+			"updateEventView",
+			"updateBreadcrumbView",
+			"breadcrumb",
+			"updateBreadcrumbView",
+			"Vauhditon pituus\nVatsalihasliike\nSelkälihasliike\nEtunojapunnerrus\nLeuanveto\nYhteensä\n",
+			"getFirstWeekday",
+			"getMonthDays",
+			"_createListViewItems",
+			"updateMainView",
+			"toYYYYMMDD",
+			"updateListView",
+			"_createListViewItems",
+			"events",
+			"createMonthTable",
+			"events",
+			"addPossibleEvents",
+			"mini-month",
+			"createMonthTable",
+			"selectMonth",
+			"empty",
+			"({\n",
+			"_createTitle",
+			"gameDrawCb",
+			"col",
+			"_createColumn",
+			"function",
+			"_createColumn",
+			"_createDay",
+			"_createColumn",
+			"updateListView",
+			"getEvents",
+			"updateMainView",
+			"_createRow",
+			"trigger",
+			"data",
+			"getEvents",
+			"consol",
+			"\n						",
+			"addPossibleEvents",
+			"prototype",
+			"d",
+			"   =",
+			"prototype",
+			"Date",
+			"createMonthTable",
+			"getEvents",
+			" ",
+			"db",
+			"Configuration\nConfiguration",
+			"Configuration",
+			"var ",
+			"\n  ",
+			"var ",
+			"    block js\n      != js('site')\n",
+			"translateTabsToSpaces",
+			"tree",
+			"console",
+			"network"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 6,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "torpedo/events/static/events/js/dateutils.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1689,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								731,
+								731
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "torpedo/events/urls.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 890,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								457,
+								457
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "torpedo/events/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								937,
+								937
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 136.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "torpedo/events/static/events/js/calendar.view.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1289,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								431,
+								431
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "torpedo/events/static/events/js/show.view.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1524,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								450,
+								450
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 306.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "torpedo/events/templates/events/show.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 892,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								241,
+								241
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "torpedo/events/static/events/js/scalendar.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12428,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7384,
+								7384
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3001.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "torpedo/events/templates/events/test.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3689,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1108,
+								1108
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 894.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/home/tsrytkon/bin/gdbwrapper.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 559,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "torpedo/events/static/events/css/scalendar.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1228,
+								1228
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 765.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 118.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.rope_python_documentation":
+	{
+		"height": 100.0
+	},
+	"project": "torpedo.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"events/ur",
+				"torpedo/events/urls.py"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 274.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

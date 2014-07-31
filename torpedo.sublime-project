@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/tsrytkon/devel/nokiantorpedo-django"
+		}
+	],
+  "settings": {
+    "python_interpreter": "/home/tsrytkon/devel/nokiantorpedo-django/site-dir/bin/python",
+    "sublimegdb_workingdir": "${project_path:torpedo}",
+    // NOTE: You MUST provide --interpreter=mi for the plugin to work
+    "sublimegdb_commandline": "gdb --interpreter=mi ./manage.py",
+  }
+}
