@@ -9,8 +9,9 @@ from events.feed import EventsFeed
 
 urlpatterns = patterns('',
     # ...
-    url(r'^$', 'events.views.events_list', name='events_list'),
+    url(r'^$', 'events.views.events_timeline', name='events_timeline'),
     url(r'^list$', 'events.views.events_list', name='events_list'),
+    url(r'^timeline$', 'events.views.events_timeline', name='events_timeline'),
     url(r'^calendar$', 'events.views.events_calendar', name='events_calendar'),
     url(r'^rest', include('events.rest.urls')),
     (r'^feed/(?P<type>[^\/]*)/$', EventsFeed()),

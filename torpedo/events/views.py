@@ -24,3 +24,10 @@ def events_list(request):
     c = RequestContext(request, {
     })
     return HttpResponse(t.render(c))
+
+def events_timeline(request):
+    today = datetime.now()
+    t = loader.get_template('events/timeline.html')
+    c = RequestContext(request, {
+    })
+    return HttpResponse(t.render(c))
